@@ -1,0 +1,832 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="RBSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Buildings">
+          <Key>
+            <PropertyRef Name="id_building" />
+          </Key>
+          <Property Name="id_building" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="address" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="status" Type="bit" Nullable="false" />
+          <Property Name="insert_date" Type="datetime2" Precision="7" />
+          <Property Name="update_date" Type="datetime2" Precision="7" />
+        </EntityType>
+        <EntityType Name="Reservations">
+          <Key>
+            <PropertyRef Name="id_reservation" />
+          </Key>
+          <Property Name="id_reservation" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="event" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="description" Type="varchar(max)" />
+          <Property Name="start_date" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="end_date" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="insert_date" Type="datetime2" Precision="7" />
+          <Property Name="update_date" Type="datetime2" Precision="7" />
+          <Property Name="id_resource" Type="int" Nullable="false" />
+          <Property Name="id_room" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Resources">
+          <Key>
+            <PropertyRef Name="id_resource" />
+          </Key>
+          <Property Name="id_resource" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="surname" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="status" Type="bit" Nullable="false" />
+          <Property Name="admin" Type="bit" Nullable="false" />
+          <Property Name="username" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="insert_date" Type="datetime2" Precision="7" />
+          <Property Name="update_date" Type="datetime2" Precision="7" />
+        </EntityType>
+        <EntityType Name="Rooms">
+          <Key>
+            <PropertyRef Name="id_room" />
+          </Key>
+          <Property Name="id_room" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="sittings" Type="int" Nullable="false" />
+          <Property Name="insert_date" Type="datetime2" Precision="7" />
+          <Property Name="update_date" Type="datetime2" Precision="7" />
+          <Property Name="id_building" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Reservati__id_re__778AC167">
+          <End Role="Resources" Type="Self.Resources" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Reservations" Type="Self.Reservations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Resources">
+              <PropertyRef Name="id_resource" />
+            </Principal>
+            <Dependent Role="Reservations">
+              <PropertyRef Name="id_resource" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Reservati__id_ro__5812160E">
+          <End Role="Resources" Type="Self.Resources" Multiplicity="1" />
+          <End Role="Reservations" Type="Self.Reservations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Resources">
+              <PropertyRef Name="id_resource" />
+            </Principal>
+            <Dependent Role="Reservations">
+              <PropertyRef Name="id_resource" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Reservati__id_ro__59063A47">
+          <End Role="Rooms" Type="Self.Rooms" Multiplicity="1" />
+          <End Role="Reservations" Type="Self.Reservations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rooms">
+              <PropertyRef Name="id_room" />
+            </Principal>
+            <Dependent Role="Reservations">
+              <PropertyRef Name="id_room" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Reservati__id_ro__787EE5A0">
+          <End Role="Rooms" Type="Self.Rooms" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Reservations" Type="Self.Reservations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rooms">
+              <PropertyRef Name="id_room" />
+            </Principal>
+            <Dependent Role="Reservations">
+              <PropertyRef Name="id_room" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Rooms__id_buildi__4F7CD00D">
+          <End Role="Buildings" Type="Self.Buildings" Multiplicity="1" />
+          <End Role="Rooms" Type="Self.Rooms" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Buildings">
+              <PropertyRef Name="id_building" />
+            </Principal>
+            <Dependent Role="Rooms">
+              <PropertyRef Name="id_building" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="building_create" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="df">
+          <Parameter Name="Name" Type="varchar" Mode="In" />
+          <Parameter Name="Address" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="building_delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="df">
+          <Parameter Name="Name" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="building_detail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="df">
+          <Parameter Name="Name" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="building_getID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="df">
+          <Parameter Name="Name" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="building_list" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="df" />
+        <Function Name="check_names" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="df">
+          <Parameter Name="Name" Type="varchar" Mode="In" />
+          <Parameter Name="Surname" Type="varchar" Mode="In" />
+          <Parameter Name="Table" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="reservation_create" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="df">
+          <Parameter Name="Event" Type="varchar" Mode="In" />
+          <Parameter Name="Description" Type="varchar" Mode="In" />
+          <Parameter Name="Resource_username" Type="varchar" Mode="In" />
+          <Parameter Name="Room_name" Type="varchar" Mode="In" />
+          <Parameter Name="Start_date" Type="datetime2" Mode="In" />
+          <Parameter Name="End_date" Type="datetime2" Mode="In" />
+        </Function>
+        <Function Name="reservation_delete_single" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="df">
+          <Parameter Name="Date" Type="datetime2" Mode="In" />
+          <Parameter Name="Username" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="reservation_duplicates" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="df">
+          <Parameter Name="Building" Type="int" Mode="In" />
+          <Parameter Name="Room" Type="int" Mode="In" />
+          <Parameter Name="Start_date" Type="datetime2" Mode="In" />
+          <Parameter Name="End_date" Type="datetime2" Mode="In" />
+        </Function>
+        <Function Name="reservation_getID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="df">
+          <Parameter Name="Date" Type="datetime2" Mode="In" />
+          <Parameter Name="Resource_username" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="reservation_list" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="df">
+          <Parameter Name="Start_Date" Type="datetime2" Mode="In" />
+          <Parameter Name="End_Date" Type="datetime2" Mode="In" />
+          <Parameter Name="Resource_username" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="resource_create" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="df">
+          <Parameter Name="Name" Type="varchar" Mode="In" />
+          <Parameter Name="Surname" Type="varchar" Mode="In" />
+          <Parameter Name="Admin" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="resource_delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="df">
+          <Parameter Name="Name" Type="varchar" Mode="In" />
+          <Parameter Name="Surname" Type="varchar" Mode="In" />
+          <Parameter Name="Username" Type="varchar" Mode="In" />
+          <Parameter Name="Email" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="resource_detail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="df">
+          <Parameter Name="Name" Type="varchar" Mode="In" />
+          <Parameter Name="Surname" Type="varchar" Mode="In" />
+          <Parameter Name="Username" Type="varchar" Mode="In" />
+          <Parameter Name="Email" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="resource_getID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="df">
+          <Parameter Name="Name" Type="varchar" Mode="In" />
+          <Parameter Name="Surname" Type="varchar" Mode="In" />
+          <Parameter Name="Username" Type="varchar" Mode="In" />
+          <Parameter Name="Email" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="resource_getUsername" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="df">
+          <Parameter Name="Name" Type="varchar" Mode="In" />
+          <Parameter Name="Surname" Type="varchar" Mode="In" />
+          <Parameter Name="Email" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="resource_list" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="df" />
+        <Function Name="room_create" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="df">
+          <Parameter Name="Name" Type="varchar" Mode="In" />
+          <Parameter Name="Sittings" Type="int" Mode="In" />
+          <Parameter Name="Building_Name" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="room_detail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="df">
+          <Parameter Name="RoomName" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="room_getID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="df">
+          <Parameter Name="Name" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="room_list" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="df">
+          <Parameter Name="Building_name" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="udf_reservation_search" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="df">
+          <Parameter Name="Start_date" Type="datetime2" Mode="In" />
+          <Parameter Name="End_date" Type="datetime2" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="ID" Type="int" Nullable="false" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="udf_reservation_search_byUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="df">
+          <Parameter Name="Start_date" Type="datetime2" Mode="In" />
+          <Parameter Name="End_date" Type="datetime2" Mode="In" />
+          <Parameter Name="Resource_ID" Type="int" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="ID" Type="int" Nullable="false" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="udf_reservation_search_count" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="df">
+          <Parameter Name="Start_date" Type="datetime2" Mode="In" />
+          <Parameter Name="End_date" Type="datetime2" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="ReservationNumbers" Type="int" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <EntityContainer Name="RBSModelStoreContainer">
+          <EntitySet Name="Buildings" EntityType="Self.Buildings" Schema="df" store:Type="Tables" />
+          <EntitySet Name="Reservations" EntityType="Self.Reservations" Schema="df" store:Type="Tables" />
+          <EntitySet Name="Resources" EntityType="Self.Resources" Schema="df" store:Type="Tables" />
+          <EntitySet Name="Rooms" EntityType="Self.Rooms" Schema="df" store:Type="Tables" />
+          <AssociationSet Name="FK__Reservati__id_re__778AC167" Association="Self.FK__Reservati__id_re__778AC167">
+            <End Role="Resources" EntitySet="Resources" />
+            <End Role="Reservations" EntitySet="Reservations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Reservati__id_ro__5812160E" Association="Self.FK__Reservati__id_ro__5812160E">
+            <End Role="Resources" EntitySet="Resources" />
+            <End Role="Reservations" EntitySet="Reservations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Reservati__id_ro__59063A47" Association="Self.FK__Reservati__id_ro__59063A47">
+            <End Role="Rooms" EntitySet="Rooms" />
+            <End Role="Reservations" EntitySet="Reservations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Reservati__id_ro__787EE5A0" Association="Self.FK__Reservati__id_ro__787EE5A0">
+            <End Role="Rooms" EntitySet="Rooms" />
+            <End Role="Reservations" EntitySet="Reservations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Rooms__id_buildi__4F7CD00D" Association="Self.FK__Rooms__id_buildi__4F7CD00D">
+            <End Role="Buildings" EntitySet="Buildings" />
+            <End Role="Rooms" EntitySet="Rooms" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="RBSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <ComplexType Name="udf_reservation_search_Result">
+          <Property Name="ID" Type="Int32" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="udf_reservation_search_byUser_Result">
+          <Property Name="ID" Type="Int32" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="udf_reservation_search_count_Result">
+          <Property Name="ReservationNumbers" Type="Int32" />
+        </ComplexType>
+        <EntityType Name="Buildings">
+          <Key>
+            <PropertyRef Name="id_building" />
+          </Key>
+          <Property Name="id_building" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="status" Type="Boolean" Nullable="false" />
+          <Property Name="insert_date" Type="DateTime" Precision="7" />
+          <Property Name="update_date" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="Rooms" Relationship="Self.FK__Rooms__id_buildi__4F7CD00D" FromRole="Buildings" ToRole="Rooms" />
+        </EntityType>
+        <EntityType Name="Reservations">
+          <Key>
+            <PropertyRef Name="id_reservation" />
+          </Key>
+          <Property Name="id_reservation" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="event" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="start_date" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="end_date" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="insert_date" Type="DateTime" Precision="7" />
+          <Property Name="update_date" Type="DateTime" Precision="7" />
+          <Property Name="id_resource" Type="Int32" Nullable="false" />
+          <Property Name="id_room" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Resources" Relationship="Self.FK__Reservati__id_re__778AC167" FromRole="Reservations" ToRole="Resources" />
+          <NavigationProperty Name="Resources1" Relationship="Self.FK__Reservati__id_ro__5812160E" FromRole="Reservations" ToRole="Resources" />
+          <NavigationProperty Name="Rooms" Relationship="Self.FK__Reservati__id_ro__59063A47" FromRole="Reservations" ToRole="Rooms" />
+          <NavigationProperty Name="Rooms1" Relationship="Self.FK__Reservati__id_ro__787EE5A0" FromRole="Reservations" ToRole="Rooms" />
+        </EntityType>
+        <EntityType Name="Resources">
+          <Key>
+            <PropertyRef Name="id_resource" />
+          </Key>
+          <Property Name="id_resource" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="surname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="status" Type="Boolean" Nullable="false" />
+          <Property Name="admin" Type="Boolean" Nullable="false" />
+          <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="insert_date" Type="DateTime" Precision="7" />
+          <Property Name="update_date" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="Reservations" Relationship="Self.FK__Reservati__id_re__778AC167" FromRole="Resources" ToRole="Reservations" />
+          <NavigationProperty Name="Reservations1" Relationship="Self.FK__Reservati__id_ro__5812160E" FromRole="Resources" ToRole="Reservations" />
+        </EntityType>
+        <EntityType Name="Rooms">
+          <Key>
+            <PropertyRef Name="id_room" />
+          </Key>
+          <Property Name="id_room" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="sittings" Type="Int32" Nullable="false" />
+          <Property Name="insert_date" Type="DateTime" Precision="7" />
+          <Property Name="update_date" Type="DateTime" Precision="7" />
+          <Property Name="id_building" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Buildings" Relationship="Self.FK__Rooms__id_buildi__4F7CD00D" FromRole="Rooms" ToRole="Buildings" />
+          <NavigationProperty Name="Reservations" Relationship="Self.FK__Reservati__id_ro__59063A47" FromRole="Rooms" ToRole="Reservations" />
+          <NavigationProperty Name="Reservations1" Relationship="Self.FK__Reservati__id_ro__787EE5A0" FromRole="Rooms" ToRole="Reservations" />
+        </EntityType>
+        <Association Name="FK__Rooms__id_buildi__4F7CD00D">
+          <End Role="Buildings" Type="Self.Buildings" Multiplicity="1" />
+          <End Role="Rooms" Type="Self.Rooms" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Buildings">
+              <PropertyRef Name="id_building" />
+            </Principal>
+            <Dependent Role="Rooms">
+              <PropertyRef Name="id_building" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Reservati__id_re__778AC167">
+          <End Role="Resources" Type="Self.Resources" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Reservations" Type="Self.Reservations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Resources">
+              <PropertyRef Name="id_resource" />
+            </Principal>
+            <Dependent Role="Reservations">
+              <PropertyRef Name="id_resource" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Reservati__id_ro__5812160E">
+          <End Role="Resources" Type="Self.Resources" Multiplicity="1" />
+          <End Role="Reservations" Type="Self.Reservations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Resources">
+              <PropertyRef Name="id_resource" />
+            </Principal>
+            <Dependent Role="Reservations">
+              <PropertyRef Name="id_resource" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Reservati__id_ro__59063A47">
+          <End Role="Rooms" Type="Self.Rooms" Multiplicity="1" />
+          <End Role="Reservations" Type="Self.Reservations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rooms">
+              <PropertyRef Name="id_room" />
+            </Principal>
+            <Dependent Role="Reservations">
+              <PropertyRef Name="id_room" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Reservati__id_ro__787EE5A0">
+          <End Role="Rooms" Type="Self.Rooms" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Reservations" Type="Self.Reservations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rooms">
+              <PropertyRef Name="id_room" />
+            </Principal>
+            <Dependent Role="Reservations">
+              <PropertyRef Name="id_room" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="RBSEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Buildings" EntityType="Self.Buildings" />
+          <EntitySet Name="Reservations" EntityType="Self.Reservations" />
+          <EntitySet Name="Resources" EntityType="Self.Resources" />
+          <EntitySet Name="Rooms" EntityType="Self.Rooms" />
+          <AssociationSet Name="FK__Rooms__id_buildi__4F7CD00D" Association="Self.FK__Rooms__id_buildi__4F7CD00D">
+            <End Role="Buildings" EntitySet="Buildings" />
+            <End Role="Rooms" EntitySet="Rooms" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Reservati__id_re__778AC167" Association="Self.FK__Reservati__id_re__778AC167">
+            <End Role="Resources" EntitySet="Resources" />
+            <End Role="Reservations" EntitySet="Reservations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Reservati__id_ro__5812160E" Association="Self.FK__Reservati__id_ro__5812160E">
+            <End Role="Resources" EntitySet="Resources" />
+            <End Role="Reservations" EntitySet="Reservations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Reservati__id_ro__59063A47" Association="Self.FK__Reservati__id_ro__59063A47">
+            <End Role="Rooms" EntitySet="Rooms" />
+            <End Role="Reservations" EntitySet="Reservations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Reservati__id_ro__787EE5A0" Association="Self.FK__Reservati__id_ro__787EE5A0">
+            <End Role="Rooms" EntitySet="Rooms" />
+            <End Role="Reservations" EntitySet="Reservations" />
+          </AssociationSet>
+          <FunctionImport Name="udf_reservation_search" IsComposable="true" ReturnType="Collection(RBSModel.udf_reservation_search_Result)">
+            <Parameter Name="Start_date" Mode="In" Type="DateTime" />
+            <Parameter Name="End_date" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="udf_reservation_search_byUser" IsComposable="true" ReturnType="Collection(RBSModel.udf_reservation_search_byUser_Result)">
+            <Parameter Name="Start_date" Mode="In" Type="DateTime" />
+            <Parameter Name="End_date" Mode="In" Type="DateTime" />
+            <Parameter Name="Resource_ID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="udf_reservation_search_count" IsComposable="true" ReturnType="Collection(RBSModel.udf_reservation_search_count_Result)">
+            <Parameter Name="Start_date" Mode="In" Type="DateTime" />
+            <Parameter Name="End_date" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="building_create" ReturnType="Collection(RBSModel.building_create_Result)">
+            <Parameter Name="Name" Mode="In" Type="String" />
+            <Parameter Name="Address" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="building_delete">
+          <Parameter Name="Name" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="building_detail" ReturnType="Collection(RBSModel.building_detail_Result)">
+          <Parameter Name="Name" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="building_getID">
+          <Parameter Name="Name" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="building_list" ReturnType="Collection(RBSModel.building_list_Result)" />
+          <FunctionImport Name="check_names">
+            <Parameter Name="Name" Mode="In" Type="String" />
+            <Parameter Name="Surname" Mode="In" Type="String" />
+            <Parameter Name="Table" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="reservation_create">
+            <Parameter Name="Event" Mode="In" Type="String" />
+            <Parameter Name="Description" Mode="In" Type="String" />
+            <Parameter Name="Resource_username" Mode="In" Type="String" />
+            <Parameter Name="Room_name" Mode="In" Type="String" />
+            <Parameter Name="Start_date" Mode="In" Type="DateTime" />
+            <Parameter Name="End_date" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="reservation_delete_single">
+            <Parameter Name="Date" Mode="In" Type="DateTime" />
+            <Parameter Name="Username" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="reservation_duplicates">
+            <Parameter Name="Building" Mode="In" Type="Int32" />
+            <Parameter Name="Room" Mode="In" Type="Int32" />
+            <Parameter Name="Start_date" Mode="In" Type="DateTime" />
+            <Parameter Name="End_date" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="reservation_getID">
+            <Parameter Name="Date" Mode="In" Type="DateTime" />
+            <Parameter Name="Resource_username" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="reservation_list" ReturnType="Collection(RBSModel.reservation_list_Result)">
+            <Parameter Name="Start_Date" Mode="In" Type="DateTime" />
+            <Parameter Name="End_Date" Mode="In" Type="DateTime" />
+            <Parameter Name="Resource_username" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="resource_delete">
+            <Parameter Name="Name" Mode="In" Type="String" />
+            <Parameter Name="Surname" Mode="In" Type="String" />
+            <Parameter Name="Username" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="resource_getID">
+            <Parameter Name="Name" Mode="In" Type="String" />
+            <Parameter Name="Surname" Mode="In" Type="String" />
+            <Parameter Name="Username" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="resource_getUsername">
+            <Parameter Name="Name" Mode="In" Type="String" />
+            <Parameter Name="Surname" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="resource_list" ReturnType="Collection(RBSModel.resource_list_Result)" />
+          <FunctionImport Name="room_create">
+            <Parameter Name="Name" Mode="In" Type="String" />
+            <Parameter Name="Sittings" Mode="In" Type="Int32" />
+            <Parameter Name="Building_Name" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="room_detail" ReturnType="Collection(RBSModel.room_detail_Result)">
+          <Parameter Name="RoomName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="room_getID">
+          <Parameter Name="Name" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="room_list" ReturnType="Collection(RBSModel.room_list_Result)">
+          <Parameter Name="Building_name" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="resource_create" ReturnType="Collection(RBSModel.resource_create_Result)">
+            <Parameter Name="Name" Mode="In" Type="String" />
+            <Parameter Name="Surname" Mode="In" Type="String" />
+            <Parameter Name="Admin" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="resource_detail" ReturnType="Collection(RBSModel.resource_detail_Result)">
+            <Parameter Name="Name" Mode="In" Type="String" />
+            <Parameter Name="Surname" Mode="In" Type="String" />
+            <Parameter Name="Username" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="building_create_Result">
+          <Property Type="String" Name="name" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="address" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="status" Nullable="false" />
+          <Property Type="DateTime" Name="insert_date" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="building_detail_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Address" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="Status" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="building_list_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Surname" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="Email" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="reservation_list_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="EventName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Description" Nullable="true" />
+          <Property Type="DateTime" Name="StartDate" Nullable="false" />
+          <Property Type="DateTime" Name="EndDate" Nullable="false" />
+          <Property Type="String" Name="RoomName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="BuildingName" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="resource_list_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Surname" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Username" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="Status" Nullable="false" />
+          <Property Type="Boolean" Name="Admin" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="room_detail_Result">
+          <Property Type="Int32" Name="Room_ID" Nullable="false" />
+          <Property Type="String" Name="RoomName" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Sittings" Nullable="false" />
+          <Property Type="Int32" Name="Building_ID" Nullable="false" />
+          <Property Type="String" Name="BuildingName" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="room_list_Result">
+          <Property Type="Int32" Name="Room_ID" Nullable="false" />
+          <Property Type="String" Name="RoomName" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Sittings" Nullable="false" />
+          <Property Type="Int32" Name="Building_ID" Nullable="false" />
+          <Property Type="String" Name="BuildingName" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="resource_create_Result">
+          <Property Type="Int32" Name="id_resource" Nullable="false" />
+          <Property Type="String" Name="name" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="surname" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="email" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="username" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="admin" Nullable="false" />
+          <Property Type="Boolean" Name="status" Nullable="false" />
+          <Property Type="DateTime" Name="insert_date" Nullable="true" />
+          <Property Type="DateTime" Name="update_date" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="resource_detail_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Surname" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Username" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="Status" Nullable="false" />
+          <Property Type="Boolean" Name="Admin" Nullable="false" />
+          <Property Type="DateTime" Name="Insert_Date" Nullable="true" />
+          <Property Type="DateTime" Name="Update_Date" Nullable="true" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="RBSModelStoreContainer" CdmEntityContainer="RBSEntities">
+          <EntitySetMapping Name="Buildings">
+            <EntityTypeMapping TypeName="RBSModel.Buildings">
+              <MappingFragment StoreEntitySet="Buildings">
+                <ScalarProperty Name="id_building" ColumnName="id_building" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="insert_date" ColumnName="insert_date" />
+                <ScalarProperty Name="update_date" ColumnName="update_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reservations">
+            <EntityTypeMapping TypeName="RBSModel.Reservations">
+              <MappingFragment StoreEntitySet="Reservations">
+                <ScalarProperty Name="id_reservation" ColumnName="id_reservation" />
+                <ScalarProperty Name="event" ColumnName="event" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="start_date" ColumnName="start_date" />
+                <ScalarProperty Name="end_date" ColumnName="end_date" />
+                <ScalarProperty Name="insert_date" ColumnName="insert_date" />
+                <ScalarProperty Name="update_date" ColumnName="update_date" />
+                <ScalarProperty Name="id_resource" ColumnName="id_resource" />
+                <ScalarProperty Name="id_room" ColumnName="id_room" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Resources">
+            <EntityTypeMapping TypeName="RBSModel.Resources">
+              <MappingFragment StoreEntitySet="Resources">
+                <ScalarProperty Name="id_resource" ColumnName="id_resource" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="surname" ColumnName="surname" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="admin" ColumnName="admin" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="insert_date" ColumnName="insert_date" />
+                <ScalarProperty Name="update_date" ColumnName="update_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rooms">
+            <EntityTypeMapping TypeName="RBSModel.Rooms">
+              <MappingFragment StoreEntitySet="Rooms">
+                <ScalarProperty Name="id_room" ColumnName="id_room" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="sittings" ColumnName="sittings" />
+                <ScalarProperty Name="insert_date" ColumnName="insert_date" />
+                <ScalarProperty Name="update_date" ColumnName="update_date" />
+                <ScalarProperty Name="id_building" ColumnName="id_building" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionName="RBSModel.Store.udf_reservation_search" FunctionImportName="udf_reservation_search">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="RBSModel.udf_reservation_search_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionName="RBSModel.Store.udf_reservation_search_byUser" FunctionImportName="udf_reservation_search_byUser">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="RBSModel.udf_reservation_search_byUser_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionName="RBSModel.Store.udf_reservation_search_count" FunctionImportName="udf_reservation_search_count">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="RBSModel.udf_reservation_search_count_Result">
+                <ScalarProperty Name="ReservationNumbers" ColumnName="ReservationNumbers" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="building_create" FunctionName="RBSModel.Store.building_create">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="RBSModel.building_create_Result">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="insert_date" ColumnName="insert_date" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="building_delete" FunctionName="RBSModel.Store.building_delete" />
+          <FunctionImportMapping FunctionImportName="building_detail" FunctionName="RBSModel.Store.building_detail">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="RBSModel.building_detail_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="building_getID" FunctionName="RBSModel.Store.building_getID" />
+          <FunctionImportMapping FunctionImportName="building_list" FunctionName="RBSModel.Store.building_list">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="RBSModel.building_list_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="check_names" FunctionName="RBSModel.Store.check_names" />
+          <FunctionImportMapping FunctionImportName="reservation_create" FunctionName="RBSModel.Store.reservation_create" />
+          <FunctionImportMapping FunctionImportName="reservation_delete_single" FunctionName="RBSModel.Store.reservation_delete_single" />
+          <FunctionImportMapping FunctionImportName="reservation_duplicates" FunctionName="RBSModel.Store.reservation_duplicates" />
+          <FunctionImportMapping FunctionImportName="reservation_getID" FunctionName="RBSModel.Store.reservation_getID" />
+          <FunctionImportMapping FunctionImportName="reservation_list" FunctionName="RBSModel.Store.reservation_list">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="RBSModel.reservation_list_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="EventName" ColumnName="EventName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="RoomName" ColumnName="RoomName" />
+                <ScalarProperty Name="BuildingName" ColumnName="BuildingName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="resource_delete" FunctionName="RBSModel.Store.resource_delete" />
+          <FunctionImportMapping FunctionImportName="resource_getID" FunctionName="RBSModel.Store.resource_getID" />
+          <FunctionImportMapping FunctionImportName="resource_getUsername" FunctionName="RBSModel.Store.resource_getUsername" />
+          <FunctionImportMapping FunctionImportName="resource_list" FunctionName="RBSModel.Store.resource_list">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="RBSModel.resource_list_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Admin" ColumnName="Admin" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="room_create" FunctionName="RBSModel.Store.room_create" />
+          <FunctionImportMapping FunctionImportName="room_detail" FunctionName="RBSModel.Store.room_detail">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="RBSModel.room_detail_Result">
+                <ScalarProperty Name="Room_ID" ColumnName="Room_ID" />
+                <ScalarProperty Name="RoomName" ColumnName="RoomName" />
+                <ScalarProperty Name="Sittings" ColumnName="Sittings" />
+                <ScalarProperty Name="Building_ID" ColumnName="Building_ID" />
+                <ScalarProperty Name="BuildingName" ColumnName="BuildingName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="room_getID" FunctionName="RBSModel.Store.room_getID" />
+          <FunctionImportMapping FunctionImportName="room_list" FunctionName="RBSModel.Store.room_list">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="RBSModel.room_list_Result">
+                <ScalarProperty Name="Room_ID" ColumnName="Room_ID" />
+                <ScalarProperty Name="RoomName" ColumnName="RoomName" />
+                <ScalarProperty Name="Sittings" ColumnName="Sittings" />
+                <ScalarProperty Name="Building_ID" ColumnName="Building_ID" />
+                <ScalarProperty Name="BuildingName" ColumnName="BuildingName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="resource_create" FunctionName="RBSModel.Store.resource_create">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="RBSModel.resource_create_Result">
+                <ScalarProperty Name="id_resource" ColumnName="id_resource" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="surname" ColumnName="surname" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="admin" ColumnName="admin" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="insert_date" ColumnName="insert_date" />
+                <ScalarProperty Name="update_date" ColumnName="update_date" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="resource_detail" FunctionName="RBSModel.Store.resource_detail">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="RBSModel.resource_detail_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Admin" ColumnName="Admin" />
+                <ScalarProperty Name="Insert_Date" ColumnName="Insert_Date" />
+                <ScalarProperty Name="Update_Date" ColumnName="Update_Date" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

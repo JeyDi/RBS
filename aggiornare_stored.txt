@@ -1,0 +1,19 @@
+Per aggiornare una stored procedure con Entity Framework.
+
+1) andare su Model Browser e cancellare la stored in 3 punti
+	1. Function import
+	2. StoredProcedure
+	3. Complex Type
+
+SALVARE IL MODELLO
+
+2) Aggiornare il modello inserendo nuovamente la stored
+
+SALVARE IL MODELLO UNA SECONDA VOLTA
+
+(La stored verrà inserita in fondo al file)
+
+
+
+Se il model Browser non funziona e non si vede
+Tools -> Options -> General -> Uncheck Optimize rendering for screens with different pixel densities 

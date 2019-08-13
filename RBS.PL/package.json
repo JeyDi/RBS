@@ -1,0 +1,18 @@
+{
+  "name": "rbs",
+  "version": "1.0.0",
+  "description": "Progetto percorso circolare",
+  "main": "index.js",
+  "dependencies": {
+    "bootstrap": "^4.3.1",
+    "jquery": "^3.4.1",
+    "popper.js": "^1.15.0",
+    "typescript": "^3.4.5"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Andrea Guzzo",
+  "license": "ISC"
+}
