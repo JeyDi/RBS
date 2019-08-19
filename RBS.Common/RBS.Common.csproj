@@ -48,11 +48,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BLBuildings.cs" />
+    <Compile Include="BLReservations.cs" />
     <Compile Include="BLResources.cs" />
-    <Compile Include="Entities\BuildingVM.cs" />
-    <Compile Include="Entities\ReservationVM.cs" />
+    <Compile Include="BLRooms.cs" />
+    <Compile Include="Entities\BuildingsVM.cs" />
+    <Compile Include="Entities\ReservationsVM.cs" />
     <Compile Include="Entities\ResourcesVM.cs" />
-    <Compile Include="Entities\RoomVM.cs" />
+    <Compile Include="Entities\RoomsVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

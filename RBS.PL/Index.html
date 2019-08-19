@@ -2,14 +2,111 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title></title>
+    <link href="node_modules/jquery-ui-dist/jquery-ui.css" rel="stylesheet" />
+    <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!--<link href="StyleSheet/Index.css" rel="stylesheet" />-->
+    <title>RBS</title>
 </head>
 <body>
-    <h2>Prova, vediamo se funziona!</h2>
+
+    <div id="navbar">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <span class="navbar-brand mb-0 h1">RBS</span>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="Index.html">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Prenota.html">Prenota</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Informazioni.html">Informazioni</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Gestisci.html">Gestisci</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
 
 
-    <script type="module" src="Scripts/file2.js"></script>
-    <script type="module" src="Scripts/file1.js"></script>
+    <main class="login-form">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-header">Registrati o effettua il login</div>
+                        <div class="card-body">
+                            <form action="" method="">
+                                <div class="form-group row">
+                                    <label for="Username" class="col-md-4 col-form-label text-md-right">E-Mail Address</label>
+                                    <div class="col-md-6">
+                                        <input type="text" id="email_address" class="form-control" name="email-address" required autofocus>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
+                                    <div class="col-md-6">
+                                        <input type="password" id="password" class="form-control" name="password" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-md-6 offset-md-4">
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" name="remember"> Remember Me
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 offset-md-4">
+                                    <button type="submit" class="btn btn-primary">
+                                        Register
+                                    </button>
+                                    <a href="#" class="btn btn-link">
+                                        Forgot Your Password?
+                                    </a>
+                                </div>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+        <!-- Footer -->
+        <footer class="page-footer font-small cyan darken-3">
+            <div class="container">
+                <div class="row">
+
+                </div>
+            </div>
+            <div class="footer-copyright text-center py-3">
+                © 2019 Copyright:
+                <a href="https://www.reti.it"> Reti Spa</a>
+            </div>
+        </footer>
+        <!-- Footer -->
+
+        <script src="node_modules/jquery/dist/jquery.js"></script>
+        <script src="node_modules/jquery-ui-dist/jquery-ui.js"></script>
+        <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+        <!--<script type="module" src="Scripts/file2.js"></script>
+    <script type="module" src="Scripts/file1.js"></script>-->
 
 </body>
 

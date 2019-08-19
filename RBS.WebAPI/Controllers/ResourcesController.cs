@@ -16,8 +16,8 @@ namespace RBS.WebAPI.Controllers
     {
         // GET api/Resources
         [HttpGet]
-        [Route("GetAll")]
-        public async Task<IHttpActionResult> GetAll()
+        [Route("GetAllCoded")]
+        public IHttpActionResult GetAll_Coded()
         {
             try
             {
@@ -36,7 +36,7 @@ namespace RBS.WebAPI.Controllers
                 //dbContext.Dispose(); //not useful because using the using
 
                 BLResources mng = new BLResources();
-                IEnumerable<Resources> resource = mng.GetAll();
+                IEnumerable<Resources> resource = mng.GetAll_Coded();
 
                 List<ResourcesVM> resources_list = new List<ResourcesVM>();
 
@@ -69,62 +69,19 @@ namespace RBS.WebAPI.Controllers
 
         // GET api/Resources
         [HttpGet]
-        [Route("GetAllStored")]
-        public IHttpActionResult GetAllStored()
+        [Route("GetAll")]
+        public IHttpActionResult GetAll()
         {
             try
             {
 
                 BLResources resource = new BLResources();
-                var resource_list = resource.GetAllStored();
+                var resource_list = resource.GetAll();
 
-                return Ok(resource_list);
+                ResourcesVM obj = new ResourcesVM();
 
-                //using (var dbContext = new RBSEntities())
-                //{
-                //    var resources = dbContext.resource_list();
-                //    return Ok(resources.ToList());
-                //};
-
-                //ResourceManager BL = new ResourceManager();
-                //List<Resource> result = BL.GetResources();
-                //return Ok(result);
-
-
-                //Dispose to close connection
-                //dbContext.Dispose(); //not useful because using the using
-
-                //BLResources mng = new BLResources();
-                //IEnumerable<resource_list_Result> resource = mng.GetAllStored();
-
-                //List<ResourcesVM> resources_list = new List<ResourcesVM>();
-
-                //foreach (resource_list_Result es in resource)
-                //{
-                //    ResourcesVM rs = new ResourcesVM()
-                //    {
-                //        id_resource = es.ID
-                //        ,
-                //        name = es.Name
-                //        ,
-                //        surname = es.Surname
-                //        ,
-                //        email = es.Email
-                //        ,
-                //        username = es.Username
-                //        ,
-                //        admin = es.Admin
-                //        ,
-                //        status = es.Status
-                //        ,
-                //        insert_date = null
-                //        ,
-                //        update_date = null
-                //    };
-
-                //    resources_list.Add(rs);
-                //}
-                //return Ok(resources_list);
+                return Ok(obj.CreateList(resource_list));
+               
             }
 
             catch (Exception ex)
@@ -135,21 +92,21 @@ namespace RBS.WebAPI.Controllers
         }
 
         // GET api/Resources
-        [HttpGet]
-        [Route("Get")]
-        public async Task<IHttpActionResult> Get(string name, string surname, string username, string email)
+        [HttpPost]
+        [Route("Insert")]
+        public IHttpActionResult ResultInsert(string name = null, string surname = null, bool admin = false)
         {
             try
             {
-                var dbContext = new RBSEntities();
-                var resources = dbContext.resource_list();
+                BLResources resources = new BLResources();
+                var resource = resources.Insert(name, surname, admin);
 
-                return Ok(resources);
+                return Ok(new ResourcesVM(resource));
             }
 
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                return InternalServerError(ex);
 
             }
 
@@ -159,22 +116,22 @@ namespace RBS.WebAPI.Controllers
         // GET api/Resources
         [HttpGet]
         [Route("Detail")]
-        public async Task<IHttpActionResult> ResourceDetail(string name = null, string surname = null, string username = null, string email = null)
+        public IHttpActionResult ResourceDetail(string name = null, string surname = null, string username = null, string email = null)
         {
             try
             {
 
                 BLResources resource = new BLResources();
-                var resource_detail = resource.GetResourceDetail(name,surname,username,email);
+                var resource_detail = resource.GetDetail(name,surname,username,email);
 
                 
                 //Return a ResourceVM Object mapped from Resource
                 return Ok(new ResourcesVM(resource_detail));
             }
 
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                return InternalServerError(ex);
 
             }
 

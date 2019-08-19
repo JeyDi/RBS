@@ -443,32 +443,13 @@
             <Parameter Name="Start_date" Mode="In" Type="DateTime" />
             <Parameter Name="End_date" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="building_create" ReturnType="Collection(RBSModel.building_create_Result)">
-            <Parameter Name="Name" Mode="In" Type="String" />
-            <Parameter Name="Address" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="building_delete">
-          <Parameter Name="Name" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="building_detail" ReturnType="Collection(RBSModel.building_detail_Result)">
-          <Parameter Name="Name" Mode="In" Type="String" />
-          </FunctionImport>
           <FunctionImport Name="building_getID">
           <Parameter Name="Name" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="building_list" ReturnType="Collection(RBSModel.building_list_Result)" />
           <FunctionImport Name="check_names">
             <Parameter Name="Name" Mode="In" Type="String" />
             <Parameter Name="Surname" Mode="In" Type="String" />
             <Parameter Name="Table" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="reservation_create">
-            <Parameter Name="Event" Mode="In" Type="String" />
-            <Parameter Name="Description" Mode="In" Type="String" />
-            <Parameter Name="Resource_username" Mode="In" Type="String" />
-            <Parameter Name="Room_name" Mode="In" Type="String" />
-            <Parameter Name="Start_date" Mode="In" Type="DateTime" />
-            <Parameter Name="End_date" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="reservation_delete_single">
             <Parameter Name="Date" Mode="In" Type="DateTime" />
@@ -482,11 +463,6 @@
           </FunctionImport>
           <FunctionImport Name="reservation_getID">
             <Parameter Name="Date" Mode="In" Type="DateTime" />
-            <Parameter Name="Resource_username" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="reservation_list" ReturnType="Collection(RBSModel.reservation_list_Result)">
-            <Parameter Name="Start_Date" Mode="In" Type="DateTime" />
-            <Parameter Name="End_Date" Mode="In" Type="DateTime" />
             <Parameter Name="Resource_username" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="resource_delete">
@@ -506,20 +482,8 @@
             <Parameter Name="Surname" Mode="In" Type="String" />
             <Parameter Name="Email" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="resource_list" ReturnType="Collection(RBSModel.resource_list_Result)" />
-          <FunctionImport Name="room_create">
-            <Parameter Name="Name" Mode="In" Type="String" />
-            <Parameter Name="Sittings" Mode="In" Type="Int32" />
-            <Parameter Name="Building_Name" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="room_detail" ReturnType="Collection(RBSModel.room_detail_Result)">
-          <Parameter Name="RoomName" Mode="In" Type="String" />
-          </FunctionImport>
           <FunctionImport Name="room_getID">
           <Parameter Name="Name" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="room_list" ReturnType="Collection(RBSModel.room_list_Result)">
-          <Parameter Name="Building_name" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="resource_create" ReturnType="Collection(RBSModel.resource_create_Result)">
             <Parameter Name="Name" Mode="In" Type="String" />
@@ -532,57 +496,43 @@
             <Parameter Name="Username" Mode="In" Type="String" />
             <Parameter Name="Email" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="resource_list" ReturnType="Collection(RBSModel.resource_list_Result)" />
+          <FunctionImport Name="room_create" ReturnType="Collection(RBSModel.room_create_Result)">
+            <Parameter Name="Name" Mode="In" Type="String" />
+            <Parameter Name="Sittings" Mode="In" Type="Int32" />
+            <Parameter Name="Building_Name" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="room_detail" ReturnType="Collection(RBSModel.room_detail_Result)">
+          <Parameter Name="RoomName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="building_create" ReturnType="Collection(RBSModel.building_create_Result)">
+            <Parameter Name="Name" Mode="In" Type="String" />
+            <Parameter Name="Address" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="building_delete">
+          <Parameter Name="Name" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="building_detail" ReturnType="Collection(RBSModel.building_detail_Result)">
+          <Parameter Name="Name" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="building_list" ReturnType="Collection(RBSModel.building_list_Result)" />
+          <FunctionImport Name="reservation_create" ReturnType="Collection(RBSModel.reservation_create_Result)">
+            <Parameter Name="Event" Mode="In" Type="String" />
+            <Parameter Name="Description" Mode="In" Type="String" />
+            <Parameter Name="Resource_username" Mode="In" Type="String" />
+            <Parameter Name="Room_name" Mode="In" Type="String" />
+            <Parameter Name="Start_date" Mode="In" Type="DateTime" />
+            <Parameter Name="End_date" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="reservation_list" ReturnType="Collection(RBSModel.reservation_list_Result)">
+            <Parameter Name="Start_Date" Mode="In" Type="DateTime" />
+            <Parameter Name="End_Date" Mode="In" Type="DateTime" />
+            <Parameter Name="Resource_username" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="room_list" ReturnType="Collection(RBSModel.room_list_Result)">
+            <Parameter Name="Building_name" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
-        <ComplexType Name="building_create_Result">
-          <Property Type="String" Name="name" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="address" Nullable="false" MaxLength="50" />
-          <Property Type="Boolean" Name="status" Nullable="false" />
-          <Property Type="DateTime" Name="insert_date" Nullable="true" />
-        </ComplexType>
-        <ComplexType Name="building_detail_Result">
-          <Property Type="Int32" Name="ID" Nullable="false" />
-          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="Address" Nullable="false" MaxLength="50" />
-          <Property Type="Boolean" Name="Status" Nullable="false" />
-        </ComplexType>
-        <ComplexType Name="building_list_Result">
-          <Property Type="Int32" Name="ID" Nullable="false" />
-          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="Surname" Nullable="false" MaxLength="50" />
-          <Property Type="Boolean" Name="Email" Nullable="false" />
-        </ComplexType>
-        <ComplexType Name="reservation_list_Result">
-          <Property Type="Int32" Name="ID" Nullable="false" />
-          <Property Type="String" Name="EventName" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="Description" Nullable="true" />
-          <Property Type="DateTime" Name="StartDate" Nullable="false" />
-          <Property Type="DateTime" Name="EndDate" Nullable="false" />
-          <Property Type="String" Name="RoomName" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="BuildingName" Nullable="false" MaxLength="50" />
-        </ComplexType>
-        <ComplexType Name="resource_list_Result">
-          <Property Type="Int32" Name="ID" Nullable="false" />
-          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="Surname" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="Email" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="Username" Nullable="false" MaxLength="50" />
-          <Property Type="Boolean" Name="Status" Nullable="false" />
-          <Property Type="Boolean" Name="Admin" Nullable="false" />
-        </ComplexType>
-        <ComplexType Name="room_detail_Result">
-          <Property Type="Int32" Name="Room_ID" Nullable="false" />
-          <Property Type="String" Name="RoomName" Nullable="false" MaxLength="50" />
-          <Property Type="Int32" Name="Sittings" Nullable="false" />
-          <Property Type="Int32" Name="Building_ID" Nullable="false" />
-          <Property Type="String" Name="BuildingName" Nullable="false" MaxLength="50" />
-        </ComplexType>
-        <ComplexType Name="room_list_Result">
-          <Property Type="Int32" Name="Room_ID" Nullable="false" />
-          <Property Type="String" Name="RoomName" Nullable="false" MaxLength="50" />
-          <Property Type="Int32" Name="Sittings" Nullable="false" />
-          <Property Type="Int32" Name="Building_ID" Nullable="false" />
-          <Property Type="String" Name="BuildingName" Nullable="false" MaxLength="50" />
-        </ComplexType>
         <ComplexType Name="resource_create_Result">
           <Property Type="Int32" Name="id_resource" Nullable="false" />
           <Property Type="String" Name="name" Nullable="false" MaxLength="50" />
@@ -604,6 +554,96 @@
           <Property Type="Boolean" Name="Admin" Nullable="false" />
           <Property Type="DateTime" Name="Insert_Date" Nullable="true" />
           <Property Type="DateTime" Name="Update_Date" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="resource_list_Result">
+          <Property Type="Int32" Name="id_resource" Nullable="false" />
+          <Property Type="String" Name="name" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="surname" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="email" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="username" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="status" Nullable="false" />
+          <Property Type="Boolean" Name="admin" Nullable="false" />
+          <Property Type="DateTime" Name="insert_date" Nullable="true" />
+          <Property Type="DateTime" Name="update_date" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="room_create_Result">
+          <Property Type="Int32" Name="room_id" Nullable="false" />
+          <Property Type="String" Name="room_name" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="room_sittings" Nullable="false" />
+          <Property Type="Int32" Name="build_id" Nullable="false" />
+          <Property Type="String" Name="build_name" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="room_detail_Result">
+          <Property Type="Int32" Name="room_id" Nullable="false" />
+          <Property Type="String" Name="room_name" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="room_sittings" Nullable="false" />
+          <Property Type="Int32" Name="build_id" Nullable="false" />
+          <Property Type="String" Name="build_name" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="building_create_Result">
+          <Property Type="Int32" Name="id_building" Nullable="false" />
+          <Property Type="String" Name="name" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="address" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="status" Nullable="false" />
+          <Property Type="DateTime" Name="insert_date" Nullable="true" />
+          <Property Type="DateTime" Name="update_date" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="building_detail_Result">
+          <Property Type="Int32" Name="id_building" Nullable="false" />
+          <Property Type="String" Name="name" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="address" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="status" Nullable="false" />
+          <Property Type="DateTime" Name="insert_date" Nullable="true" />
+          <Property Type="DateTime" Name="update_date" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="building_list_Result">
+          <Property Type="Int32" Name="id_building" Nullable="false" />
+          <Property Type="String" Name="name" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="address" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="status" Nullable="false" />
+          <Property Type="DateTime" Name="insert_date" Nullable="true" />
+          <Property Type="DateTime" Name="update_date" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="reservation_create_Result">
+          <Property Type="Int32" Name="reserv_id" Nullable="false" />
+          <Property Type="String" Name="reserv_event" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="reserv_description" Nullable="true" />
+          <Property Type="DateTime" Name="reserv_start_date" Nullable="false" />
+          <Property Type="DateTime" Name="reserv_end_date" Nullable="false" />
+          <Property Type="Int32" Name="resource_id" Nullable="false" />
+          <Property Type="String" Name="resource_name" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="resource_surname" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="resource_username" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="resource_email" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="room_id" Nullable="false" />
+          <Property Type="String" Name="room_name" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="room_sittings" Nullable="false" />
+          <Property Type="Int32" Name="build_id" Nullable="false" />
+          <Property Type="String" Name="build_name" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="reservation_list_Result">
+          <Property Type="Int32" Name="reserv_id" Nullable="false" />
+          <Property Type="String" Name="reserv_event" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="reserv_description" Nullable="true" />
+          <Property Type="DateTime" Name="reserv_start_date" Nullable="false" />
+          <Property Type="DateTime" Name="reserv_end_date" Nullable="false" />
+          <Property Type="Int32" Name="resource_id" Nullable="false" />
+          <Property Type="String" Name="resource_name" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="resource_surname" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="resource_username" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="resource_email" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="room_id" Nullable="false" />
+          <Property Type="String" Name="room_name" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="room_sittings" Nullable="false" />
+          <Property Type="Int32" Name="build_id" Nullable="false" />
+          <Property Type="String" Name="build_name" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="room_list_Result">
+          <Property Type="Int32" Name="room_id" Nullable="false" />
+          <Property Type="String" Name="room_name" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="room_sittings" Nullable="false" />
+          <Property Type="Int32" Name="build_id" Nullable="false" />
+          <Property Type="String" Name="build_name" Nullable="false" MaxLength="50" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -686,96 +726,15 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="building_create" FunctionName="RBSModel.Store.building_create">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="RBSModel.building_create_Result">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="address" ColumnName="address" />
-                <ScalarProperty Name="status" ColumnName="status" />
-                <ScalarProperty Name="insert_date" ColumnName="insert_date" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="building_delete" FunctionName="RBSModel.Store.building_delete" />
-          <FunctionImportMapping FunctionImportName="building_detail" FunctionName="RBSModel.Store.building_detail">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="RBSModel.building_detail_Result">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="building_getID" FunctionName="RBSModel.Store.building_getID" />
-          <FunctionImportMapping FunctionImportName="building_list" FunctionName="RBSModel.Store.building_list">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="RBSModel.building_list_Result">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Surname" ColumnName="Surname" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="check_names" FunctionName="RBSModel.Store.check_names" />
-          <FunctionImportMapping FunctionImportName="reservation_create" FunctionName="RBSModel.Store.reservation_create" />
           <FunctionImportMapping FunctionImportName="reservation_delete_single" FunctionName="RBSModel.Store.reservation_delete_single" />
           <FunctionImportMapping FunctionImportName="reservation_duplicates" FunctionName="RBSModel.Store.reservation_duplicates" />
           <FunctionImportMapping FunctionImportName="reservation_getID" FunctionName="RBSModel.Store.reservation_getID" />
-          <FunctionImportMapping FunctionImportName="reservation_list" FunctionName="RBSModel.Store.reservation_list">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="RBSModel.reservation_list_Result">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="EventName" ColumnName="EventName" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
-                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
-                <ScalarProperty Name="RoomName" ColumnName="RoomName" />
-                <ScalarProperty Name="BuildingName" ColumnName="BuildingName" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="resource_delete" FunctionName="RBSModel.Store.resource_delete" />
           <FunctionImportMapping FunctionImportName="resource_getID" FunctionName="RBSModel.Store.resource_getID" />
           <FunctionImportMapping FunctionImportName="resource_getUsername" FunctionName="RBSModel.Store.resource_getUsername" />
-          <FunctionImportMapping FunctionImportName="resource_list" FunctionName="RBSModel.Store.resource_list">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="RBSModel.resource_list_Result">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Surname" ColumnName="Surname" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Username" ColumnName="Username" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="Admin" ColumnName="Admin" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="room_create" FunctionName="RBSModel.Store.room_create" />
-          <FunctionImportMapping FunctionImportName="room_detail" FunctionName="RBSModel.Store.room_detail">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="RBSModel.room_detail_Result">
-                <ScalarProperty Name="Room_ID" ColumnName="Room_ID" />
-                <ScalarProperty Name="RoomName" ColumnName="RoomName" />
-                <ScalarProperty Name="Sittings" ColumnName="Sittings" />
-                <ScalarProperty Name="Building_ID" ColumnName="Building_ID" />
-                <ScalarProperty Name="BuildingName" ColumnName="BuildingName" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="room_getID" FunctionName="RBSModel.Store.room_getID" />
-          <FunctionImportMapping FunctionImportName="room_list" FunctionName="RBSModel.Store.room_list">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="RBSModel.room_list_Result">
-                <ScalarProperty Name="Room_ID" ColumnName="Room_ID" />
-                <ScalarProperty Name="RoomName" ColumnName="RoomName" />
-                <ScalarProperty Name="Sittings" ColumnName="Sittings" />
-                <ScalarProperty Name="Building_ID" ColumnName="Building_ID" />
-                <ScalarProperty Name="BuildingName" ColumnName="BuildingName" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="resource_create" FunctionName="RBSModel.Store.resource_create">
             <ResultMapping>
               <ComplexTypeMapping TypeName="RBSModel.resource_create_Result">
@@ -803,6 +762,133 @@
                 <ScalarProperty Name="Admin" ColumnName="Admin" />
                 <ScalarProperty Name="Insert_Date" ColumnName="Insert_Date" />
                 <ScalarProperty Name="Update_Date" ColumnName="Update_Date" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="resource_list" FunctionName="RBSModel.Store.resource_list">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="RBSModel.resource_list_Result">
+                <ScalarProperty Name="id_resource" ColumnName="id_resource" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="surname" ColumnName="surname" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="admin" ColumnName="admin" />
+                <ScalarProperty Name="insert_date" ColumnName="insert_date" />
+                <ScalarProperty Name="update_date" ColumnName="update_date" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="room_create" FunctionName="RBSModel.Store.room_create">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="RBSModel.room_create_Result">
+                <ScalarProperty Name="room_id" ColumnName="room_id" />
+                <ScalarProperty Name="room_name" ColumnName="room_name" />
+                <ScalarProperty Name="room_sittings" ColumnName="room_sittings" />
+                <ScalarProperty Name="build_id" ColumnName="build_id" />
+                <ScalarProperty Name="build_name" ColumnName="build_name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="room_detail" FunctionName="RBSModel.Store.room_detail">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="RBSModel.room_detail_Result">
+                <ScalarProperty Name="room_id" ColumnName="room_id" />
+                <ScalarProperty Name="room_name" ColumnName="room_name" />
+                <ScalarProperty Name="room_sittings" ColumnName="room_sittings" />
+                <ScalarProperty Name="build_id" ColumnName="build_id" />
+                <ScalarProperty Name="build_name" ColumnName="build_name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="building_create" FunctionName="RBSModel.Store.building_create">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="RBSModel.building_create_Result">
+                <ScalarProperty Name="id_building" ColumnName="id_building" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="insert_date" ColumnName="insert_date" />
+                <ScalarProperty Name="update_date" ColumnName="update_date" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="building_delete" FunctionName="RBSModel.Store.building_delete" />
+          <FunctionImportMapping FunctionImportName="building_detail" FunctionName="RBSModel.Store.building_detail">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="RBSModel.building_detail_Result">
+                <ScalarProperty Name="id_building" ColumnName="id_building" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="insert_date" ColumnName="insert_date" />
+                <ScalarProperty Name="update_date" ColumnName="update_date" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="building_list" FunctionName="RBSModel.Store.building_list">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="RBSModel.building_list_Result">
+                <ScalarProperty Name="id_building" ColumnName="id_building" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="insert_date" ColumnName="insert_date" />
+                <ScalarProperty Name="update_date" ColumnName="update_date" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="reservation_create" FunctionName="RBSModel.Store.reservation_create">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="RBSModel.reservation_create_Result">
+                <ScalarProperty Name="reserv_id" ColumnName="reserv_id" />
+                <ScalarProperty Name="reserv_event" ColumnName="reserv_event" />
+                <ScalarProperty Name="reserv_description" ColumnName="reserv_description" />
+                <ScalarProperty Name="reserv_start_date" ColumnName="reserv_start_date" />
+                <ScalarProperty Name="reserv_end_date" ColumnName="reserv_end_date" />
+                <ScalarProperty Name="resource_id" ColumnName="resource_id" />
+                <ScalarProperty Name="resource_name" ColumnName="resource_name" />
+                <ScalarProperty Name="resource_surname" ColumnName="resource_surname" />
+                <ScalarProperty Name="resource_username" ColumnName="resource_username" />
+                <ScalarProperty Name="resource_email" ColumnName="resource_email" />
+                <ScalarProperty Name="room_id" ColumnName="room_id" />
+                <ScalarProperty Name="room_name" ColumnName="room_name" />
+                <ScalarProperty Name="room_sittings" ColumnName="room_sittings" />
+                <ScalarProperty Name="build_id" ColumnName="build_id" />
+                <ScalarProperty Name="build_name" ColumnName="build_name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="reservation_list" FunctionName="RBSModel.Store.reservation_list">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="RBSModel.reservation_list_Result">
+                <ScalarProperty Name="reserv_id" ColumnName="reserv_id" />
+                <ScalarProperty Name="reserv_event" ColumnName="reserv_event" />
+                <ScalarProperty Name="reserv_description" ColumnName="reserv_description" />
+                <ScalarProperty Name="reserv_start_date" ColumnName="reserv_start_date" />
+                <ScalarProperty Name="reserv_end_date" ColumnName="reserv_end_date" />
+                <ScalarProperty Name="resource_id" ColumnName="resource_id" />
+                <ScalarProperty Name="resource_name" ColumnName="resource_name" />
+                <ScalarProperty Name="resource_surname" ColumnName="resource_surname" />
+                <ScalarProperty Name="resource_username" ColumnName="resource_username" />
+                <ScalarProperty Name="resource_email" ColumnName="resource_email" />
+                <ScalarProperty Name="room_id" ColumnName="room_id" />
+                <ScalarProperty Name="room_name" ColumnName="room_name" />
+                <ScalarProperty Name="room_sittings" ColumnName="room_sittings" />
+                <ScalarProperty Name="build_id" ColumnName="build_id" />
+                <ScalarProperty Name="build_name" ColumnName="build_name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="room_list" FunctionName="RBSModel.Store.room_list">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="RBSModel.room_list_Result">
+                <ScalarProperty Name="room_id" ColumnName="room_id" />
+                <ScalarProperty Name="room_name" ColumnName="room_name" />
+                <ScalarProperty Name="room_sittings" ColumnName="room_sittings" />
+                <ScalarProperty Name="build_id" ColumnName="build_id" />
+                <ScalarProperty Name="build_name" ColumnName="build_name" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

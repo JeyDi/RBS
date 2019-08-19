@@ -17,7 +17,7 @@ namespace TestConsole
             
             foreach( var c in resources)
             {
-                Console.WriteLine(c.Name);
+                Console.WriteLine(c.name);
             }
 
             //LINQ Syntax

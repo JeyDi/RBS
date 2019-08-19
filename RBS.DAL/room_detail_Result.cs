@@ -13,10 +13,10 @@ namespace RBS.DAL
     
     public partial class room_detail_Result
     {
-        public int Room_ID { get; set; }
-        public string RoomName { get; set; }
-        public int Sittings { get; set; }
-        public int Building_ID { get; set; }
-        public string BuildingName { get; set; }
+        public int room_id { get; set; }
+        public string room_name { get; set; }
+        public int room_sittings { get; set; }
+        public int build_id { get; set; }
+        public string build_name { get; set; }
     }
 }

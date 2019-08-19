@@ -36,6 +36,31 @@ namespace RBS.Common.Entities
             this.insert_date = resource.insert_date;
             this.update_date = resource.update_date;
         }
+
+        public List<ResourcesVM> CreateList(List<Resources> input_list)
+        {
+            List<ResourcesVM> result = new List<ResourcesVM>();
+            foreach (Resources e in input_list)
+            {
+
+                ResourcesVM r = new ResourcesVM();
+                r.id_resource = e.id_resource;
+                r.name = e.name;
+                r.surname = e.surname;
+                r.username = e.username;
+                r.email = e.email;
+                r.status = e.status;
+                r.admin = e.admin;
+                r.insert_date = e.insert_date;
+                r.update_date = e.update_date;
+
+                result.Add(r);
+            }
+
+
+            return result;
+            
+        }
     }
 
    

@@ -78,37 +78,6 @@ namespace RBS.DAL
             return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<udf_reservation_search_count_Result>("[RBSEntities].[udf_reservation_search_count](@Start_date, @End_date)", start_dateParameter, end_dateParameter);
         }
     
-        public virtual ObjectResult<building_create_Result> building_create(string name, string address)
-        {
-            var nameParameter = name != null ?
-                new ObjectParameter("Name", name) :
-                new ObjectParameter("Name", typeof(string));
-    
-            var addressParameter = address != null ?
-                new ObjectParameter("Address", address) :
-                new ObjectParameter("Address", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<building_create_Result>("building_create", nameParameter, addressParameter);
-        }
-    
-        public virtual int building_delete(string name)
-        {
-            var nameParameter = name != null ?
-                new ObjectParameter("Name", name) :
-                new ObjectParameter("Name", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("building_delete", nameParameter);
-        }
-    
-        public virtual ObjectResult<building_detail_Result> building_detail(string name)
-        {
-            var nameParameter = name != null ?
-                new ObjectParameter("Name", name) :
-                new ObjectParameter("Name", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<building_detail_Result>("building_detail", nameParameter);
-        }
-    
         public virtual int building_getID(string name)
         {
             var nameParameter = name != null ?
@@ -116,11 +85,6 @@ namespace RBS.DAL
                 new ObjectParameter("Name", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("building_getID", nameParameter);
-        }
-    
-        public virtual ObjectResult<building_list_Result> building_list()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<building_list_Result>("building_list");
         }
     
         public virtual int check_names(string name, string surname, string table)
@@ -138,35 +102,6 @@ namespace RBS.DAL
                 new ObjectParameter("Table", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("check_names", nameParameter, surnameParameter, tableParameter);
-        }
-    
-        public virtual int reservation_create(string @event, string description, string resource_username, string room_name, Nullable<System.DateTime> start_date, Nullable<System.DateTime> end_date)
-        {
-            var eventParameter = @event != null ?
-                new ObjectParameter("Event", @event) :
-                new ObjectParameter("Event", typeof(string));
-    
-            var descriptionParameter = description != null ?
-                new ObjectParameter("Description", description) :
-                new ObjectParameter("Description", typeof(string));
-    
-            var resource_usernameParameter = resource_username != null ?
-                new ObjectParameter("Resource_username", resource_username) :
-                new ObjectParameter("Resource_username", typeof(string));
-    
-            var room_nameParameter = room_name != null ?
-                new ObjectParameter("Room_name", room_name) :
-                new ObjectParameter("Room_name", typeof(string));
-    
-            var start_dateParameter = start_date.HasValue ?
-                new ObjectParameter("Start_date", start_date) :
-                new ObjectParameter("Start_date", typeof(System.DateTime));
-    
-            var end_dateParameter = end_date.HasValue ?
-                new ObjectParameter("End_date", end_date) :
-                new ObjectParameter("End_date", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("reservation_create", eventParameter, descriptionParameter, resource_usernameParameter, room_nameParameter, start_dateParameter, end_dateParameter);
         }
     
         public virtual int reservation_delete_single(Nullable<System.DateTime> date, string username)
@@ -214,23 +149,6 @@ namespace RBS.DAL
                 new ObjectParameter("Resource_username", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("reservation_getID", dateParameter, resource_usernameParameter);
-        }
-    
-        public virtual ObjectResult<reservation_list_Result> reservation_list(Nullable<System.DateTime> start_Date, Nullable<System.DateTime> end_Date, string resource_username)
-        {
-            var start_DateParameter = start_Date.HasValue ?
-                new ObjectParameter("Start_Date", start_Date) :
-                new ObjectParameter("Start_Date", typeof(System.DateTime));
-    
-            var end_DateParameter = end_Date.HasValue ?
-                new ObjectParameter("End_Date", end_Date) :
-                new ObjectParameter("End_Date", typeof(System.DateTime));
-    
-            var resource_usernameParameter = resource_username != null ?
-                new ObjectParameter("Resource_username", resource_username) :
-                new ObjectParameter("Resource_username", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<reservation_list_Result>("reservation_list", start_DateParameter, end_DateParameter, resource_usernameParameter);
         }
     
         public virtual int resource_delete(string name, string surname, string username, string email)
@@ -292,37 +210,6 @@ namespace RBS.DAL
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("resource_getUsername", nameParameter, surnameParameter, emailParameter);
         }
     
-        public virtual ObjectResult<resource_list_Result> resource_list()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<resource_list_Result>("resource_list");
-        }
-    
-        public virtual int room_create(string name, Nullable<int> sittings, string building_Name)
-        {
-            var nameParameter = name != null ?
-                new ObjectParameter("Name", name) :
-                new ObjectParameter("Name", typeof(string));
-    
-            var sittingsParameter = sittings.HasValue ?
-                new ObjectParameter("Sittings", sittings) :
-                new ObjectParameter("Sittings", typeof(int));
-    
-            var building_NameParameter = building_Name != null ?
-                new ObjectParameter("Building_Name", building_Name) :
-                new ObjectParameter("Building_Name", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("room_create", nameParameter, sittingsParameter, building_NameParameter);
-        }
-    
-        public virtual ObjectResult<room_detail_Result> room_detail(string roomName)
-        {
-            var roomNameParameter = roomName != null ?
-                new ObjectParameter("RoomName", roomName) :
-                new ObjectParameter("RoomName", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<room_detail_Result>("room_detail", roomNameParameter);
-        }
-    
         public virtual int room_getID(string name)
         {
             var nameParameter = name != null ?
@@ -330,15 +217,6 @@ namespace RBS.DAL
                 new ObjectParameter("Name", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("room_getID", nameParameter);
-        }
-    
-        public virtual ObjectResult<room_list_Result> room_list(string building_name)
-        {
-            var building_nameParameter = building_name != null ?
-                new ObjectParameter("Building_name", building_name) :
-                new ObjectParameter("Building_name", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<room_list_Result>("room_list", building_nameParameter);
         }
     
         public virtual ObjectResult<resource_create_Result> resource_create(string name, string surname, Nullable<bool> admin)
@@ -377,6 +255,128 @@ namespace RBS.DAL
                 new ObjectParameter("Email", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<resource_detail_Result>("resource_detail", nameParameter, surnameParameter, usernameParameter, emailParameter);
+        }
+    
+        public virtual ObjectResult<resource_list_Result> resource_list()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<resource_list_Result>("resource_list");
+        }
+    
+        public virtual ObjectResult<room_create_Result> room_create(string name, Nullable<int> sittings, string building_Name)
+        {
+            var nameParameter = name != null ?
+                new ObjectParameter("Name", name) :
+                new ObjectParameter("Name", typeof(string));
+    
+            var sittingsParameter = sittings.HasValue ?
+                new ObjectParameter("Sittings", sittings) :
+                new ObjectParameter("Sittings", typeof(int));
+    
+            var building_NameParameter = building_Name != null ?
+                new ObjectParameter("Building_Name", building_Name) :
+                new ObjectParameter("Building_Name", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<room_create_Result>("room_create", nameParameter, sittingsParameter, building_NameParameter);
+        }
+    
+        public virtual ObjectResult<room_detail_Result> room_detail(string roomName)
+        {
+            var roomNameParameter = roomName != null ?
+                new ObjectParameter("RoomName", roomName) :
+                new ObjectParameter("RoomName", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<room_detail_Result>("room_detail", roomNameParameter);
+        }
+    
+        public virtual ObjectResult<building_create_Result> building_create(string name, string address)
+        {
+            var nameParameter = name != null ?
+                new ObjectParameter("Name", name) :
+                new ObjectParameter("Name", typeof(string));
+    
+            var addressParameter = address != null ?
+                new ObjectParameter("Address", address) :
+                new ObjectParameter("Address", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<building_create_Result>("building_create", nameParameter, addressParameter);
+        }
+    
+        public virtual int building_delete(string name)
+        {
+            var nameParameter = name != null ?
+                new ObjectParameter("Name", name) :
+                new ObjectParameter("Name", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("building_delete", nameParameter);
+        }
+    
+        public virtual ObjectResult<building_detail_Result> building_detail(string name)
+        {
+            var nameParameter = name != null ?
+                new ObjectParameter("Name", name) :
+                new ObjectParameter("Name", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<building_detail_Result>("building_detail", nameParameter);
+        }
+    
+        public virtual ObjectResult<building_list_Result> building_list()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<building_list_Result>("building_list");
+        }
+    
+        public virtual ObjectResult<reservation_create_Result> reservation_create(string @event, string description, string resource_username, string room_name, Nullable<System.DateTime> start_date, Nullable<System.DateTime> end_date)
+        {
+            var eventParameter = @event != null ?
+                new ObjectParameter("Event", @event) :
+                new ObjectParameter("Event", typeof(string));
+    
+            var descriptionParameter = description != null ?
+                new ObjectParameter("Description", description) :
+                new ObjectParameter("Description", typeof(string));
+    
+            var resource_usernameParameter = resource_username != null ?
+                new ObjectParameter("Resource_username", resource_username) :
+                new ObjectParameter("Resource_username", typeof(string));
+    
+            var room_nameParameter = room_name != null ?
+                new ObjectParameter("Room_name", room_name) :
+                new ObjectParameter("Room_name", typeof(string));
+    
+            var start_dateParameter = start_date.HasValue ?
+                new ObjectParameter("Start_date", start_date) :
+                new ObjectParameter("Start_date", typeof(System.DateTime));
+    
+            var end_dateParameter = end_date.HasValue ?
+                new ObjectParameter("End_date", end_date) :
+                new ObjectParameter("End_date", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<reservation_create_Result>("reservation_create", eventParameter, descriptionParameter, resource_usernameParameter, room_nameParameter, start_dateParameter, end_dateParameter);
+        }
+    
+        public virtual ObjectResult<reservation_list_Result> reservation_list(Nullable<System.DateTime> start_Date, Nullable<System.DateTime> end_Date, string resource_username)
+        {
+            var start_DateParameter = start_Date.HasValue ?
+                new ObjectParameter("Start_Date", start_Date) :
+                new ObjectParameter("Start_Date", typeof(System.DateTime));
+    
+            var end_DateParameter = end_Date.HasValue ?
+                new ObjectParameter("End_Date", end_Date) :
+                new ObjectParameter("End_Date", typeof(System.DateTime));
+    
+            var resource_usernameParameter = resource_username != null ?
+                new ObjectParameter("Resource_username", resource_username) :
+                new ObjectParameter("Resource_username", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<reservation_list_Result>("reservation_list", start_DateParameter, end_DateParameter, resource_usernameParameter);
+        }
+    
+        public virtual ObjectResult<room_list_Result> room_list(string building_name)
+        {
+            var building_nameParameter = building_name != null ?
+                new ObjectParameter("Building_name", building_name) :
+                new ObjectParameter("Building_name", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<room_list_Result>("room_list", building_nameParameter);
         }
     }
 }

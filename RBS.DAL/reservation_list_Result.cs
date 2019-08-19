@@ -13,12 +13,20 @@ namespace RBS.DAL
     
     public partial class reservation_list_Result
     {
-        public int ID { get; set; }
-        public string EventName { get; set; }
-        public string Description { get; set; }
-        public System.DateTime StartDate { get; set; }
-        public System.DateTime EndDate { get; set; }
-        public string RoomName { get; set; }
-        public string BuildingName { get; set; }
+        public int reserv_id { get; set; }
+        public string reserv_event { get; set; }
+        public string reserv_description { get; set; }
+        public System.DateTime reserv_start_date { get; set; }
+        public System.DateTime reserv_end_date { get; set; }
+        public int resource_id { get; set; }
+        public string resource_name { get; set; }
+        public string resource_surname { get; set; }
+        public string resource_username { get; set; }
+        public string resource_email { get; set; }
+        public int room_id { get; set; }
+        public string room_name { get; set; }
+        public int room_sittings { get; set; }
+        public int build_id { get; set; }
+        public string build_name { get; set; }
     }
 }

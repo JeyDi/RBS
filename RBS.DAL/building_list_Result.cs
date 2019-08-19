@@ -13,9 +13,11 @@ namespace RBS.DAL
     
     public partial class building_list_Result
     {
-        public int ID { get; set; }
-        public string Name { get; set; }
-        public string Surname { get; set; }
-        public bool Email { get; set; }
+        public int id_building { get; set; }
+        public string name { get; set; }
+        public string address { get; set; }
+        public bool status { get; set; }
+        public Nullable<System.DateTime> insert_date { get; set; }
+        public Nullable<System.DateTime> update_date { get; set; }
     }
 }

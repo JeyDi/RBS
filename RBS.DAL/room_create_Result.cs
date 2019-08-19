@@ -11,13 +11,12 @@ namespace RBS.DAL
 {
     using System;
     
-    public partial class building_create_Result
+    public partial class room_create_Result
     {
-        public int id_building { get; set; }
-        public string name { get; set; }
-        public string address { get; set; }
-        public bool status { get; set; }
-        public Nullable<System.DateTime> insert_date { get; set; }
-        public Nullable<System.DateTime> update_date { get; set; }
+        public int room_id { get; set; }
+        public string room_name { get; set; }
+        public int room_sittings { get; set; }
+        public int build_id { get; set; }
+        public string build_name { get; set; }
     }
 }

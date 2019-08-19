@@ -14,7 +14,7 @@ namespace RBS.Common
     {
 
 
-        public IEnumerable<Resources> GetAll()
+        public IEnumerable<Resources> GetAll_Coded()
         {
             //List<Resources> list_resource = new List<Resources>();
 
@@ -36,7 +36,7 @@ namespace RBS.Common
             }
         }
 
-        public List<Resources> Get(int? id_resource, string name, string surname, string email, string username)
+        public List<Resources> Get_Coded(int? id_resource, string name, string surname, string email, string username)
         {
 
             //TODO
@@ -60,7 +60,7 @@ namespace RBS.Common
             }
         }
 
-        public bool Add(string Name, string Surname, string Email, string Username)
+        public bool Add_Coded(string Name, string Surname, string Email, string Username)
         {
             Resources new_resource = new Resources()
             {
@@ -87,15 +87,18 @@ namespace RBS.Common
             }
         }
 
-        public IEnumerable<resource_list_Result> GetAllStored()
+        /// <summary>
+        /// Get all resources info (using stored procedure logic)
+        /// </summary>
+        /// <returns></returns>
+        public List<Resources> GetAll()
         {
 
 
             try
             {
                 EFSPRepository SPRepo = new EFSPRepository();
-                IEnumerable<resource_list_Result> resources = SPRepo.GetAll();
-
+                List<Resources> resources = SPRepo.SP_Resources_GetAll();
 
                 return resources;
 
@@ -104,43 +107,25 @@ namespace RBS.Common
             {
                 return null;
             }
-            //try
-            //{
-
-            //    //DAL.GlobalUnitOfWork.Commit();
-            //    //foreach (Resources element in resources)
-            //    //{
-            //    //    list_resource.Add(element);
-            //    //}
-            //    return resources;
-            //    //using (PercorsiCircolariDB_v2Entities1 db_context = new PercorsiCircolariDB_v2Entities1())
-            //    //{
-            //    //    List<Risorsa> result = db_context.GetRisorse(null, null, null, null, null, null).Select(x => new PercorsiManagerApp.Common.Entities.Risorsa
-            //    //    {
-            //    //        Id = x.Id,
-            //    //        UserName = x.Username,
-            //    //        Nome = x.Nome,
-            //    //        Cognome = x.Cognome,
-            //    //        FlagDisponibile = x.FlagDisponibile
-            //    //    }).ToList();
-            //    //    return result;
-            //    //}
-            //}
-            //catch (Exception ex)
-            //{
-            //    return null;
-            //}
+          
         }
 
-
-        public Resources GetResourceDetail(string name, string surname, string username, string email)
+        /// <summary>
+        /// Get Single Resource Detail (using stored procedure logic)
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="surname"></param>
+        /// <param name="username"></param>
+        /// <param name="email"></param>
+        /// <returns></returns>
+        public Resources GetDetail(string name, string surname, string username, string email)
         {
 
 
             try
             {
                 EFSPRepository SPRepo = new EFSPRepository();
-                Resources resources = SPRepo.GetDetail(name,surname,username,email);
+                Resources resources = SPRepo.SP_Resources_Get(name,surname,username,email);
 
 
                 return resources;
@@ -153,6 +138,35 @@ namespace RBS.Common
 
 
         }
+
+        /// <summary>
+        /// Insert a new Resource (using stored procedure logic)
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="surname"></param>
+        /// <param name="admin"></param>
+        /// <returns></returns>
+        public Resources Insert(string name, string surname, bool admin = false)
+        {
+
+
+            try
+            {
+                EFSPRepository SPRepo = new EFSPRepository();
+                Resources resource = SPRepo.SP_Resources_Create(name, surname, admin);
+
+
+                return resource;
+
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+
+        }
+
+     
 
     }
 }
