@@ -15,7 +15,7 @@ namespace RBS.WebAPI.Controllers
 
         // GET api/Resources
         [HttpGet]
-        [Route("GetAll")]
+        [Route("GetAll/{build_name}")]
         public IHttpActionResult GetAll(string build_name)
         {
             try
@@ -38,14 +38,15 @@ namespace RBS.WebAPI.Controllers
         }
 
         // GET api/Resources
-        [HttpGet]
-        [Route("Insert")]
-        public IHttpActionResult BuildingInsert(string name = null, int sittings = 1, string build_name = null)
+        [HttpPost]
+        [Route("Insert/{name}/{sittings}/{build_name}")]
+        public IHttpActionResult BuildingInsert(string name = null, string sittings = "1", string build_name = null)
         {
             try
             {
+                int sittings_number = Int32.Parse(sittings.Trim());
                 BLRooms rooms = new BLRooms();
-                var room = rooms.Insert(name, sittings, build_name);
+                var room = rooms.Insert(name, sittings_number, build_name);
 
                 return Ok(new RoomsVM(room));
             }
@@ -61,7 +62,7 @@ namespace RBS.WebAPI.Controllers
 
         // GET api/Resources
         [HttpGet]
-        [Route("Detail")]
+        [Route("Detail/{name}")]
         public IHttpActionResult BuildingDetail(string name = null)
         {
             try

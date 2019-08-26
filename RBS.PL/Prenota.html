@@ -4,8 +4,11 @@
     <meta charset="utf-8" />
     <link href="node_modules/jquery-ui-dist/jquery-ui.css" rel="stylesheet" />
     <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="node_modules/bootstrap-table/dist/bootstrap-table.min.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a96f81cb07.js"></script>
+    <!--<link href="StyleSheet/Prenota.css" rel="stylesheet" />-->
+
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!--<link href="StyleSheet/Index.css" rel="stylesheet" />-->
     <title>RBS</title>
 </head>
 <body>
@@ -36,7 +39,66 @@
         </nav>
     </div>
 
+    <div id="manager">
+        <!--Manager delle risorse-->
+        <div id="manager_risorse">
+            <div class="container">
+                <h2> Le tue prenotazioni</h2>
+                <div class="row">
+                    <div class="form-group row">
 
+                        <label for="input_risorse" class="col-sm-4 col-form-label">Seleziona una risorsa</label>
+                        <div class="col-sm-10">
+
+                            <select class="custom-select" id="input_risorse" name="selectBox"></select>
+
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-10">
+                            <button type="button" id="refresh_risorse_table" class="btn btn-success">Ricarica</button>
+                        </div>
+                    </div>
+                    <div class="container">
+                        <div id="Prenotazioni_Alert_UnSuccess" class="alert alert-warning text-center alert-dismissible" role="alert" style="display:none">
+                            Prenotazione cancellata, ricarica la tabella per visualizzare le modifiche
+                            <button type="button" id="Prenotazioni_Alert_UnSuccess_Button" class="close" onclick='$("#Prenotazioni_Alert_UnSuccess").hide();' aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        </div>
+                        <div id="Prenotazioni_Alert_Success" class="alert alert-success text-center alert-dismissible" role="alert" style="display:none">
+                            Nuova prenotazione inserita
+                            <button type="button" id="Prenotazioni_Alert_Success_Button" class="close" onclick='$("#Prenotazioni_Alert_UnSuccess").hide();' aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <table id="table_prenotazioni"
+                           data-toggle="table"
+                           data-filter-control="true"
+                           data-search="true"
+                           data-sortable="true"
+                           data-pagination="true"
+                           data-detail-view="true"
+                           data-detail-view-by-click="false"
+                           data-detail-formatter="TablePrenotazioniDetails"
+                           data-detail-view-icon="true"
+                           data-sorter="Cognome">
+                        <thead>
+                            <tr>
+
+                                <th data-field="description" data-sortable="true" data-filter-control="input">Descrizione</th>
+                                <th data-field="start_date" data-sortable="true" data-filter-control="input">Data Inizio</th>
+                                <th data-field="end_date" data-sortable="true" data-filter-control="input">Data Fine</th>
+
+                                <th data-formatter="TablePrenotazioniActions" data-filter-control="input">Prenotazioni Actions</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 
@@ -59,9 +121,10 @@
     <script src="node_modules/jquery/dist/jquery.js"></script>
     <script src="node_modules/jquery-ui-dist/jquery-ui.js"></script>
     <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+    <script src="node_modules/bootstrap-table/dist/bootstrap-table.min.js"></script>
+    <script src="Scripts/Prenota.js"></script>
     <!--<script type="module" src="Scripts/file2.js"></script>
     <script type="module" src="Scripts/file1.js"></script>-->
-
 </body>
 
 

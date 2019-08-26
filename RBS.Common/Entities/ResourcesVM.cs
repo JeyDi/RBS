@@ -19,6 +19,7 @@ namespace RBS.Common.Entities
         public Nullable<System.DateTime> insert_date { get; set; }
         public Nullable<System.DateTime> update_date { get; set; }
 
+
         public ResourcesVM()
         {
 

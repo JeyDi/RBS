@@ -93,7 +93,7 @@ namespace RBS.WebAPI.Controllers
 
         // GET api/Resources
         [HttpPost]
-        [Route("Insert")]
+        [Route("Insert/{name}/{surname}/{admin}")]
         public IHttpActionResult ResultInsert(string name = null, string surname = null, bool admin = false)
         {
             try
@@ -115,7 +115,7 @@ namespace RBS.WebAPI.Controllers
 
         // GET api/Resources
         [HttpGet]
-        [Route("Detail")]
+        [Route("Detail/{name}/{surname}/{username}/{email}")]
         public IHttpActionResult ResourceDetail(string name = null, string surname = null, string username = null, string email = null)
         {
             try

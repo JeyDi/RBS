@@ -26,7 +26,7 @@ namespace RBS.DAL
             this.update_date = new_resource.Update_Date;
             this.admin = new_resource.Admin;
             this.status = new_resource.Status;
-            
+
         }
 
         /// <summary>
@@ -97,7 +97,7 @@ namespace RBS.DAL
             this.address = nb.address;
             this.insert_date = nb.insert_date;
             this.status = nb.status;
-            
+
         }
 
         public Buildings(building_detail_Result nb)
@@ -140,6 +140,38 @@ namespace RBS.DAL
 
         }
 
+        public Reservations(reservation_all_Result rsv)
+        {
+            this.id_reservation = rsv.reserv_id;
+            this.description = rsv.reserv_description;
+            this.start_date = rsv.reserv_start_date;
+            this.end_date = rsv.reserv_end_date;
+            this.id_resource = rsv.resource_id;
+            this.id_room = rsv.room_id;
+
+            this.Rooms = new Rooms()
+            {
+                id_room = rsv.room_id,
+                name = rsv.room_name,
+                sittings = rsv.room_sittings,
+                Buildings = new Buildings()
+                {
+                    id_building = rsv.build_id,
+                    name = rsv.build_name
+                }
+
+            };
+            this.Resources = new Resources()
+            {
+                name = rsv.resource_name,
+                surname = rsv.resource_surname,
+                username = rsv.resource_username,
+                email = rsv.resource_email
+            };
+
+        }
+
+
         public Reservations(reservation_create_Result rsv)
         {
             this.id_reservation = rsv.reserv_id;
@@ -147,15 +179,27 @@ namespace RBS.DAL
             this.start_date = rsv.reserv_start_date;
             this.end_date = rsv.reserv_end_date;
             this.id_resource = rsv.resource_id;
-            //this.Resources.name = rsv.resource_name;
-            //this.Resources.surname = rsv.resource_surname;
-            //this.Resources.username = rsv.resource_username;
-            //this.Resources.email = rsv.resource_email;
             this.id_room = rsv.room_id;
-            //this.Rooms.name = rsv.room_name;
-            //this.Rooms.sittings = rsv.room_sittings;
-            //this.Rooms.id_building = rsv.build_id;
-            //this.Rooms.Buildings.name = rsv.build_name;
+
+            this.Rooms = new Rooms()
+            {
+                id_room = rsv.room_id,
+                name = rsv.room_name,
+                sittings = rsv.room_sittings,
+                Buildings = new Buildings()
+                {
+                    id_building = rsv.build_id,
+                    name = rsv.build_name
+                }
+
+            };
+            this.Resources = new Resources()
+            {
+                name = rsv.resource_name,
+                surname = rsv.resource_surname,
+                username = rsv.resource_username,
+                email = rsv.resource_email
+            };
 
         }
 
@@ -167,15 +211,27 @@ namespace RBS.DAL
             this.start_date = rsv.reserv_start_date;
             this.end_date = rsv.reserv_end_date;
             this.id_resource = rsv.resource_id;
-            //this.Resources.name = rsv.resource_name;
-            //this.Resources.surname = rsv.resource_surname;
-            //this.Resources.username = rsv.resource_username;
-            //this.Resources.email = rsv.resource_email;
             this.id_room = rsv.room_id;
-            //this.Rooms.name = rsv.room_name;
-            //this.Rooms.sittings = rsv.room_sittings;
-            //this.Rooms.id_building = rsv.build_id;
-            //this.Rooms.Buildings.name = rsv.build_name;
+
+            this.Rooms = new Rooms()
+            {
+                id_room = rsv.room_id,
+                name = rsv.room_name,
+                sittings = rsv.room_sittings,
+                Buildings = new Buildings()
+                {
+                    id_building = rsv.build_id,
+                    name = rsv.build_name
+                }
+
+            };
+            this.Resources = new Resources()
+            {
+                name = rsv.resource_name,
+                surname = rsv.resource_surname,
+                username = rsv.resource_username,
+                email = rsv.resource_email
+            };
 
         }
 
@@ -186,28 +242,85 @@ namespace RBS.DAL
 
             foreach (reservation_list_Result rsv in rsv_list)
             {
-                
-                this.id_reservation = rsv.reserv_id;
-                this.description = rsv.reserv_description;
-                this.start_date = rsv.reserv_start_date;
-                this.end_date = rsv.reserv_end_date;
-                this.id_resource = rsv.resource_id;
-                //this.Resources.name = rsv.resource_name;
-                //this.Resources.surname = rsv.resource_surname;
-                //this.Resources.username = rsv.resource_username;
-                //this.Resources.email = rsv.resource_email;
-                this.id_room = rsv.room_id;
-                //this.Rooms.name = rsv.room_name;
-                //this.Rooms.sittings = rsv.room_sittings;
-                //this.Rooms.id_building = rsv.build_id;
-                //this.Rooms.Buildings.name = rsv.build_name;
+                Reservations r = new Reservations();
 
-                new_list.Add(this);
+                r.id_reservation = rsv.reserv_id;
+                r.description = rsv.reserv_description;
+                r.start_date = rsv.reserv_start_date;
+                r.end_date = rsv.reserv_end_date;
+                r.id_resource = rsv.resource_id;
+                r.id_room = rsv.room_id;
+
+                r.Rooms = new Rooms()
+                {
+                    id_room = rsv.room_id,
+                    name = rsv.room_name,
+                    sittings = rsv.room_sittings,
+                    Buildings = new Buildings()
+                    {
+                        id_building = rsv.build_id,
+                        name = rsv.build_name
+                    }
+
+                };
+                r.Resources = new Resources()
+                {
+                    name = rsv.resource_name,
+                    surname = rsv.resource_surname,
+                    username = rsv.resource_username,
+                    email = rsv.resource_email
+                };
+
+                new_list.Add(r);
 
             }
 
             return new_list;
-            
+
+        }
+
+        public List<Reservations> ConvertList(List<reservation_all_Result> rsv_list)
+        {
+
+            List<Reservations> new_list = new List<Reservations>();
+
+            foreach (reservation_all_Result rsv in rsv_list)
+            {
+                Reservations r = new Reservations();
+
+                r.id_reservation = rsv.reserv_id;
+                r.description = rsv.reserv_description;
+                r.start_date = rsv.reserv_start_date;
+                r.end_date = rsv.reserv_end_date;
+                r.id_resource = rsv.resource_id;
+                r.id_room = rsv.room_id;
+
+                r.Rooms = new Rooms()
+                {
+                    id_room = rsv.room_id,
+                    name = rsv.room_name,
+                    sittings = rsv.room_sittings,
+                    Buildings = new Buildings()
+                    {
+                        id_building = rsv.build_id,
+                        name = rsv.build_name
+                    }
+
+                };
+                r.Resources = new Resources()
+                {
+                    name = rsv.resource_name,
+                    surname = rsv.resource_surname,
+                    username = rsv.resource_username,
+                    email = rsv.resource_email
+                };
+
+                new_list.Add(r);
+
+            }
+
+            return new_list;
+
         }
 
     }
@@ -220,8 +333,13 @@ namespace RBS.DAL
             this.id_room = nr.room_id;
             this.name = nr.room_name;
             this.sittings = nr.room_sittings;
-            //this.Buildings.name = nr.build_name;
             this.id_building = nr.build_id;
+            this.Buildings = new Buildings()
+            {
+                //id_building = nr.build_id,
+                name = nr.build_name
+            };
+
         }
 
         public Rooms(room_detail_Result nr)
@@ -229,10 +347,14 @@ namespace RBS.DAL
             this.id_room = nr.room_id;
             this.name = nr.room_name;
             this.sittings = nr.room_sittings;
-            //this.Buildings.name = nr.build_name;
             this.id_building = nr.build_id;
+            this.Buildings = new Buildings()
+            {
+                //id_building = nr.build_id,
+                name = nr.build_name
+            };
         }
-            
+
         public List<Rooms> ConvertList(List<room_list_Result> nr_list)
         {
 
@@ -245,12 +367,17 @@ namespace RBS.DAL
                 r.id_room = nr.room_id;
                 r.name = nr.room_name;
                 r.sittings = nr.room_sittings;
-                //r.Buildings.name = nr.build_name;
                 r.id_building = nr.build_id;
+                r.Buildings = new Buildings()
+                {
+                    //id_building = nr.build_id,
+                    name = nr.build_name
+                };
 
                 new_list.Add(r);
 
             }
+
 
             return new_list;
 

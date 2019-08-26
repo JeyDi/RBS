@@ -84,7 +84,7 @@ namespace RBS.Common
         }
 
 
-        public int Delete(string name, string address)
+        public int Delete(string name)
         {
 
             try

@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <link href="node_modules/jquery-ui-dist/jquery-ui.css" rel="stylesheet" />
+    <!--<link href="node_modules/jquery-ui-dist/jquery-ui.css" rel="stylesheet" />-->
     <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!--<link href="StyleSheet/Index.css" rel="stylesheet" />-->
@@ -20,7 +20,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="Index.html">Home <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="Home.html">Home <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="Prenota.html">Prenota</a>
@@ -47,6 +47,7 @@
             <thead>
                 <tr>
                     <th scope="col">#</th>
+                    <th scope="col">Check</th>
                     <th scope="col">First</th>
                     <th scope="col">Last</th>
                     <th scope="col">Handle</th>
@@ -55,18 +56,27 @@
             <tbody>
                 <tr>
                     <th scope="row">1</th>
+                    <td>
+                    <input type="checkbox" class="radio" value="1" name="fooby[1][]" />
+                    </td>                                        
                     <td>Mark</td>
                     <td>Otto</td>
                     <td>@mdo</td>
                 </tr>
                 <tr>
                     <th scope="row">2</th>
+                    <td>
+                        <input type="checkbox" class="radio" value="1" name="fooby[1][]" />
+                    </td>
                     <td>Jacob</td>
                     <td>Thornton</td>
                     <td>@fat</td>
                 </tr>
                 <tr>
                     <th scope="row">3</th>
+                    <td>
+                        <input type="checkbox" class="radio" value="1" name="fooby[1][]" />
+                    </td>
                     <td>Larry</td>
                     <td>the Bird</td>
                     <td>@twitter</td>
@@ -75,12 +85,17 @@
         </table>
     </div>
 
+    <div class="container">
+        <button type="button" class="btn btn-dark">Rimuovi</button>
+
+    </div>
+
 
     <!-- Footer -->
     <footer class="page-footer font-small cyan darken-3">
         <div class="container">
             <div class="row">
-           
+
             </div>
         </div>
         <div class="footer-copyright text-center py-3">
@@ -92,7 +107,7 @@
 
 
     <script src="node_modules/jquery/dist/jquery.js"></script>
-    <script src="node_modules/jquery-ui-dist/jquery-ui.js"></script>
+    <!--<script src="node_modules/jquery-ui-dist/jquery-ui.js"></script>-->
     <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
     <!--<script type="module" src="Scripts/file2.js"></script>
     <script type="module" src="Scripts/file1.js"></script>-->

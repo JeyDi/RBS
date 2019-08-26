@@ -4,8 +4,12 @@
     <meta charset="utf-8" />
     <link href="node_modules/jquery-ui-dist/jquery-ui.css" rel="stylesheet" />
     <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="node_modules/bootstrap-table/dist/bootstrap-table.min.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a96f81cb07.js"></script>
+
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!--<link href="StyleSheet/Index.css" rel="stylesheet" />-->
+
+    <!--<link href="StyleSheet/Gestisci.css" rel="stylesheet" />-->
     <title>RBS</title>
 </head>
 <body>
@@ -36,12 +40,264 @@
         </nav>
     </div>
 
+    <div class="container">
+        <div class="row"><h4>Seleziona l'azione da compiere</h4></div>
+        <div class="row">
+            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                <label class="btn btn-secondary" id="option_risorse">
+                    <input type="radio" name="tabella_risorse" autocomplete="off" checked> Risorse
+                </label>
+                <label class="btn btn-secondary" id="option_sale">
+                    <input type="radio" name="tabella_sale" autocomplete="off" checked> Sale
+                </label>
+                <label class="btn btn-secondary" id="option_edifici">
+                    <input type="radio" name="tabella_edifici" autocomplete="off" checked> Edifici
+                </label>
+
+            </div>
+
+        </div>
+    </div>
 
 
+    <!--Managers-->
+    <div id="manager">
+        <!--Manager delle risorse-->
+        <div id="manager_risorse" style="display: none;">
+            <div class="container">
+                <h2> Gestore delle risorse</h2>
+                <div class="row">
+                    <div class="form-group row">
+                        <div class="col-sm-10">
+                            <button type="button" id="refresh_risorse_table" class="btn btn-success">Ricarica</button>
+                        </div>
+                    </div>
+                    <div class="container">
+                        <div id="Risorse_Alert_UnSuccess" class="alert alert-warning text-center alert-dismissible" role="alert" style="display:none">
+                            Risorsa, ricarica la tabella per visualizzare le modifiche
+                            <button type="button" id="Risorse_Alert_UnSuccess_Button" class="close" onclick='$("#Risorse_Alert_UnSuccess").hide();' aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        </div>
+                        <div id="Risorse_Alert_Success" class="alert alert-success text-center alert-dismissible" role="alert" style="display:none">
+                            Nuova risorsa inserita
+                            <button type="button" id="Risorse_Alert_Success_Button" class="close" onclick='$("#Risorse_Alert_UnSuccess").hide();' aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <table id="table_risorse"
+                           data-toggle="table"
+                           data-filter-control="true"
+                           data-search="true"
+                           data-sortable="true"
+                           data-pagination="true"
+                           data-detail-view="true"
+                           data-detail-view-by-click="false"
+                           data-detail-formatter="TableRisorseDetails"
+                           data-detail-view-icon="true"
+                           data-sorter="Cognome">
+                        <thead>
+                            <tr>
+
+                                <th data-field="name" data-sortable="true" data-filter-control="input">Nome</th>
+                                <th data-field="surname" data-sortable="true" data-filter-control="input">Cognome</th>
+
+                                <th data-formatter="TableRisorseActions" data-filter-control="input">Risorse Actions</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+                <div class="row">
+                    <form>
+                        <div class="form-group row">
+                            <label for="input_risorse_nome" class="col-sm-4 col-form-label">Nome</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="input_risorse_nome" placeholder="Nome utente">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="input_risorse_cognome" class="col-sm-4 col-form-label">Cognome</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="input_risorse_cognome" placeholder="Cognome utente">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-10">
+                                <label class="form-check-label"><input type="checkbox" id="checkbox_risorse_admin" checked="true">Admin</label>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-10">
+                                <button type="button" id="input_risorse_inserisci" class="btn btn-success">Inserisci</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!--Manager delle sale-->
+        <div id="manager_sale" style="display: none;">
+            <div class=" container">
+                <div class="row">
+                    <div class="container">
+                        <h2> Gestore delle sale</h2>
+                        <div class="form-group row">
+
+                            <label for="input_sale_edificio" class="col-sm-4 col-form-label">Seleziona un edificio</label>
+                            <div class="col-sm-10">
+
+                                <select class="custom-select" id="input_sale_edificio" name="selectBox"></select>
+
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-10">
+                                <button type="button" id="refresh_sale_table" class="btn btn-success">Ricarica</button>
+                            </div>
+                        </div>
+                        <div class="container">
+                            <div id="Sale_Alert_UnSuccess" class="alert alert-warning text-center alert-dismissible" role="alert" style="display:none">
+                                Sala elminata, ricarica la tabella per visualizzare le modifiche
+                                <button type="button" id="Sala_Alert_UnSuccess_Button" class="close" onclick='$("#Sale_Alert_UnSuccess").hide();' aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            </div>
+                            <div id="Sala_Alert_Success" class="alert alert-success text-center alert-dismissible" role="alert" style="display:none">
+                                Nuova sala creata
+                                <button type="button" id="Sala_Alert_Success_Button" class="close" onclick='$("#Sale_Alert_UnSuccess").hide();' aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="container">
+                        <table id="table_sale"
+                               data-toggle="table"
+                               data-filter-control="true"
+                               data-search="true"
+                               data-sortable="true"
+                               data-pagination="true"
+                               data-detail-view="true"
+                               data-detail-view-by-click="false"
+                               data-detail-formatter="TableSaleDetails"
+                               data-detail-view-icon="true"
+                               data-sorter="Nome">
+                            <thead>
+                                <tr>
+                                    <th data-field="name" data-sortable="true" data-filter-control="input">Nome</th>
+                                    <th data-field="sittings" data-sortable="true" data-filter-control="input">Posti a sedere</th>
+                                    <th data-formatter="TableSalaActions" data-filter-control="input">Sale Actions</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <form>
+                        <div class="form-group row">
+                            <label for="input_sale_nome" class="col-sm-4 col-form-label">Nome Sala</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="input_sale_nome" placeholder="Nome della sala">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="input_sale_sittings" class="col-sm-4 col-form-label">Posti disponibili</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="input_sale_sittings" placeholder="Numero di posti disponibili">
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-10">
+                        <button type="button" id="input_sale_inserisci" class="btn btn-success">Inserisci</button>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!--Manager degli edifici-->
+    <div id="manager_edifici" style="display: none;">
+        <div class="container">
+            <div class="row">
+                <div class="container">
+                    <h2> Gestore degli edifici</h2>
+                    <div class="form-group row">
+                        <div class="col-sm-10">
+                            <button type="button" id="refresh_edifici_table" class="btn btn-success">Ricarica</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <div id="Edifici_Alert_UnSuccess" class="alert alert-warning text-center alert-dismissible" role="alert" style="display:none">
+                        Edificio eliminato, ricarica la tabella per visualizzare le modifiche
+                        <button type="button" id="Edifici_Alert_UnSuccess_Button" class="close" onclick='$("#Edifici_Alert_UnSuccess").hide();' aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                    <div id="Edifici_Alert_Success" class="alert alert-success text-center alert-dismissible" role="alert" style="display:none">
+                        Nuovo edificio inserito
+                        <button type="button" id="Edifici_Alert_Success_Button" class="close" onclick='$("#Edifici_Alert_Success").hide();' aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="container">
+                    <table id="table_edifici"
+                           data-toggle="table"
+                           data-filter-control="true"
+                           data-search="true"
+                           data-sortable="true"
+                           data-pagination="true"
+                           data-detail-view="true"
+                           data-detail-view-by-click="false"
+                           data-detail-formatter="TableEdificiDetails"
+                           data-detail-view-icon="true"
+                           data-sorter="Nome Edificio">
+                        <thead>
+                            <tr>
+
+                                <th data-field="name" data-sortable="true" data-filter-control="input">Nome Edificio</th>
+                                <th data-formatter="TableEdificiActions" data-filter-control="input">Edifici Actions</th>
+
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+            <div class="row">
+                <div class="container">
+                    <form>
+                        <div class="form-group row">
+                            <label for="input_edificio_nome" class="col-sm-4 col-form-label">Nome Edificio</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="input_edificio_nome" placeholder="Nome dell'edificio">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="input_edificio_indirizzo" class="col-sm-4 col-form-label">Indirizzo</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="input_edificio_indirizzo" placeholder="Indirizzo dell'edificio">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-10">
+                        <button type="button" id="input_edificio_inserisci" class="btn btn-success">Inserisci</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Managers-->
     <!-- Footer -->
     <footer class="page-footer font-small cyan darken-3">
         <div class="container">
             <div class="row">
+
 
             </div>
         </div>
@@ -55,6 +311,8 @@
     <script src="node_modules/jquery/dist/jquery.js"></script>
     <script src="node_modules/jquery-ui-dist/jquery-ui.js"></script>
     <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+    <script src="node_modules/bootstrap-table/dist/bootstrap-table.min.js"></script>
+    <script src="Scripts/Gestisci.js"></script>
     <!--<script type="module" src="Scripts/file2.js"></script>
     <script type="module" src="Scripts/file1.js"></script>-->
 

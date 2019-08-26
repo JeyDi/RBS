@@ -13,7 +13,7 @@ namespace RBS.WebAPI.Controllers
     public class ReservationsController : ApiController
     {
         [HttpGet]
-        [Route("Detail")]
+        [Route("Detail/{start_date}/{end_date}/{username}")]
         public IHttpActionResult ReservationDetail(string start_date, string end_date, string username)
         {
             try
@@ -36,9 +36,32 @@ namespace RBS.WebAPI.Controllers
 
         }
 
-
         [HttpGet]
-        [Route("Insert")]
+        [Route("GetAll/{username}")]
+        public IHttpActionResult ReservationList(string username)
+        {
+            try
+            {
+
+                BLReservations reservations = new BLReservations();
+                var reservation_list = reservations.GetAll(username);
+
+                ReservationsVM obj = new ReservationsVM();
+
+                return Ok(obj.CreateList(reservation_list));
+
+            }
+
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+
+        }
+
+
+        [HttpPost]
+        [Route("Insert/{event_name}/{description}/{username}/{room}/{start_date}/{end_date}")]
         public IHttpActionResult ReservationInsert(string event_name, string description, string username, string room, string start_date, string end_date)
         {
             try

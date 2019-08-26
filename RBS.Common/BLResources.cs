@@ -30,7 +30,7 @@ namespace RBS.Common
                 return resources;
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return null;
             }
@@ -54,7 +54,7 @@ namespace RBS.Common
                 return list_resource;
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return null;
             }

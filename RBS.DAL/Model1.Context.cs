@@ -378,5 +378,14 @@ namespace RBS.DAL
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<room_list_Result>("room_list", building_nameParameter);
         }
+    
+        public virtual ObjectResult<reservation_all_Result> reservation_all(string resource_username)
+        {
+            var resource_usernameParameter = resource_username != null ?
+                new ObjectParameter("Resource_username", resource_username) :
+                new ObjectParameter("Resource_username", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<reservation_all_Result>("reservation_all", resource_usernameParameter);
+        }
     }
 }

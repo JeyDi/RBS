@@ -38,8 +38,8 @@ namespace RBS.WebAPI.Controllers
         }
 
        
-        [HttpGet]
-        [Route("Insert")]
+        [HttpPost]
+        [Route("Insert/{name}/{address}")]
         public IHttpActionResult BuildingInsert(string name = null, string address = null)
         {
             try
@@ -61,7 +61,7 @@ namespace RBS.WebAPI.Controllers
 
         // GET api/Resources
         [HttpGet]
-        [Route("Detail")]
+        [Route("Detail/{name}")]
         public IHttpActionResult BuildingDetail(string name = null)
         {
             try
@@ -84,16 +84,16 @@ namespace RBS.WebAPI.Controllers
         }
 
         [HttpGet]
-        [Route("Delete")]
-        public IHttpActionResult BuildingDelete(string name, string address)
+        [Route("Delete/{name}")]
+        public IHttpActionResult BuildingDelete(string name)
         {
             try
             {
                 BLBuildings buildings = new BLBuildings();
-                var building_delete = buildings.Delete(name, address);
+                var building_delete = buildings.Delete(name);
                 if(building_delete > 0)
                 {
-                    return Ok();
+                    return Ok("Edificio Eliminato");
                 }
                 else
                 {

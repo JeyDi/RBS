@@ -4,8 +4,15 @@
   "description": "Progetto percorso circolare",
   "main": "index.js",
   "dependencies": {
+    "@types/bootstrap": "^4.3.1",
+    "@types/bootstrap-table": "^1.11.5",
+    "@types/jquery": "^3.3.31",
+    "@types/jqueryui": "^1.12.7",
     "bootstrap": "^4.3.1",
+    "bootstrap-table": "^1.15.4",
+    "fontawesome": "^5.6.3",
     "jquery": "^3.4.1",
+    "jquery-ui-dist": "^1.12.1",
     "popper.js": "^1.15.0",
     "typescript": "^3.4.5"
   },

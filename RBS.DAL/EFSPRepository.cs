@@ -202,7 +202,18 @@ namespace RBS.DAL
             return null;
         }
 
-        
+
+        public List<Reservations> SP_Reservation_GetAll(string username)
+        {
+            var reservations = ((RBSEntities)Context).reservation_all(username).ToList();
+
+            Reservations reservation_obj = new Reservations();
+            var reservation_list = reservation_obj.ConvertList(reservations);
+
+            return reservation_list;
+        }
+
+
         //TODO
         public Reservations SP_Reservation_Delete()
         {

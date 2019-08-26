@@ -12,9 +12,10 @@ namespace RBS.WebAPI
         {
             // Web API configuration and services
             // Web API configuration and services
-            var corsAttr = new EnableCorsAttribute("http://localhost:44352", "*", "*");
+            var corsAttr = new EnableCorsAttribute("http://localhost:44345", "*", "*");
             config.EnableCors(corsAttr);
 
+            //config.EnableCors();
 
             // Web API routes
             config.MapHttpAttributeRoutes();

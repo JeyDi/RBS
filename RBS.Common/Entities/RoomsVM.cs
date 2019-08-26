@@ -16,6 +16,8 @@ namespace RBS.Common.Entities
         public Nullable<System.DateTime> update_date { get; set; }
         public int id_building { get; set; }
 
+        public string building_name { get; set; }
+
         public RoomsVM()
         {
 
@@ -30,7 +32,7 @@ namespace RBS.Common.Entities
             this.insert_date = rooms.insert_date;
             this.update_date = rooms.update_date;
             this.id_building = rooms.id_building;
-
+            this.building_name = rooms.Buildings.name;
         }
 
         public List<RoomsVM> CreateList(List<Rooms> input_list)
@@ -38,14 +40,15 @@ namespace RBS.Common.Entities
             List<RoomsVM> result = new List<RoomsVM>();
             foreach (Rooms e in input_list)
             {
-                this.id_room = e.id_room;
-                this.name = e.name;
-                this.sittings = e.sittings;
-                this.insert_date = e.insert_date;
-                this.update_date = e.update_date;
-                this.id_building = e.id_building;
-
-                result.Add(this);
+                RoomsVM r = new RoomsVM();
+                r.id_room = e.id_room;
+                r.name = e.name;
+                r.sittings = e.sittings;
+                r.insert_date = e.insert_date;
+                r.update_date = e.update_date;
+                r.id_building = e.id_building;
+                r.building_name = e.Buildings.name;
+                result.Add(r);
             }
 
             return result;

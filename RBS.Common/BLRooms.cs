@@ -47,7 +47,7 @@ namespace RBS.Common
             {
                 EFSPRepository SPRepo = new EFSPRepository();
                 Rooms room = SPRepo.SP_Rooms_Get(name);
-
+                
 
                 return room;
 

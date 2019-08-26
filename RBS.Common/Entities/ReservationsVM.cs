@@ -17,7 +17,15 @@ namespace RBS.Common.Entities
         public Nullable<System.DateTime> insert_date { get; set; }
         public Nullable<System.DateTime> update_date { get; set; }
         public int id_resource { get; set; }
+        public string resource_name { get; set; }
+        public string resource_surname { get; set; }
+        public string resource_username { get; set; }
+        public string resource_email { get; set; }
         public int id_room { get; set; }
+        public string room_name { get; set; }
+        public int room_sittings { get; set; }
+        public int id_building { get; set; }
+        public string building_name { get; set; }
 
         public ReservationsVM()
         {
@@ -34,7 +42,16 @@ namespace RBS.Common.Entities
             this.insert_date = reservations.insert_date;
             this.update_date = reservations.update_date;
             this.id_resource = reservations.id_resource;
+            this.resource_name = reservations.Resources.name;
+            this.resource_surname = reservations.Resources.surname;
+            this.resource_username = reservations.Resources.username;
+            this.resource_email = reservations.Resources.email;
             this.id_room = reservations.id_room;
+            this.room_name = reservations.Rooms.name;
+            this.room_sittings = reservations.Rooms.sittings;
+            this.id_building = reservations.Rooms.Buildings.id_building;
+            this.building_name = reservations.Rooms.Buildings.name;
+           
         }
 
 
@@ -52,7 +69,15 @@ namespace RBS.Common.Entities
                 r.insert_date = e.insert_date;
                 r.update_date = e.update_date;
                 r.id_resource = e.id_resource;
+                r.resource_name = e.Resources.name;
+                r.resource_surname = e.Resources.surname;
+                r.resource_username = e.Resources.username;
+                r.resource_email = e.Resources.email;
                 r.id_room = e.id_room;
+                r.room_name = e.Rooms.name;
+                r.room_sittings = e.Rooms.sittings;
+                r.id_building = e.Rooms.Buildings.id_building;
+                r.building_name = e.Rooms.Buildings.name;
 
                 result.Add(r);
             }

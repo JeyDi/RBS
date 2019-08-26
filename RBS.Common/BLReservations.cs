@@ -30,6 +30,30 @@ namespace RBS.Common
                 EFSPRepository SPRepo = new EFSPRepository();
                 List<Reservations> reservations = SPRepo.SP_Reservation_Get(start_date,end_date,username);
 
+                return reservations;
+
+            }
+            catch (Exception)
+            {
+
+                return null;
+            }
+
+
+        }
+
+        /// <summary>
+        /// Get all reservations created by a specific user
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
+        public List<Reservations> GetAll(string username)
+        {
+
+            try
+            {
+                EFSPRepository SPRepo = new EFSPRepository();
+                List<Reservations> reservations = SPRepo.SP_Reservation_GetAll(username);
 
                 return reservations;
 
@@ -59,7 +83,6 @@ namespace RBS.Common
                 EFSPRepository SPRepo = new EFSPRepository();
                 Reservations reservation = SPRepo.SP_Reservation_Create(event_name, description, username, room, start_date, end_date);
 
-
                 return reservation;
 
             }
@@ -78,7 +101,6 @@ namespace RBS.Common
             {
                 EFSPRepository SPRepo = new EFSPRepository();
                 var result = SPRepo.SP_Reservation_Delete();
-
 
                 return result;
 
