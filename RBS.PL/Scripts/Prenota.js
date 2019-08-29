@@ -5,11 +5,31 @@ var prenotazioni_list = [];
 var prenotazioni_delete_row;
 jQuery(document).ready(() => {
     console.log("starting DOM functions");
+    CreateTable();
     DropdownRisorse();
-    RefreshTable();
+    RefreshTableButton();
+    DropdownStanze();
+    InsertPrenotazioniTable();
+    ShowAll();
     console.log("finish loading function in DOM");
 });
 function CreateTable() {
+    $.ajax({
+        url: BaseUrl + "reservations/All",
+        type: "GET",
+        //contentType: 'application/json',
+        dataType: 'json',
+        success: function (json) {
+            risorse_list = json;
+            $('#table_prenotazioni').bootstrapTable('load', risorse_list);
+            //$('#table_risorse').bootstrapTable({ data: risorse_list });
+        },
+        error: function (err) {
+            console.log(err);
+        }
+    });
+}
+function RefreshTable() {
     var username = $('#input_risorse').find("option:selected").text();
     $.ajax({
         url: BaseUrl + "reservations/GetAll/" + username,
@@ -27,6 +47,29 @@ function CreateTable() {
     });
 }
 ;
+function RefreshTableButton() {
+    $('#refresh_risorse_table').on('click', function (event) {
+        RefreshTable();
+    });
+}
+function ShowAll() {
+    $('#showall_risorse_table').on('click', function (event) {
+        $.ajax({
+            url: BaseUrl + "reservations/All",
+            type: "GET",
+            //contentType: 'application/json',
+            dataType: 'json',
+            success: function (json) {
+                risorse_list = json;
+                $('#table_prenotazioni').bootstrapTable('load', risorse_list);
+                //$('#table_risorse').bootstrapTable({ data: risorse_list });
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        });
+    });
+}
 function DropdownRisorse() {
     var resources_list = [];
     $('#input_risorse').empty();
@@ -47,7 +90,6 @@ function DropdownRisorse() {
                     .append($("<option></option>")
                     .attr("value", index)
                     .text(value.name));
-                console.log(value.name);
             });
             return resources_list;
         },
@@ -78,7 +120,6 @@ function DropdownStanze() {
                     .append($("<option></option>")
                     .attr("value", index)
                     .text(value.name));
-                console.log(value.name);
             });
             return resources_list;
         },
@@ -89,19 +130,12 @@ function DropdownStanze() {
     });
 }
 ;
-function RefreshTable() {
-    $('#refresh_risorse_table').on('click', function (event) {
-        CreateTable();
-    });
-}
-function TablePrenotazioniActions(value, row) {
-    prenotazioni_delete_row = row;
-    return '<i class="fas fa-trash-alt" onclick="DeletePrenotazioneTable()"></i>';
-}
 function TablePrenotazioniDetails(index, row) {
     var html = [];
     //$.each(row, function (key, value) {
-    html.push('<p><b>ID Prenotazione:</b> ' + row.id_reservations + '</p>');
+    html.push('<p><b>ID Prenotazione:</b> ' + row.id_reservation + '</p>');
+    html.push('<p><b>Data inizio:</b> ' + row.start_date + '</p>');
+    html.push('<p><b>Data fine:</b> ' + row.end_date + '</p>');
     html.push('<p><b>ID Risorsa:</b> ' + row.id_resource + '</p>');
     html.push('<p><b>Nome risorsa:</b> ' + row.resource_name + '</p>');
     html.push('<p><b>Cognome risorsa:</b> ' + row.resource_surname + '</p>');
@@ -116,30 +150,49 @@ function TablePrenotazioniDetails(index, row) {
     return html.join('');
 }
 function DeletePrenotazioniTable() {
-    $('#table_prenotazioni').bootstrapTable('load', edifici_list);
-    $("#Prenotazioni_Alert_UnSuccess").show();
+    var id = prenotazioni_delete_row.id_reservation;
+    $.ajax({
+        url: BaseUrl + "reservations/Delete/" + id,
+        type: "GET",
+        //contentType: 'application/json',
+        //dataType: 'json',
+        success: function () {
+            console.log(prenotazioni_delete_row.description + " eliminated");
+            //CreateEdificiTable()
+        },
+        error: function (err) {
+            console.log(err);
+        }
+    }).done(function (data) {
+        CreateTable();
+        $("#Prenotazioni_Alert_UnSuccess").show();
+    });
+}
+function TablePrenotazioniActions(value, row) {
+    prenotazioni_delete_row = row;
+    return '<i class="fas fa-trash-alt" onclick="DeletePrenotazioniTable()"></i>';
 }
 function InsertPrenotazioniTable() {
     $('#input_prenotazione_inserisci').on('click', function (event) {
-        var evento = $("#input_prenota_evento").val();
-        var descrizione = $("#input_prenota_descrizione").val();
-        var start_date = $("#input_prenota_data_inizio").val();
-        var end_date = $("#input_prenota_data_fine").val();
-        var stanza = $('#input_prenota_stanza').find("option:selected").text();
-        var username = $('#input_risorse').find("option:selected").text();
         $.ajax({
-            url: BaseUrl + "reservation/Insert/" + evento + "/" + descrizione + "/" + username + "/" + stanza + "/" + start_date + "/" + end_date,
+            url: BaseUrl + 'reservations/Insert',
             type: "POST",
             contentType: 'application/json',
-            data: JSON.stringify({}),
-            success: function () {
-                CreateTable();
-                $("#Prenotazioni_Alert_Success").show();
-            },
+            data: JSON.stringify({
+                event_name: $("#input_prenota_evento").val(),
+                description: $("#input_prenota_descrizione").val(),
+                username: $('#input_risorse').find("option:selected").text(),
+                room: $('#input_prenota_stanza').find("option:selected").text(),
+                start_date: $('#input_prenota_data_value').datepicker('getFormattedDate'),
+                end_date: $('#input_prenota_data_value').datepicker('getFormattedDate')
+            }),
             error: function (err) {
                 alert("errore nella creazione della prenotazione, valori non inseriti correttamente");
                 console.log(err);
             }
+        }).done(function (data) {
+            RefreshTable();
+            $("#Prenotazioni_Alert_Success").show();
         });
     });
 }

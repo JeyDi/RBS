@@ -5,6 +5,8 @@ var risorse_list = [];
 var sale_list = [];
 var edifici_list = [];
 var edifici_delete_row;
+var sale_delete_row;
+var risorse_delete_row;
 jQuery(document).ready(() => {
     console.log("starting DOM functions");
     //Show tables actions
@@ -21,6 +23,7 @@ function ShowRisorseTable() {
         $('#manager_risorse').toggle("slide");
         CreateRisorseTable();
         InsertRisorseTable();
+        RefreshRisorseTable();
     });
 }
 function CreateRisorseTable() {
@@ -58,7 +61,7 @@ function InsertRisorseTable() {
             data: JSON.stringify({}),
             success: function () {
                 CreateRisorseTable();
-                $("#Risorsa_Alert_Success").show();
+                $("#Risorse_Alert_Success").show();
             },
             error: function (err) {
                 alert("errore nella creazione dell'utente.");
@@ -68,10 +71,38 @@ function InsertRisorseTable() {
     });
 }
 function DeleteRisorsaTable() {
-    $("#Risorsa_Alert_UnSuccess").show();
+    console.log("risorse delete row");
+    console.log(risorse_delete_row);
+    $.ajax({
+        url: BaseUrl + "resources/Delete/" + risorse_delete_row.username,
+        //url: BaseUrl + "resources/Delete",
+        type: "GET",
+        contentType: 'application/json',
+        dataType: 'json',
+        //data: JSON.stringify({
+        //    name: risorse_delete_row.name,
+        //    surname: risorse_delete_row.surname,
+        //    username: risorse_delete_row.username,
+        //    email: risorse_delete_row.email
+        //}),
+        success: function () {
+            console.log(risorse_delete_row.username + " eliminated");
+            //CreateEdificiTable()
+        },
+        error: function (err) {
+            console.log(err);
+        }
+    }).done(function (data) {
+        //$('#table_risorse').bootstrapTable('load', risorse_list);
+        CreateRisorseTable();
+        //console.log(JSON.stringify(data));
+        $("#Risorse_Alert_UnSuccess").show();
+    });
+    //$("#Risorse_Alert_UnSuccess").show();
 }
 function TableRisorseActions(value, row) {
-    return '<i class="fas fa-trash-alt" onclick="DeleteRisorsaTable(' + row.id + ')"></i>';
+    risorse_delete_row = row;
+    return '<i class="fas fa-trash-alt" onclick="DeleteRisorsaTable()"></i>';
 }
 function TableRisorseDetails(index, row) {
     var html = [];
@@ -94,14 +125,11 @@ function ShowSaleTable() {
         DropdownSaleInsert();
         InsertSalaTable();
         CreateSaleTable();
-        RefreshSaleTable();
     });
 }
 function CreateSaleTable() {
     $('#refresh_sale_table').on('click', function (event) {
         var edificio = $('#input_sale_edificio').find("option:selected").text();
-        console.log("Call");
-        console.log("Edificio:" + edificio);
         $.ajax({
             url: BaseUrl + "rooms/GetAll/" + edificio,
             type: "GET",
@@ -109,8 +137,6 @@ function CreateSaleTable() {
             dataType: 'json',
             success: function (json) {
                 sale_list = json;
-                console.log("Inside the call of sale");
-                console.log(sale_list);
                 $('#table_sale').bootstrapTable('load', sale_list);
             },
             error: function (err) {
@@ -160,7 +186,7 @@ function InsertSalaTable() {
             contentType: 'application/json',
             data: JSON.stringify({}),
             success: function () {
-                CreateSaleTable();
+                RefreshSaleTable();
                 $("#Sala_Alert_Success").show();
             },
             error: function (err) {
@@ -171,10 +197,25 @@ function InsertSalaTable() {
     });
 }
 function DeleteSalaTable() {
-    $("#Sala_Alert_UnSuccess").show();
+    $.ajax({
+        url: BaseUrl + "rooms/Delete/" + sale_delete_row.name,
+        type: "GET",
+        contentType: 'application/json',
+        dataType: 'json',
+        success: function () {
+            console.log(sale_delete_row.name + " eliminated");
+        },
+        error: function (err) {
+            console.log(err);
+        }
+    }).done(function (data) {
+        RefreshSaleTable();
+        $("#Sala_Alert_UnSuccess").show();
+    });
 }
 function TableSalaActions(value, row) {
-    return '<i class="fas fa-trash-alt" onclick="DeleteSalaTable(' + row.id + ')"></i>';
+    sale_delete_row = row;
+    return '<i class="fas fa-trash-alt" onclick="DeleteSalaTable()"></i>';
 }
 function TableSaleDetails(index, row) {
     var html = [];
@@ -186,8 +227,19 @@ function TableSaleDetails(index, row) {
     return html.join('');
 }
 function RefreshSaleTable() {
-    $('#refresh_sale_table').on('click', function (event) {
-        CreateSaleTable();
+    var edificio = $('#input_sale_edificio').find("option:selected").text();
+    $.ajax({
+        url: BaseUrl + "rooms/GetAll/" + edificio,
+        type: "GET",
+        //contentType: 'application/json',
+        dataType: 'json',
+        success: function (json) {
+            sale_list = json;
+            $('#table_sale').bootstrapTable('load', sale_list);
+        },
+        error: function (err) {
+            console.log(err);
+        }
     });
 }
 ///////TABLE EDIFICI
@@ -249,9 +301,10 @@ function DeleteEdificiTable() {
         error: function (err) {
             console.log(err);
         }
+    }).done(function (data) {
+        CreateEdificiTable();
+        $("#Edifici_Alert_UnSuccess").show();
     });
-    $('#table_edifici').bootstrapTable('load', edifici_list);
-    $("#Edifici_Alert_UnSuccess").show();
 }
 function TableEdificiActions(value, row) {
     edifici_delete_row = row;

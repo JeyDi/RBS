@@ -5,6 +5,7 @@
     <link href="node_modules/jquery-ui-dist/jquery-ui.css" rel="stylesheet" />
     <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="node_modules/bootstrap-table/dist/bootstrap-table.min.css" rel="stylesheet">
+    <link href="node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/a96f81cb07.js"></script>
     <!--<link href="StyleSheet/Prenota.css" rel="stylesheet" />-->
 
@@ -47,26 +48,33 @@
                 <div class="row">
                     <div class="form-group row">
 
-                        <label for="input_risorse" class="col-sm-4 col-form-label">Seleziona una risorsa</label>
-                        <div class="col-sm-10">
+                        <label for="input_risorse" class="col-md-10 col-form-label">Seleziona una risorsa</label>
+                        <div class="col-md-10">
 
                             <select class="custom-select" id="input_risorse" name="selectBox"></select>
 
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <div class="col-sm-10">
-                            <button type="button" id="refresh_risorse_table" class="btn btn-success">Ricarica</button>
+                    <div class="row">
+                        <div class="form-group row">
+                            <div class="col-md-10">
+                                <button type="button" id="refresh_risorse_table" class="btn btn-success">Ricarica</button>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-10">
+                                <button type="button" id="showall_risorse_table" class="btn btn-success">Vedi tutti</button>
+                            </div>
                         </div>
                     </div>
                     <div class="container">
                         <div id="Prenotazioni_Alert_UnSuccess" class="alert alert-warning text-center alert-dismissible" role="alert" style="display:none">
-                            Prenotazione cancellata, ricarica la tabella per visualizzare le modifiche
+                            Prenotazione cancellata correttamente
                             <button type="button" id="Prenotazioni_Alert_UnSuccess_Button" class="close" onclick='$("#Prenotazioni_Alert_UnSuccess").hide();' aria-label="Close"><span aria-hidden="true">&times;</span></button>
                         </div>
                         <div id="Prenotazioni_Alert_Success" class="alert alert-success text-center alert-dismissible" role="alert" style="display:none">
                             Nuova prenotazione inserita
-                            <button type="button" id="Prenotazioni_Alert_Success_Button" class="close" onclick='$("#Prenotazioni_Alert_UnSuccess").hide();' aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <button type="button" id="Prenotazioni_Alert_Success_Button" class="close" onclick='$("#Prenotazioni_Alert_Success").hide();' aria-label="Close"><span aria-hidden="true">&times;</span></button>
                         </div>
                     </div>
                 </div>
@@ -83,13 +91,12 @@
                            data-detail-view-by-click="false"
                            data-detail-formatter="TablePrenotazioniDetails"
                            data-detail-view-icon="true"
-                           data-sorter="Cognome">
+                           data-sorter="Data Inizio">
                         <thead>
                             <tr>
 
                                 <th data-field="description" data-sortable="true" data-filter-control="input">Descrizione</th>
-                                <th data-field="start_date" data-sortable="true" data-filter-control="input">Data Inizio</th>
-                                <th data-field="end_date" data-sortable="true" data-filter-control="input">Data Fine</th>
+                                <th data-field="start_date" data-sortable="true" data-filter-control="input">Data</th>
 
                                 <th data-formatter="TablePrenotazioniActions" data-filter-control="input">Prenotazioni Actions</th>
                             </tr>
@@ -99,41 +106,55 @@
             </div>
             <div class="container">
                 <div class="row">
+                    <h3>Inserisci un nuovo evento</h3>
+                </div>
+                <div class="row">
                     <form>
                         <div class="form-group row">
-                            <label for="input_prenota_evento" class="col-sm-4 col-form-label">Nome evento</label>
-                            <div class="col-sm-10">
+                            <label for="input_prenota_evento" class="col-md-10 col-form-label">Nome evento</label>
+                            <div class="col-md-10">
                                 <input type="text" class="form-control" id="input_prenota_evento" placeholder="Nome dell'evento">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="input_prenota_descrizione" class="col-sm-4 col-form-label">Descrizione</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="input_prenota_descrizione" placeholder="Desrizione dell'evento">
+                            <label for="input_prenota_descrizione" class="col-md-10 col-form-label">Descrizione</label>
+                            <div class="col-md-10">
+                                <input type="text" class="form-control" id="input_prenota_descrizione" placeholder="Descrizione dell'evento">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="input_prenota_stanza" class="col-sm-4 col-form-label">Seleziona una stanza</label>
-                            <div class="col-sm-10">
+                            <label for="input_prenota_stanza" class="col-md-10 col-form-label">Seleziona una stanza</label>
+                            <div class="col-md-10">
                                 <select class="custom-select" id="input_prenota_stanza" name="selectBox"></select>
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label for="input_prenota_data_inizio" class="col-sm-4 col-form-label">Data di inizio</label>
-                            <div class="col-sm-10">
+                        <!--<div class="form-group row">
+                            <label for="input_prenota_data_inizio" class="col-md-10 col-form-label">Data di inizio</label>
+                            <div class="col-md-10">
                                 <input type="text" class="form-control" id="input_prenota_data_inizio" placeholder="Inserisci la data di inizio">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="input_prenota_data_fine" class="col-sm-4 col-form-label">Data di fine</label>
-                            <div class="col-sm-10">
+                            <label for="input_prenota_data_fine" class="col-md-10 col-form-label">Data di fine</label>
+                            <div class="col-md-10">
                                 <input type="text" class="form-control" id="input_prenota_data_fine" placeholder="Inserisci la data di fine">
+                            </div>
+                        </div>-->
+                        <div class="form-group row">
+                            <label for="input_prenota_data" class="col-md-10 col-form-label">Data di prenotazione</label>
+                            <div class="col-md-10">
+                                <div class="input-group date" id="input_prenota_data" data-provide="datepicker" data-date-format="dd-mm-yyyy">
+                                    <input type="text" id="input_prenota_data_value" class="form-control">
+                                    <div class="input-group-addon">
+                                        <span class="glyphicon glyphicon-th"></span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </form>
                 </div>
                 <div class="form-group row">
-                    <div class="col-sm-10">
+                    <div class="col-md-10">
                         <button type="button" id="input_prenotazione_inserisci" class="btn btn-success">Inserisci</button>
                     </div>
                 </div>
@@ -163,6 +184,9 @@
     <script src="node_modules/jquery-ui-dist/jquery-ui.js"></script>
     <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
     <script src="node_modules/bootstrap-table/dist/bootstrap-table.min.js"></script>
+    <script src="node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+
+
     <script src="Scripts/Prenota.js"></script>
     <!--<script type="module" src="Scripts/file2.js"></script>
     <script type="module" src="Scripts/file1.js"></script>-->
