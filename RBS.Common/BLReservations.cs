@@ -94,20 +94,20 @@ namespace RBS.Common
         }
 
         //TODO
-        public Reservations Delete()
+        public int Delete(int id)
         {
 
             try
             {
                 EFSPRepository SPRepo = new EFSPRepository();
-                var result = SPRepo.SP_Reservation_Delete();
+                var result = SPRepo.SP_Reservation_Delete(id);
 
                 return result;
 
             }
             catch (Exception)
             {
-                return null;
+                return -1;
             }
 
         }

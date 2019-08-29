@@ -93,13 +93,13 @@ namespace RBS.Common
         /// <param name="name"></param>
         /// <param name="address"></param>
         /// <returns></returns>
-        public Rooms Delete()
+        public int Delete(string room_name)
         {
 
             try
             {
                 EFSPRepository SPRepo = new EFSPRepository();
-                var result = SPRepo.SP_Rooms_Delete();
+                var result = SPRepo.SP_Rooms_Delete(room_name);
 
 
                 return result;
@@ -107,7 +107,7 @@ namespace RBS.Common
             }
             catch (Exception)
             {
-                return null;
+                return -1;
             }
 
         }

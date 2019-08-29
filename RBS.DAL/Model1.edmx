@@ -141,6 +141,7 @@
         <Function Name="reservation_all" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="df">
           <Parameter Name="Resource_username" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="reservation_all_unfiltered" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="df" />
         <Function Name="reservation_create" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="df">
           <Parameter Name="Event" Type="varchar" Mode="In" />
           <Parameter Name="Description" Type="varchar" Mode="In" />
@@ -148,6 +149,9 @@
           <Parameter Name="Room_name" Type="varchar" Mode="In" />
           <Parameter Name="Start_date" Type="datetime2" Mode="In" />
           <Parameter Name="End_date" Type="datetime2" Mode="In" />
+        </Function>
+        <Function Name="reservation_delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="df">
+          <Parameter Name="Identifier" Type="int" Mode="In" />
         </Function>
         <Function Name="reservation_delete_single" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="df">
           <Parameter Name="Date" Type="datetime2" Mode="In" />
@@ -197,10 +201,14 @@
           <Parameter Name="Email" Type="varchar" Mode="In" />
         </Function>
         <Function Name="resource_list" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="df" />
+        <Function Name="room_all" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="df" />
         <Function Name="room_create" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="df">
           <Parameter Name="Name" Type="varchar" Mode="In" />
           <Parameter Name="Sittings" Type="int" Mode="In" />
           <Parameter Name="Building_Name" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="room_delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="df">
+          <Parameter Name="Name" Type="varchar" Mode="In" />
         </Function>
         <Function Name="room_detail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="df">
           <Parameter Name="RoomName" Type="varchar" Mode="In" />
@@ -536,7 +544,15 @@
           <Parameter Name="Building_name" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="reservation_all" ReturnType="Collection(RBSModel.reservation_all_Result)">
-            <Parameter Name="Resource_username" Mode="In" Type="String" />
+          <Parameter Name="Resource_username" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="reservation_all_unfiltered" ReturnType="Collection(RBSModel.reservation_all_unfiltered_Result)" />
+          <FunctionImport Name="room_all" ReturnType="Collection(RBSModel.room_all_Result)" />
+          <FunctionImport Name="room_delete">
+          <Parameter Name="Name" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="reservation_delete">
+            <Parameter Name="Identifier" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="resource_create_Result">
@@ -662,6 +678,30 @@
           <Property Type="String" Name="resource_surname" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="resource_username" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="resource_email" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="room_id" Nullable="false" />
+          <Property Type="String" Name="room_name" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="room_sittings" Nullable="false" />
+          <Property Type="Int32" Name="build_id" Nullable="false" />
+          <Property Type="String" Name="build_name" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="reservation_all_unfiltered_Result">
+          <Property Type="Int32" Name="reserv_id" Nullable="false" />
+          <Property Type="String" Name="reserv_event" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="reserv_description" Nullable="true" />
+          <Property Type="DateTime" Name="reserv_start_date" Nullable="false" />
+          <Property Type="DateTime" Name="reserv_end_date" Nullable="false" />
+          <Property Type="Int32" Name="resource_id" Nullable="false" />
+          <Property Type="String" Name="resource_name" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="resource_surname" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="resource_username" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="resource_email" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="room_id" Nullable="false" />
+          <Property Type="String" Name="room_name" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="room_sittings" Nullable="false" />
+          <Property Type="Int32" Name="build_id" Nullable="false" />
+          <Property Type="String" Name="build_name" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="room_all_Result">
           <Property Type="Int32" Name="room_id" Nullable="false" />
           <Property Type="String" Name="room_name" Nullable="false" MaxLength="50" />
           <Property Type="Int32" Name="room_sittings" Nullable="false" />
@@ -936,6 +976,40 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="reservation_all_unfiltered" FunctionName="RBSModel.Store.reservation_all_unfiltered">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="RBSModel.reservation_all_unfiltered_Result">
+                <ScalarProperty Name="reserv_id" ColumnName="reserv_id" />
+                <ScalarProperty Name="reserv_event" ColumnName="reserv_event" />
+                <ScalarProperty Name="reserv_description" ColumnName="reserv_description" />
+                <ScalarProperty Name="reserv_start_date" ColumnName="reserv_start_date" />
+                <ScalarProperty Name="reserv_end_date" ColumnName="reserv_end_date" />
+                <ScalarProperty Name="resource_id" ColumnName="resource_id" />
+                <ScalarProperty Name="resource_name" ColumnName="resource_name" />
+                <ScalarProperty Name="resource_surname" ColumnName="resource_surname" />
+                <ScalarProperty Name="resource_username" ColumnName="resource_username" />
+                <ScalarProperty Name="resource_email" ColumnName="resource_email" />
+                <ScalarProperty Name="room_id" ColumnName="room_id" />
+                <ScalarProperty Name="room_name" ColumnName="room_name" />
+                <ScalarProperty Name="room_sittings" ColumnName="room_sittings" />
+                <ScalarProperty Name="build_id" ColumnName="build_id" />
+                <ScalarProperty Name="build_name" ColumnName="build_name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="room_all" FunctionName="RBSModel.Store.room_all">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="RBSModel.room_all_Result">
+                <ScalarProperty Name="room_id" ColumnName="room_id" />
+                <ScalarProperty Name="room_name" ColumnName="room_name" />
+                <ScalarProperty Name="room_sittings" ColumnName="room_sittings" />
+                <ScalarProperty Name="build_id" ColumnName="build_id" />
+                <ScalarProperty Name="build_name" ColumnName="build_name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="room_delete" FunctionName="RBSModel.Store.room_delete" />
+          <FunctionImportMapping FunctionImportName="reservation_delete" FunctionName="RBSModel.Store.reservation_delete" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

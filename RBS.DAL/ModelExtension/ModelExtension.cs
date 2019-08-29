@@ -323,6 +323,50 @@ namespace RBS.DAL
 
         }
 
+        public List<Reservations> ConvertList(List<reservation_all_unfiltered_Result> rsv_list)
+        {
+
+            List<Reservations> new_list = new List<Reservations>();
+
+            foreach (reservation_all_unfiltered_Result rsv in rsv_list)
+            {
+                Reservations r = new Reservations();
+
+                r.id_reservation = rsv.reserv_id;
+                r.description = rsv.reserv_description;
+                r.start_date = rsv.reserv_start_date;
+                r.end_date = rsv.reserv_end_date;
+                r.id_resource = rsv.resource_id;
+                r.id_room = rsv.room_id;
+
+                r.Rooms = new Rooms()
+                {
+                    id_room = rsv.room_id,
+                    name = rsv.room_name,
+                    sittings = rsv.room_sittings,
+                    Buildings = new Buildings()
+                    {
+                        id_building = rsv.build_id,
+                        name = rsv.build_name
+                    }
+
+                };
+                r.Resources = new Resources()
+                {
+                    name = rsv.resource_name,
+                    surname = rsv.resource_surname,
+                    username = rsv.resource_username,
+                    email = rsv.resource_email
+                };
+
+                new_list.Add(r);
+
+            }
+
+            return new_list;
+
+        }
+
     }
 
 
@@ -355,12 +399,54 @@ namespace RBS.DAL
             };
         }
 
+
+        public Rooms(room_all_Result nr)
+        {
+            this.id_room = nr.room_id;
+            this.name = nr.room_name;
+            this.sittings = nr.room_sittings;
+            this.id_building = nr.build_id;
+            this.Buildings = new Buildings()
+            {
+                //id_building = nr.build_id,
+                name = nr.build_name
+            };
+        }
+
         public List<Rooms> ConvertList(List<room_list_Result> nr_list)
         {
 
             List<Rooms> new_list = new List<Rooms>();
 
             foreach (room_list_Result nr in nr_list)
+            {
+                Rooms r = new Rooms();
+
+                r.id_room = nr.room_id;
+                r.name = nr.room_name;
+                r.sittings = nr.room_sittings;
+                r.id_building = nr.build_id;
+                r.Buildings = new Buildings()
+                {
+                    //id_building = nr.build_id,
+                    name = nr.build_name
+                };
+
+                new_list.Add(r);
+
+            }
+
+
+            return new_list;
+
+        }
+
+        public List<Rooms> ConvertList(List<room_all_Result> nr_list)
+        {
+
+            List<Rooms> new_list = new List<Rooms>();
+
+            foreach (room_all_Result nr in nr_list)
             {
                 Rooms r = new Rooms();
 

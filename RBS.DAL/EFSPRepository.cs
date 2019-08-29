@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace RBS.DAL
 {
     /// <summary>
-    /// All Stored procedure implementation and mappings from Entity Framework
+    /// All Stored procedure implementation and mapped from Entity Framework
     /// </summary>
     public class EFSPRepository
     {
@@ -20,13 +20,14 @@ namespace RBS.DAL
             get { return mContext ?? (mContext = ((EFUnitOfWork)GlobalUnitOfWork.Current).Context); }
         }
 
-       /// <summary>
-       /// Insert a new resource (person) in the database
-       /// </summary>
-       /// <param name="name"></param>
-       /// <param name="surname"></param>
-       /// <param name="admin"></param>
-       /// <returns></returns>
+        #region Resources
+        /// <summary>
+        /// Insert a new resource (person) in the database
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="surname"></param>
+        /// <param name="admin"></param>
+        /// <returns></returns>
         public Resources SP_Resources_Create(string name, string surname, bool? admin)
         {
 
@@ -84,10 +85,11 @@ namespace RBS.DAL
             return new Resources(resource);
         }
 
-        //TODO
-        public Resources SP_Resources_Delete()
+        
+        public int SP_Resources_Delete(string name = null, string surname = null, string username = null , string email = null)
         {
-            return null;
+            var result = ((RBSEntities)Context).resource_delete(name, surname, username, email);
+            return result;
         }
 
         //TODO
@@ -96,7 +98,10 @@ namespace RBS.DAL
             return null;
         }
 
-        
+        #endregion
+
+        #region Buildings
+
         public List<Buildings> SP_Buildings_GetAll()
         {
             var building = ((RBSEntities)Context).building_list().ToList();
@@ -139,6 +144,9 @@ namespace RBS.DAL
             return null;
         }
 
+        #endregion
+
+        #region Rooms
 
         public List<Rooms> SP_Rooms_GetAll(string build_name)
         {
@@ -168,12 +176,26 @@ namespace RBS.DAL
             return new Rooms(room);
         }
 
-        
-        //TODO
-        public Rooms SP_Rooms_Delete()
+
+        public int SP_Rooms_Delete(string room_name)
         {
-            return null;
+            var result = ((RBSEntities)Context).room_delete(room_name);
+            return result;
         }
+
+
+        public List<Rooms> SP_Rooms_All()
+        {
+            var rooms = ((RBSEntities)Context).room_all().ToList();
+
+            Rooms room_obj = new Rooms();
+            var room_list = room_obj.ConvertList(rooms);
+            return room_list;
+        }
+
+        #endregion
+
+        #region Reservations
 
         public List<Reservations> SP_Reservation_Get(DateTime start_date, DateTime end_date, string username)
         {
@@ -202,7 +224,11 @@ namespace RBS.DAL
             return null;
         }
 
-
+        /// <summary>
+        /// See all the reservations by an user
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
         public List<Reservations> SP_Reservation_GetAll(string username)
         {
             var reservations = ((RBSEntities)Context).reservation_all(username).ToList();
@@ -214,15 +240,32 @@ namespace RBS.DAL
         }
 
 
-        //TODO
-        public Reservations SP_Reservation_Delete()
+        /// <summary>
+        /// Delete a reservation with an id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public int SP_Reservation_Delete(int? id)
         {
 
-
-            return null;
+            var result = ((RBSEntities)Context).reservation_delete(id);
+            return result;
         }
 
+        /// <summary>
+        /// See al the reservations without any filter
+        /// </summary>
+        /// <returns></returns>
+        public List<Reservations> SP_Reservation_All()
+        {
+            var reservations = ((RBSEntities)Context).reservation_all_unfiltered().ToList();
 
+            Reservations reservation_obj = new Reservations();
+            var reservation_list = reservation_obj.ConvertList(reservations);
 
+            return reservation_list;
+        }
+
+        #endregion 
     }
 }

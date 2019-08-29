@@ -58,6 +58,37 @@ function DropdownRisorse() {
     });
 }
 ;
+function DropdownStanze() {
+    var resources_list = [];
+    $('#input_prenota_stanza').empty();
+    $.ajax({
+        url: BaseUrl + "rooms/All",
+        type: "GET",
+        //contentType: 'application/json',
+        dataType: 'json',
+        success: function (json) {
+            //building_list = JSON.parse(json)
+            $.each(json, function () {
+                resources_list.push({
+                    name: this.name,
+                });
+            });
+            $.each(resources_list, function (index, value) {
+                $('#input_prenota_stanza')
+                    .append($("<option></option>")
+                    .attr("value", index)
+                    .text(value.name));
+                console.log(value.name);
+            });
+            return resources_list;
+        },
+        error: function (err) {
+            console.log(err);
+            return [];
+        }
+    });
+}
+;
 function RefreshTable() {
     $('#refresh_risorse_table').on('click', function (event) {
         CreateTable();
@@ -87,5 +118,29 @@ function TablePrenotazioniDetails(index, row) {
 function DeletePrenotazioniTable() {
     $('#table_prenotazioni').bootstrapTable('load', edifici_list);
     $("#Prenotazioni_Alert_UnSuccess").show();
+}
+function InsertPrenotazioniTable() {
+    $('#input_prenotazione_inserisci').on('click', function (event) {
+        var evento = $("#input_prenota_evento").val();
+        var descrizione = $("#input_prenota_descrizione").val();
+        var start_date = $("#input_prenota_data_inizio").val();
+        var end_date = $("#input_prenota_data_fine").val();
+        var stanza = $('#input_prenota_stanza').find("option:selected").text();
+        var username = $('#input_risorse').find("option:selected").text();
+        $.ajax({
+            url: BaseUrl + "reservation/Insert/" + evento + "/" + descrizione + "/" + username + "/" + stanza + "/" + start_date + "/" + end_date,
+            type: "POST",
+            contentType: 'application/json',
+            data: JSON.stringify({}),
+            success: function () {
+                CreateTable();
+                $("#Prenotazioni_Alert_Success").show();
+            },
+            error: function (err) {
+                alert("errore nella creazione della prenotazione, valori non inseriti correttamente");
+                console.log(err);
+            }
+        });
+    });
 }
 //# sourceMappingURL=Prenota.js.map

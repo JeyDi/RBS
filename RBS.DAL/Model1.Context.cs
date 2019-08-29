@@ -387,5 +387,33 @@ namespace RBS.DAL
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<reservation_all_Result>("reservation_all", resource_usernameParameter);
         }
+    
+        public virtual ObjectResult<reservation_all_unfiltered_Result> reservation_all_unfiltered()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<reservation_all_unfiltered_Result>("reservation_all_unfiltered");
+        }
+    
+        public virtual ObjectResult<room_all_Result> room_all()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<room_all_Result>("room_all");
+        }
+    
+        public virtual int room_delete(string name)
+        {
+            var nameParameter = name != null ?
+                new ObjectParameter("Name", name) :
+                new ObjectParameter("Name", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("room_delete", nameParameter);
+        }
+    
+        public virtual int reservation_delete(Nullable<int> identifier)
+        {
+            var identifierParameter = identifier.HasValue ?
+                new ObjectParameter("Identifier", identifier) :
+                new ObjectParameter("Identifier", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("reservation_delete", identifierParameter);
+        }
     }
 }
