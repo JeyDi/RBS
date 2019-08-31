@@ -57,10 +57,9 @@
     <Compile Include="Entities\ResourcesVM.cs" />
     <Compile Include="Entities\RoomsVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utilities\Actions.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Utilities\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\RBS.DAL\RBS.DAL.csproj">
       <Project>{0409c281-666c-4a06-a200-51a5543f372e}</Project>

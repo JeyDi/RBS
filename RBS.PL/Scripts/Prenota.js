@@ -4,14 +4,12 @@ var BaseUrl = "http://localhost:44375/api/";
 var prenotazioni_list = [];
 var prenotazioni_delete_row;
 jQuery(document).ready(() => {
-    console.log("starting DOM functions");
     CreateTable();
     DropdownRisorse();
     RefreshTableButton();
     DropdownStanze();
     InsertPrenotazioniTable();
     ShowAll();
-    console.log("finish loading function in DOM");
 });
 function CreateTable() {
     $.ajax({
@@ -156,10 +154,6 @@ function DeletePrenotazioniTable() {
         type: "GET",
         //contentType: 'application/json',
         //dataType: 'json',
-        success: function () {
-            console.log(prenotazioni_delete_row.description + " eliminated");
-            //CreateEdificiTable()
-        },
         error: function (err) {
             console.log(err);
         }

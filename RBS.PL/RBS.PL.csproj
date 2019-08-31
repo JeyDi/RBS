@@ -85,10 +85,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Gestisci.html" />
-    <Content Include="Home.html" />
-    <Content Include="Index.html" />
-    <Content Include="Informazioni.html" />
+    <Content Include="Pages\Gestisci.html" />
+    <Content Include="Pages\Login.html" />
+    <Content Include="Pages\Home.html" />
+    <Content Include="Pages\Informazioni.html" />
     <Content Include="node_modules\bootstrap-datepicker\dist\css\bootstrap-datepicker.css" />
     <Content Include="node_modules\bootstrap-datepicker\dist\css\bootstrap-datepicker.min.css" />
     <Content Include="node_modules\bootstrap-datepicker\dist\css\bootstrap-datepicker.standalone.css" />
@@ -750,8 +750,12 @@
     <Content Include="node_modules\typescript\lib\watchGuard.js" />
     <Content Include="node_modules\typescript\LICENSE.txt" />
     <Content Include="node_modules\typescript\ThirdPartyNoticeText.txt" />
-    <Content Include="Prenota.html" />
+    <Content Include="Pages\Prenota.html" />
+    <Content Include="StyleSheet\Gestisci.css" />
+    <Content Include="StyleSheet\Home.css" />
     <Content Include="StyleSheet\img\RetiLogo.png" />
+    <Content Include="StyleSheet\Informazioni.css" />
+    <Content Include="StyleSheet\Prenota.css" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -1091,6 +1095,8 @@
     <TypeScriptCompile Include="Scripts\file2.ts" />
     <TypeScriptCompile Include="Scripts\Gestisci.ts" />
     <TypeScriptCompile Include="Scripts\Global.ts" />
+    <TypeScriptCompile Include="Scripts\Index.ts" />
+    <TypeScriptCompile Include="Scripts\Informazioni.ts" />
     <TypeScriptCompile Include="Scripts\Prenota.ts" />
   </ItemGroup>
   <ItemGroup>

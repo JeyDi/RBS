@@ -87,5 +87,17 @@ namespace RBS.Common.Entities
 
     }
 
-    
+    public class ReservationInputVM
+    {
+
+
+        public string event_name { get; set; }
+        public string description { get; set; }
+        public string username { get; set; }
+        public string room { get; set; }
+        public string start_date { get; set; }
+        public string end_date { get; set; }
+
+    }
+
 }

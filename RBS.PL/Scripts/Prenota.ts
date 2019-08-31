@@ -7,7 +7,6 @@ var prenotazioni_list = [];
 var prenotazioni_delete_row;
 
 jQuery(document).ready(() => {
-    console.log("starting DOM functions");
 
    
     CreateTable()
@@ -17,7 +16,6 @@ jQuery(document).ready(() => {
     InsertPrenotazioniTable()
     ShowAll()
 
-    console.log("finish loading function in DOM");
 })
 
 
@@ -192,11 +190,6 @@ function DeletePrenotazioniTable() {
         type: "GET",
         //contentType: 'application/json',
         //dataType: 'json',
-        success: function () {
-            console.log(prenotazioni_delete_row.description + " eliminated")
-
-            //CreateEdificiTable()
-        },
         error: function (err) {
             console.log(err);
         }

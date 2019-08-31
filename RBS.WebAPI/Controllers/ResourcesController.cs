@@ -14,7 +14,10 @@ namespace RBS.WebAPI.Controllers
     [RoutePrefix("api/resources")]
     public class ResourcesController : ApiController
     {
-        // GET api/Resources
+        /// <summary>
+        /// TEST API - with old method hardcoded
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [Route("GetAllCoded")]
         public IHttpActionResult GetAll_Coded()
@@ -67,7 +70,10 @@ namespace RBS.WebAPI.Controllers
         }
 
 
-        // GET api/Resources
+        /// <summary>
+        /// Get all resources
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [Route("GetAll")]
         public IHttpActionResult GetAll()
@@ -91,7 +97,13 @@ namespace RBS.WebAPI.Controllers
 
         }
 
-        // GET api/Resources
+        /// <summary>
+        /// Insert a new resource
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="surname"></param>
+        /// <param name="admin"></param>
+        /// <returns></returns>
         [HttpPost]
         [Route("Insert/{name}/{surname}/{admin}")]
         public IHttpActionResult ResultInsert(string name = null, string surname = null, bool admin = false)
@@ -113,7 +125,14 @@ namespace RBS.WebAPI.Controllers
         }
 
 
-        // GET api/Resources
+        /// <summary>
+        /// Get details of a single resource
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="surname"></param>
+        /// <param name="username"></param>
+        /// <param name="email"></param>
+        /// <returns></returns>
         [HttpGet]
         [Route("Detail/{name}/{surname}/{username}/{email}")]
         public IHttpActionResult ResourceDetail(string name = null, string surname = null, string username = null, string email = null)
@@ -135,6 +154,38 @@ namespace RBS.WebAPI.Controllers
 
             }
 
+        }
+
+        /// <summary>
+        /// Delete a resource
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="surname"></param>
+        /// <param name="username"></param>
+        /// <param name="email"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("Delete/{username}")]
+        public IHttpActionResult ResourceDelete(string name = null, string surname = null, string username = null, string email = null)
+        {
+            try
+            {
+                BLResources resources = new BLResources();
+                var result = resources.Delete(name,surname,username,email);
+                //if (result > 0)
+                //{
+                //    return Ok(result);
+                //}
+                //else
+                //{
+                //    return NotFound();
+                //}
+                return Ok("Resource deleted");
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
         }
 
     }

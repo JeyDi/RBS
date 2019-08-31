@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 
 namespace RBS.DAL
 {
+
+    #region Resources
     public partial class Resources
     {
         /// <summary>
@@ -28,6 +30,10 @@ namespace RBS.DAL
             this.status = new_resource.Status;
 
         }
+
+
+
+
 
         /// <summary>
         /// Map resource_create_result object in result object
@@ -77,6 +83,11 @@ namespace RBS.DAL
             return new_list;
         }
     }
+
+    #endregion
+
+
+    #region Buildings
 
     public partial class Buildings
     {
@@ -131,6 +142,9 @@ namespace RBS.DAL
         }
     }
 
+    #endregion
+
+    #region Reservationss
 
     public partial class Reservations
     {
@@ -369,6 +383,9 @@ namespace RBS.DAL
 
     }
 
+    #endregion
+
+    #region Rooms
 
     public partial class Rooms
     {
@@ -471,7 +488,9 @@ namespace RBS.DAL
 
     }
 
+    #endregion
 
+    //TEST
     //Estensione di prova della Stored Procedure di dettaglio
     public partial class RBSEntities : DbContext
     {

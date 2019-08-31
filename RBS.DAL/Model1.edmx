@@ -304,24 +304,6 @@
           <Property Name="update_date" Type="DateTime" Precision="7" />
           <NavigationProperty Name="Rooms" Relationship="Self.FK__Rooms__id_buildi__4F7CD00D" FromRole="Buildings" ToRole="Rooms" />
         </EntityType>
-        <EntityType Name="Reservations">
-          <Key>
-            <PropertyRef Name="id_reservation" />
-          </Key>
-          <Property Name="id_reservation" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="event" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="start_date" Type="DateTime" Nullable="false" Precision="7" />
-          <Property Name="end_date" Type="DateTime" Nullable="false" Precision="7" />
-          <Property Name="insert_date" Type="DateTime" Precision="7" />
-          <Property Name="update_date" Type="DateTime" Precision="7" />
-          <Property Name="id_resource" Type="Int32" Nullable="false" />
-          <Property Name="id_room" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Resources" Relationship="Self.FK__Reservati__id_re__778AC167" FromRole="Reservations" ToRole="Resources" />
-          <NavigationProperty Name="Resources1" Relationship="Self.FK__Reservati__id_ro__5812160E" FromRole="Reservations" ToRole="Resources" />
-          <NavigationProperty Name="Rooms" Relationship="Self.FK__Reservati__id_ro__59063A47" FromRole="Reservations" ToRole="Rooms" />
-          <NavigationProperty Name="Rooms1" Relationship="Self.FK__Reservati__id_ro__787EE5A0" FromRole="Reservations" ToRole="Rooms" />
-        </EntityType>
         <EntityType Name="Resources">
           <Key>
             <PropertyRef Name="id_resource" />
@@ -335,9 +317,9 @@
           <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="insert_date" Type="DateTime" Precision="7" />
           <Property Name="update_date" Type="DateTime" Precision="7" />
-          <NavigationProperty Name="Reservations" Relationship="Self.FK__Reservati__id_re__778AC167" FromRole="Resources" ToRole="Reservations" />
-          <NavigationProperty Name="Reservations1" Relationship="Self.FK__Reservati__id_ro__5812160E" FromRole="Resources" ToRole="Reservations" />
-        </EntityType>
+          <NavigationProperty Name="Reservations" Relationship="RBSModel.FK__Reservati__id_re__778AC167" FromRole="Resources" ToRole="Reservations" />
+          <NavigationProperty Name="Reservations1" Relationship="RBSModel.FK__Reservati__id_ro__5812160E" FromRole="Resources" ToRole="Reservations" />
+          </EntityType>
         <EntityType Name="Rooms">
           <Key>
             <PropertyRef Name="id_room" />
@@ -349,9 +331,9 @@
           <Property Name="update_date" Type="DateTime" Precision="7" />
           <Property Name="id_building" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Buildings" Relationship="Self.FK__Rooms__id_buildi__4F7CD00D" FromRole="Rooms" ToRole="Buildings" />
-          <NavigationProperty Name="Reservations" Relationship="Self.FK__Reservati__id_ro__59063A47" FromRole="Rooms" ToRole="Reservations" />
-          <NavigationProperty Name="Reservations1" Relationship="Self.FK__Reservati__id_ro__787EE5A0" FromRole="Rooms" ToRole="Reservations" />
-        </EntityType>
+          <NavigationProperty Name="Reservations" Relationship="RBSModel.FK__Reservati__id_ro__59063A47" FromRole="Rooms" ToRole="Reservations" />
+          <NavigationProperty Name="Reservations1" Relationship="RBSModel.FK__Reservati__id_ro__787EE5A0" FromRole="Rooms" ToRole="Reservations" />
+          </EntityType>
         <Association Name="FK__Rooms__id_buildi__4F7CD00D">
           <End Role="Buildings" Type="Self.Buildings" Multiplicity="1" />
           <End Role="Rooms" Type="Self.Rooms" Multiplicity="*" />
@@ -364,82 +346,13 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Reservati__id_re__778AC167">
-          <End Role="Resources" Type="Self.Resources" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="Reservations" Type="Self.Reservations" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Resources">
-              <PropertyRef Name="id_resource" />
-            </Principal>
-            <Dependent Role="Reservations">
-              <PropertyRef Name="id_resource" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Reservati__id_ro__5812160E">
-          <End Role="Resources" Type="Self.Resources" Multiplicity="1" />
-          <End Role="Reservations" Type="Self.Reservations" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Resources">
-              <PropertyRef Name="id_resource" />
-            </Principal>
-            <Dependent Role="Reservations">
-              <PropertyRef Name="id_resource" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Reservati__id_ro__59063A47">
-          <End Role="Rooms" Type="Self.Rooms" Multiplicity="1" />
-          <End Role="Reservations" Type="Self.Reservations" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Rooms">
-              <PropertyRef Name="id_room" />
-            </Principal>
-            <Dependent Role="Reservations">
-              <PropertyRef Name="id_room" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Reservati__id_ro__787EE5A0">
-          <End Role="Rooms" Type="Self.Rooms" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="Reservations" Type="Self.Reservations" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Rooms">
-              <PropertyRef Name="id_room" />
-            </Principal>
-            <Dependent Role="Reservations">
-              <PropertyRef Name="id_room" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="RBSEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Buildings" EntityType="Self.Buildings" />
-          <EntitySet Name="Reservations" EntityType="Self.Reservations" />
           <EntitySet Name="Resources" EntityType="Self.Resources" />
           <EntitySet Name="Rooms" EntityType="Self.Rooms" />
           <AssociationSet Name="FK__Rooms__id_buildi__4F7CD00D" Association="Self.FK__Rooms__id_buildi__4F7CD00D">
             <End Role="Buildings" EntitySet="Buildings" />
             <End Role="Rooms" EntitySet="Rooms" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Reservati__id_re__778AC167" Association="Self.FK__Reservati__id_re__778AC167">
-            <End Role="Resources" EntitySet="Resources" />
-            <End Role="Reservations" EntitySet="Reservations" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Reservati__id_ro__5812160E" Association="Self.FK__Reservati__id_ro__5812160E">
-            <End Role="Resources" EntitySet="Resources" />
-            <End Role="Reservations" EntitySet="Reservations" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Reservati__id_ro__59063A47" Association="Self.FK__Reservati__id_ro__59063A47">
-            <End Role="Rooms" EntitySet="Rooms" />
-            <End Role="Reservations" EntitySet="Reservations" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Reservati__id_ro__787EE5A0" Association="Self.FK__Reservati__id_ro__787EE5A0">
-            <End Role="Rooms" EntitySet="Rooms" />
-            <End Role="Reservations" EntitySet="Reservations" />
           </AssociationSet>
           <FunctionImport Name="udf_reservation_search" IsComposable="true" ReturnType="Collection(RBSModel.udf_reservation_search_Result)">
             <Parameter Name="Start_date" Mode="In" Type="DateTime" />
@@ -475,12 +388,6 @@
           <FunctionImport Name="reservation_getID">
             <Parameter Name="Date" Mode="In" Type="DateTime" />
             <Parameter Name="Resource_username" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="resource_delete">
-            <Parameter Name="Name" Mode="In" Type="String" />
-            <Parameter Name="Surname" Mode="In" Type="String" />
-            <Parameter Name="Username" Mode="In" Type="String" />
-            <Parameter Name="Email" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="resource_getID">
             <Parameter Name="Name" Mode="In" Type="String" />
@@ -552,8 +459,31 @@
           <Parameter Name="Name" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="reservation_delete">
-            <Parameter Name="Identifier" Mode="In" Type="Int32" />
+          <Parameter Name="Identifier" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="resource_delete">
+            <Parameter Name="Name" Mode="In" Type="String" />
+            <Parameter Name="Surname" Mode="In" Type="String" />
+            <Parameter Name="Username" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="Reservations" EntityType="RBSModel.Reservations" />
+          <AssociationSet Name="FK__Reservati__id_re__778AC167" Association="RBSModel.FK__Reservati__id_re__778AC167">
+            <End Role="Resources" EntitySet="Resources" />
+            <End Role="Reservations" EntitySet="Reservations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Reservati__id_ro__5812160E" Association="RBSModel.FK__Reservati__id_ro__5812160E">
+            <End Role="Resources" EntitySet="Resources" />
+            <End Role="Reservations" EntitySet="Reservations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Reservati__id_ro__59063A47" Association="RBSModel.FK__Reservati__id_ro__59063A47">
+            <End Role="Rooms" EntitySet="Rooms" />
+            <End Role="Reservations" EntitySet="Reservations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Reservati__id_ro__787EE5A0" Association="RBSModel.FK__Reservati__id_ro__787EE5A0">
+            <End Role="Rooms" EntitySet="Rooms" />
+            <End Role="Reservations" EntitySet="Reservations" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="resource_create_Result">
           <Property Type="Int32" Name="id_resource" Nullable="false" />
@@ -708,6 +638,76 @@
           <Property Type="Int32" Name="build_id" Nullable="false" />
           <Property Type="String" Name="build_name" Nullable="false" MaxLength="50" />
         </ComplexType>
+        <EntityType Name="Reservations">
+          <Key>
+            <PropertyRef Name="id_reservation" />
+          </Key>
+          <Property Name="id_reservation" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="event" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="start_date" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="end_date" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="insert_date" Type="DateTime" Precision="7" />
+          <Property Name="update_date" Type="DateTime" Precision="7" />
+          <Property Name="id_resource" Type="Int32" Nullable="false" />
+          <Property Name="id_room" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Resources" Relationship="RBSModel.FK__Reservati__id_re__778AC167" FromRole="Reservations" ToRole="Resources" />
+          <NavigationProperty Name="Resources1" Relationship="RBSModel.FK__Reservati__id_ro__5812160E" FromRole="Reservations" ToRole="Resources" />
+          <NavigationProperty Name="Rooms" Relationship="RBSModel.FK__Reservati__id_ro__59063A47" FromRole="Reservations" ToRole="Rooms" />
+          <NavigationProperty Name="Rooms1" Relationship="RBSModel.FK__Reservati__id_ro__787EE5A0" FromRole="Reservations" ToRole="Rooms" />
+        </EntityType>
+        <Association Name="FK__Reservati__id_re__778AC167">
+          <End Type="RBSModel.Resources" Role="Resources" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="RBSModel.Reservations" Role="Reservations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Resources">
+              <PropertyRef Name="id_resource" />
+            </Principal>
+            <Dependent Role="Reservations">
+              <PropertyRef Name="id_resource" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Reservati__id_ro__5812160E">
+          <End Type="RBSModel.Resources" Role="Resources" Multiplicity="1" />
+          <End Type="RBSModel.Reservations" Role="Reservations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Resources">
+              <PropertyRef Name="id_resource" />
+            </Principal>
+            <Dependent Role="Reservations">
+              <PropertyRef Name="id_resource" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Reservati__id_ro__59063A47">
+          <End Type="RBSModel.Rooms" Role="Rooms" Multiplicity="1" />
+          <End Type="RBSModel.Reservations" Role="Reservations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rooms">
+              <PropertyRef Name="id_room" />
+            </Principal>
+            <Dependent Role="Reservations">
+              <PropertyRef Name="id_room" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Reservati__id_ro__787EE5A0">
+          <End Type="RBSModel.Rooms" Role="Rooms" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="RBSModel.Reservations" Role="Reservations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rooms">
+              <PropertyRef Name="id_room" />
+            </Principal>
+            <Dependent Role="Reservations">
+              <PropertyRef Name="id_room" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -723,21 +723,6 @@
                 <ScalarProperty Name="status" ColumnName="status" />
                 <ScalarProperty Name="insert_date" ColumnName="insert_date" />
                 <ScalarProperty Name="update_date" ColumnName="update_date" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Reservations">
-            <EntityTypeMapping TypeName="RBSModel.Reservations">
-              <MappingFragment StoreEntitySet="Reservations">
-                <ScalarProperty Name="id_reservation" ColumnName="id_reservation" />
-                <ScalarProperty Name="event" ColumnName="event" />
-                <ScalarProperty Name="description" ColumnName="description" />
-                <ScalarProperty Name="start_date" ColumnName="start_date" />
-                <ScalarProperty Name="end_date" ColumnName="end_date" />
-                <ScalarProperty Name="insert_date" ColumnName="insert_date" />
-                <ScalarProperty Name="update_date" ColumnName="update_date" />
-                <ScalarProperty Name="id_resource" ColumnName="id_resource" />
-                <ScalarProperty Name="id_room" ColumnName="id_room" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -794,7 +779,6 @@
           <FunctionImportMapping FunctionImportName="reservation_delete_single" FunctionName="RBSModel.Store.reservation_delete_single" />
           <FunctionImportMapping FunctionImportName="reservation_duplicates" FunctionName="RBSModel.Store.reservation_duplicates" />
           <FunctionImportMapping FunctionImportName="reservation_getID" FunctionName="RBSModel.Store.reservation_getID" />
-          <FunctionImportMapping FunctionImportName="resource_delete" FunctionName="RBSModel.Store.resource_delete" />
           <FunctionImportMapping FunctionImportName="resource_getID" FunctionName="RBSModel.Store.resource_getID" />
           <FunctionImportMapping FunctionImportName="resource_getUsername" FunctionName="RBSModel.Store.resource_getUsername" />
           <FunctionImportMapping FunctionImportName="room_getID" FunctionName="RBSModel.Store.room_getID" />
@@ -1010,6 +994,22 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="room_delete" FunctionName="RBSModel.Store.room_delete" />
           <FunctionImportMapping FunctionImportName="reservation_delete" FunctionName="RBSModel.Store.reservation_delete" />
+          <FunctionImportMapping FunctionImportName="resource_delete" FunctionName="RBSModel.Store.resource_delete" />
+          <EntitySetMapping Name="Reservations">
+            <EntityTypeMapping TypeName="RBSModel.Reservations">
+              <MappingFragment StoreEntitySet="Reservations">
+                <ScalarProperty Name="id_room" ColumnName="id_room" />
+                <ScalarProperty Name="id_resource" ColumnName="id_resource" />
+                <ScalarProperty Name="update_date" ColumnName="update_date" />
+                <ScalarProperty Name="insert_date" ColumnName="insert_date" />
+                <ScalarProperty Name="end_date" ColumnName="end_date" />
+                <ScalarProperty Name="start_date" ColumnName="start_date" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="event" ColumnName="event" />
+                <ScalarProperty Name="id_reservation" ColumnName="id_reservation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

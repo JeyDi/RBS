@@ -166,7 +166,35 @@ namespace RBS.Common
 
         }
 
-     
+        /// <summary>
+        /// Delete a resource
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="surname"></param>
+        /// <param name="username"></param>
+        /// <param name="email"></param>
+        /// <returns></returns>
+        public int Delete(string name = null, string surname = null, string username = null, string email = null)
+        {
+
+
+            try
+            {
+                EFSPRepository SPRepo = new EFSPRepository();
+                int result = SPRepo.SP_Resources_Delete(name, surname, username, email);
+
+
+                return result;
+
+            }
+            catch (Exception)
+            {
+                return -1;
+            }
+
+        }
+
+
 
     }
 }

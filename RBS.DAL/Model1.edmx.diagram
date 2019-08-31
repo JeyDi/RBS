@@ -6,15 +6,15 @@
     <edmx:Diagrams>
       <Diagram DiagramId="9fd3dfe89eb74712b1044fba78073707" Name="Diagram1">
         <EntityTypeShape EntityType="RBSModel.Buildings" Width="1.5" PointX="1.5" PointY="9.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="RBSModel.Reservations" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="RBSModel.Resources" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
         <EntityTypeShape EntityType="RBSModel.Rooms" Width="1.5" PointX="0.75" PointY="5.375" IsExpanded="true" />
         <AssociationConnector Association="RBSModel.FK__Rooms__id_buildi__4F7CD00D" ManuallyRouted="false" />
-        <AssociationConnector Association="RBSModel.FK__Reservati__id_re__778AC167" ManuallyRouted="false" />
-        <AssociationConnector Association="RBSModel.FK__Reservati__id_ro__5812160E" ManuallyRouted="false" />
-        <AssociationConnector Association="RBSModel.FK__Reservati__id_ro__59063A47" ManuallyRouted="false" />
-        <AssociationConnector Association="RBSModel.FK__Reservati__id_ro__787EE5A0" ManuallyRouted="false" />
-      </Diagram>
+        <EntityTypeShape EntityType="RBSModel.Reservations" Width="1.5" PointX="3" PointY="2.875" />
+        <AssociationConnector Association="RBSModel.FK__Reservati__id_re__778AC167" />
+        <AssociationConnector Association="RBSModel.FK__Reservati__id_ro__5812160E" />
+        <AssociationConnector Association="RBSModel.FK__Reservati__id_ro__59063A47" />
+        <AssociationConnector Association="RBSModel.FK__Reservati__id_ro__787EE5A0" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

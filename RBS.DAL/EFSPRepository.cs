@@ -85,7 +85,14 @@ namespace RBS.DAL
             return new Resources(resource);
         }
 
-        
+        /// <summary>
+        /// Delete a resource
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="surname"></param>
+        /// <param name="username"></param>
+        /// <param name="email"></param>
+        /// <returns></returns>
         public int SP_Resources_Delete(string name = null, string surname = null, string username = null , string email = null)
         {
             var result = ((RBSEntities)Context).resource_delete(name, surname, username, email);

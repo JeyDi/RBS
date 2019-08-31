@@ -2,15 +2,18 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <link href="node_modules/jquery-ui-dist/jquery-ui.css" rel="stylesheet" />
-    <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="node_modules/bootstrap-table/dist/bootstrap-table.min.css" rel="stylesheet">
+    <link href="../node_modules/jquery-ui-dist/jquery-ui.css" rel="stylesheet" />
+    <link href="../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../node_modules/bootstrap-table/dist/bootstrap-table.min.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/a96f81cb07.js"></script>
 
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!--<link href="StyleSheet/Gestisci.css" rel="stylesheet" />-->
+    <link href="../StyleSheet/Gestisci.css" rel="stylesheet" />
     <title>RBS</title>
+    <meta name="description" content="Reti Booking System">
+    <meta name="author" content="Andrea Guzzo">
+    <link rel="icon" href="../StyleSheet/img/favicon.ico">
 </head>
 <body>
 
@@ -23,17 +26,17 @@
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="./Home.html">Home <span class="sr-only">Home</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./Prenota.html">Prenota</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./Informazioni.html">Informazioni</a>
+                    </li>
                     <li class="nav-item active">
-                        <a class="nav-link" href="Index.html">Home <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="Prenota.html">Prenota</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="Informazioni.html">Informazioni</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="Gestisci.html">Gestisci</a>
+                        <a class="nav-link" href="./Gestisci.html">Gestisci<span class="sr-only">(current)</span></a>
                     </li>
                 </ul>
             </div>
@@ -41,21 +44,30 @@
     </div>
 
     <div class="container">
-        <div class="row"><h4>Seleziona l'azione da compiere</h4></div>
         <div class="row">
-            <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                <label class="btn btn-secondary" id="option_risorse">
-                    <input type="radio" name="tabella_risorse" autocomplete="off" checked> Risorse
-                </label>
-                <label class="btn btn-secondary" id="option_sale">
-                    <input type="radio" name="tabella_sale" autocomplete="off" checked> Sale
-                </label>
-                <label class="btn btn-secondary" id="option_edifici">
-                    <input type="radio" name="tabella_edifici" autocomplete="off" checked> Edifici
-                </label>
-
+            <div class="col"></div>
+            <div class="col-5" id="titles">
+                <h3>Seleziona l'azione da compiere</h3>
             </div>
+            <div class="col"></div>
 
+        </div>
+        <div class="row">
+            <div class="col"></div>
+            <div class="col-5" id="titles">
+                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                    <label class="btn btn-secondary" id="option_risorse">
+                        <input type="radio" name="tabella_risorse" autocomplete="off" checked> Risorse
+                    </label>
+                    <label class="btn btn-secondary" id="option_sale">
+                        <input type="radio" name="tabella_sale" autocomplete="off" checked> Sale
+                    </label>
+                    <label class="btn btn-secondary" id="option_edifici">
+                        <input type="radio" name="tabella_edifici" autocomplete="off" checked> Edifici
+                    </label>
+                </div>
+            </div>
+            <div class="col"></div>
         </div>
     </div>
 
@@ -65,13 +77,20 @@
         <!--Manager delle risorse-->
         <div id="manager_risorse" style="display: none;">
             <div class="container">
-                <h2> Gestore delle risorse</h2>
                 <div class="row">
-                    <div class="form-group row">
-                        <div class="col-sm-10">
-                            <button type="button" id="refresh_risorse_table" class="btn btn-success">Ricarica</button>
-                        </div>
+                    <div class="col"></div>
+                    <div class="col-5" id="titles">
+                        <h3> Gestore delle risorse</h3>
                     </div>
+                    <div class="col"></div>
+                </div>
+                <div class="row">
+                    <div class="col"></div>
+                    <div class="col-5" id="titles">
+                                <button type="button" id="refresh_risorse_table" class="btn btn-success">Ricarica</button>
+                    </div>
+                    <div class="col"></div>
+                    
                     <div class="container">
                         <div id="Risorse_Alert_UnSuccess" class="alert alert-warning text-center alert-dismissible" role="alert" style="display:none">
                             Risorsa eliminata correttamente
@@ -140,7 +159,13 @@
             <div class=" container">
                 <div class="row">
                     <div class="container">
-                        <h2> Gestore delle sale</h2>
+                        <div class="row">
+                            <div class="col"></div>
+                            <div class="col-5" id="titles">
+                                <h3> Gestore delle sale</h3>
+                            </div>
+                            <div class="col"></div>
+                        </div>
                         <div class="form-group row">
 
                             <label for="input_sale_edificio" class="col-sm-4 col-form-label">Seleziona un edificio</label>
@@ -222,7 +247,13 @@
         <div class="container">
             <div class="row">
                 <div class="container">
-                    <h2> Gestore degli edifici</h2>
+                    <div class="row">
+                        <div class="col"></div>
+                        <div class="col-5" id="titles">
+                            <h3> Gestore degli edifici</h3>
+                        </div>
+                        <div class="col"></div>
+                    </div>
                     <div class="form-group row">
                         <div class="col-sm-10">
                             <button type="button" id="refresh_edifici_table" class="btn btn-success">Ricarica</button>
@@ -293,25 +324,27 @@
 
     <!--Managers-->
     <!-- Footer -->
-    <footer class="page-footer font-small cyan darken-3">
-        <div class="container">
-            <div class="row">
-
-
+    <div class="d-flex flex-column sticky-footer-wrapper">
+        <nav>
+        </nav>
+        <footer>
+            <div class="container">
+                <div class="row">
+                </div>
             </div>
-        </div>
-        <div class="footer-copyright text-center py-3">
-            © 2019 Copyright:
-            <a href="https://www.reti.it"> Reti Spa</a>
-        </div>
-    </footer>
+            <div class="footer-copyright text-center py-3">
+                © 2019 Copyright:
+                <a href="https://www.reti.it"> Reti Spa</a>
+            </div>
+        </footer>
+    </div>
     <!-- Footer -->
 
-    <script src="node_modules/jquery/dist/jquery.js"></script>
-    <script src="node_modules/jquery-ui-dist/jquery-ui.js"></script>
-    <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
-    <script src="node_modules/bootstrap-table/dist/bootstrap-table.min.js"></script>
-    <script src="Scripts/Gestisci.js"></script>
+    <script src="../node_modules/jquery/dist/jquery.js"></script>
+    <script src="../node_modules/jquery-ui-dist/jquery-ui.js"></script>
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+    <script src="../node_modules/bootstrap-table/dist/bootstrap-table.min.js"></script>
+    <script src="../Scripts/Gestisci.js"></script>
     <!--<script type="module" src="Scripts/file2.js"></script>
     <script type="module" src="Scripts/file1.js"></script>-->
 

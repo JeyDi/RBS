@@ -28,9 +28,9 @@ namespace RBS.DAL
         }
     
         public virtual DbSet<Buildings> Buildings { get; set; }
-        public virtual DbSet<Reservations> Reservations { get; set; }
         public virtual DbSet<Resources> Resources { get; set; }
         public virtual DbSet<Rooms> Rooms { get; set; }
+        public virtual DbSet<Reservations> Reservations { get; set; }
     
         [DbFunction("RBSEntities", "udf_reservation_search")]
         public virtual IQueryable<udf_reservation_search_Result> udf_reservation_search(Nullable<System.DateTime> start_date, Nullable<System.DateTime> end_date)
@@ -149,27 +149,6 @@ namespace RBS.DAL
                 new ObjectParameter("Resource_username", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("reservation_getID", dateParameter, resource_usernameParameter);
-        }
-    
-        public virtual int resource_delete(string name, string surname, string username, string email)
-        {
-            var nameParameter = name != null ?
-                new ObjectParameter("Name", name) :
-                new ObjectParameter("Name", typeof(string));
-    
-            var surnameParameter = surname != null ?
-                new ObjectParameter("Surname", surname) :
-                new ObjectParameter("Surname", typeof(string));
-    
-            var usernameParameter = username != null ?
-                new ObjectParameter("Username", username) :
-                new ObjectParameter("Username", typeof(string));
-    
-            var emailParameter = email != null ?
-                new ObjectParameter("Email", email) :
-                new ObjectParameter("Email", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("resource_delete", nameParameter, surnameParameter, usernameParameter, emailParameter);
         }
     
         public virtual int resource_getID(string name, string surname, string username, string email)
@@ -414,6 +393,27 @@ namespace RBS.DAL
                 new ObjectParameter("Identifier", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("reservation_delete", identifierParameter);
+        }
+    
+        public virtual int resource_delete(string name, string surname, string username, string email)
+        {
+            var nameParameter = name != null ?
+                new ObjectParameter("Name", name) :
+                new ObjectParameter("Name", typeof(string));
+    
+            var surnameParameter = surname != null ?
+                new ObjectParameter("Surname", surname) :
+                new ObjectParameter("Surname", typeof(string));
+    
+            var usernameParameter = username != null ?
+                new ObjectParameter("Username", username) :
+                new ObjectParameter("Username", typeof(string));
+    
+            var emailParameter = email != null ?
+                new ObjectParameter("Email", email) :
+                new ObjectParameter("Email", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("resource_delete", nameParameter, surnameParameter, usernameParameter, emailParameter);
         }
     }
 }

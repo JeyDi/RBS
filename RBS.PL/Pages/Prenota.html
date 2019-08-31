@@ -2,15 +2,18 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <link href="node_modules/jquery-ui-dist/jquery-ui.css" rel="stylesheet" />
-    <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="node_modules/bootstrap-table/dist/bootstrap-table.min.css" rel="stylesheet">
-    <link href="node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css" rel="stylesheet">
+    <link href="../node_modules/jquery-ui-dist/jquery-ui.css" rel="stylesheet" />
+    <link href="../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../node_modules/bootstrap-table/dist/bootstrap-table.min.css" rel="stylesheet">
+    <link href="../node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/a96f81cb07.js"></script>
-    <!--<link href="StyleSheet/Prenota.css" rel="stylesheet" />-->
+    <link href="../StyleSheet/Prenota.css" rel="stylesheet" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>RBS</title>
+    <meta name="description" content="Reti Booking System">
+    <meta name="author" content="Andrea Guzzo">
+    <link rel="icon" href="../StyleSheet/img/favicon.ico">
 </head>
 <body>
 
@@ -23,17 +26,17 @@
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="./Home.html">Home</a>
+                    </li>
                     <li class="nav-item active">
-                        <a class="nav-link" href="Index.html">Home <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="./Prenota.html">Prenota <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="Prenota.html">Prenota</a>
+                        <a class="nav-link" href="./Informazioni.html">Informazioni</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="Informazioni.html">Informazioni</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="Gestisci.html">Gestisci</a>
+                        <a class="nav-link" href="./Gestisci.html">Gestisci</a>
                     </li>
                 </ul>
             </div>
@@ -44,41 +47,50 @@
         <!--Manager delle risorse-->
         <div id="manager_risorse">
             <div class="container">
-                <h2> Le tue prenotazioni</h2>
+                <div class=" row" id="titles">
+                    <div class="col"></div>
+                    <div class="col-5">
+                        <h2> Le tue prenotazioni</h2>
+                    </div>
+                    <div class="col"></div>
+                </div>
                 <div class="row">
-                    <div class="form-group row">
+                    <div class="col"></div>
+                    <div class="col-5" id="titles">
+                        <div class="form-group row">
 
-                        <label for="input_risorse" class="col-md-10 col-form-label">Seleziona una risorsa</label>
-                        <div class="col-md-10">
-
+                            <label for="input_risorse" class="col-md-10 col-form-label">Seleziona una risorsa</label>
                             <select class="custom-select" id="input_risorse" name="selectBox"></select>
 
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="form-group row">
-                            <div class="col-md-10">
-                                <button type="button" id="refresh_risorse_table" class="btn btn-success">Ricarica</button>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-md-10">
-                                <button type="button" id="showall_risorse_table" class="btn btn-success">Vedi tutti</button>
-                            </div>
+                        <div class="col"></div>
+                    
+                </div>
+                <div class="row">
+                    <div class="form-group row">
+                        <div class="col-md-10">
+                            <button type="button" id="refresh_risorse_table" class="btn btn-success">Ricarica</button>
                         </div>
                     </div>
-                    <div class="container">
-                        <div id="Prenotazioni_Alert_UnSuccess" class="alert alert-warning text-center alert-dismissible" role="alert" style="display:none">
-                            Prenotazione cancellata correttamente
-                            <button type="button" id="Prenotazioni_Alert_UnSuccess_Button" class="close" onclick='$("#Prenotazioni_Alert_UnSuccess").hide();' aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        </div>
-                        <div id="Prenotazioni_Alert_Success" class="alert alert-success text-center alert-dismissible" role="alert" style="display:none">
-                            Nuova prenotazione inserita
-                            <button type="button" id="Prenotazioni_Alert_Success_Button" class="close" onclick='$("#Prenotazioni_Alert_Success").hide();' aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <div class="form-group row">
+                        <div class="col-md-10">
+                            <button type="button" id="showall_risorse_table" class="btn btn-success">Vedi tutti</button>
                         </div>
                     </div>
                 </div>
+                <div class="container">
+                    <div id="Prenotazioni_Alert_UnSuccess" class="alert alert-warning text-center alert-dismissible" role="alert" style="display:none">
+                        Prenotazione cancellata correttamente
+                        <button type="button" id="Prenotazioni_Alert_UnSuccess_Button" class="close" onclick='$("#Prenotazioni_Alert_UnSuccess").hide();' aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                    <div id="Prenotazioni_Alert_Success" class="alert alert-success text-center alert-dismissible" role="alert" style="display:none">
+                        Nuova prenotazione inserita
+                        <button type="button" id="Prenotazioni_Alert_Success_Button" class="close" onclick='$("#Prenotazioni_Alert_Success").hide();' aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                </div>
             </div>
+
             <div class="container">
                 <div class="row">
                     <table id="table_prenotazioni"
@@ -105,8 +117,12 @@
                 </div>
             </div>
             <div class="container">
-                <div class="row">
-                    <h3>Inserisci un nuovo evento</h3>
+                <div class=" row" id="titles">
+                    <div class="col"></div>
+                    <div class="col-5">
+                        <h4> Inserisci una nuova prenotazione</h4>
+                    </div>
+                    <div class="col"></div>
                 </div>
                 <div class="row">
                     <form>
@@ -151,6 +167,20 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="form-group row">
+                            <label for="input-time-start" class="col-md-10 col-form-label">Ora di inizio</label>
+                            <div class="col-md-10">
+                                <input id="input-time-start" type="time" value="00:00:00" class="form-control" style="width:135px; height:35px">
+                                <span class="result"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="input-time-end" class="col-md-10 col-form-label">Ora di fine</label>
+                            <div class="col-md-10">
+                                <input id="input-time-end" type="time" value="00:00:00" class="form-control" style="width:135px; height:35px">
+                                <span class="result"></span>
+                            </div>
+                        </div>
                     </form>
                 </div>
                 <div class="form-group row">
@@ -162,32 +192,32 @@
         </div>
     </div>
 
-
-
-
     <!-- Footer -->
-    <footer class="page-footer font-small cyan darken-3">
-        <div class="container">
-            <div class="row">
-
+    <div class="d-flex flex-column sticky-footer-wrapper">
+        <nav>
+        </nav>
+        <footer>
+            <div class="container">
+                <div class="row">
+                </div>
             </div>
-        </div>
-        <div class="footer-copyright text-center py-3">
-            © 2019 Copyright:
-            <a href="https://www.reti.it"> Reti Spa</a>
-        </div>
-    </footer>
+            <div class="footer-copyright text-center py-3">
+                © 2019 Copyright:
+                <a href="https://www.reti.it"> Reti Spa</a>
+            </div>
+        </footer>
+    </div>
     <!-- Footer -->
 
 
-    <script src="node_modules/jquery/dist/jquery.js"></script>
-    <script src="node_modules/jquery-ui-dist/jquery-ui.js"></script>
-    <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
-    <script src="node_modules/bootstrap-table/dist/bootstrap-table.min.js"></script>
-    <script src="node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+    <script src="../node_modules/jquery/dist/jquery.js"></script>
+    <script src="../node_modules/jquery-ui-dist/jquery-ui.js"></script>
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+    <script src="../node_modules/bootstrap-table/dist/bootstrap-table.min.js"></script>
+    <script src="../node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 
 
-    <script src="Scripts/Prenota.js"></script>
+    <script src="../Scripts/Prenota.js"></script>
     <!--<script type="module" src="Scripts/file2.js"></script>
     <script type="module" src="Scripts/file1.js"></script>-->
 </body>

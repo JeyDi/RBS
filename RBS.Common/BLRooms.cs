@@ -33,6 +33,28 @@ namespace RBS.Common
         }
 
         /// <summary>
+        /// Return all the rooms without any filters
+        /// </summary>
+        /// <returns></returns>
+        public List<Rooms> All()
+        {
+
+            try
+            {
+                EFSPRepository SPRepo = new EFSPRepository();
+                List<Rooms> rooms = SPRepo.SP_Rooms_All();
+
+                return rooms;
+
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+
+        }
+
+        /// <summary>
         /// Get Single Resource Detail (using stored procedure logic)
         /// </summary>
         /// <param name="name"></param>

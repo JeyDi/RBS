@@ -1,4 +1,5 @@
-﻿using RBS.DAL;
+﻿using RBS.Common.Entities;
+using RBS.DAL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -68,6 +69,30 @@ namespace RBS.Common
         }
 
         /// <summary>
+        /// Get all the reservation without any filter for the user
+        /// </summary>
+        /// <returns></returns>
+        public List<Reservations> All()
+        {
+
+            try
+            {
+                EFSPRepository SPRepo = new EFSPRepository();
+                List<Reservations> reservations = SPRepo.SP_Reservation_All();
+
+                return reservations;
+
+            }
+            catch (Exception)
+            {
+
+                return null;
+            }
+
+        }
+
+
+        /// <summary>
         /// Insert a new Resource (using stored procedure logic)
         /// </summary>
         /// <param name="name"></param>
@@ -111,6 +136,39 @@ namespace RBS.Common
             }
 
         }
+
+        /// <summary>
+        /// Check the front-end input date with the dates into database
+        /// </summary>
+        /// <param name="check"></param>
+        /// <returns></returns>
+        //public bool checkReservationDate(ReservationInputVM check)
+        //{
+        //    IEnumerable<ReservationsVM> result = null;
+            
+        //    try
+        //    {
+        //        EFRepository<ReservationsVM> reservations = new EFRepository<ReservationsVM>();
+        //        result = reservations.GetQuery().Where(x => x.room_name == check.room)
+        //                                        .Where(x =>
+        //                                              (x.start_date <= DateTime.Parse(check.start_date) && x.end_date > DateTime.Parse(check.start_date)) ||
+        //                                              (x.start_date <= DateTime.Parse(check.end_date) && x.end_date > DateTime.Parse(check.end_date)) ||
+        //                                              (x.start_date > DateTime.Parse(check.start_date) && x.end_date <= DateTime.Parse(check.end_date))).ToList();
+        //    }
+        //    catch(Exception)
+        //    {
+        //        return false;
+        //    }
+        //    if(result != null && result.Count() != 0)
+        //    {
+        //        return false;
+        //    }
+        //    else
+        //    {
+        //        return true;
+        //    }
+        //}
+        
 
     }
 }

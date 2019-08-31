@@ -90,15 +90,16 @@ namespace RBS.WebAPI.Controllers
             try
             {
                 BLBuildings buildings = new BLBuildings();
-                var building_delete = buildings.Delete(name);
-                if(building_delete > 0)
-                {
-                    return Ok("Edificio Eliminato");
-                }
-                else
-                {
-                    return NotFound();
-                }
+                var result = buildings.Delete(name);
+                //if(result > 0)
+                //{
+                //    return Ok(result);
+                //}
+                //else
+                //{
+                //    return NotFound();
+                //}
+                return Ok("Building deleted");
             }
             catch (Exception ex)
             {
