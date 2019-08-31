@@ -219,10 +219,11 @@ namespace RBS.DAL
             //Usare FirstOfDefault se si vuole gestire l'errore
             var reservations = ((RBSEntities)Context).reservation_create(event_name,description,username, room, start_date, end_date).First();
 
-            //Resources new_resource = new Resources();
-
             //Trasformo oggetto in risorsa grazie al costruttore in: Model Extension
             return new Reservations(reservations);
+
+
+            
         }
 
         //TODO

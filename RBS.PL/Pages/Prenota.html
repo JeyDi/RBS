@@ -59,25 +59,25 @@
                     <div class="col-5" id="titles">
                         <div class="form-group row">
 
-                            <label for="input_risorse" class="col-md-10 col-form-label">Seleziona una risorsa</label>
+                            <label for="input_risorse" class="col col-form-label">Seleziona una risorsa</label>
                             <select class="custom-select" id="input_risorse" name="selectBox"></select>
 
                         </div>
                     </div>
-                        <div class="col"></div>
-                    
+                    <div class="col"></div>
+
                 </div>
                 <div class="row">
-                    <div class="form-group row">
-                        <div class="col-md-10">
+                    <div class="col"></div>
+                    <div class="col-5" id="titles">
+                        <div class="form-group row">
                             <button type="button" id="refresh_risorse_table" class="btn btn-success">Ricarica</button>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <div class="col-md-10">
-                            <button type="button" id="showall_risorse_table" class="btn btn-success">Vedi tutti</button>
-                        </div>
+                        <button type="button" id="showall_risorse_table" class="btn btn-success">Vedi tutti</button>
                     </div>
+                    <div class="col"></div>
                 </div>
                 <div class="container">
                     <div id="Prenotazioni_Alert_UnSuccess" class="alert alert-warning text-center alert-dismissible" role="alert" style="display:none">
@@ -90,9 +90,10 @@
                     </div>
                 </div>
             </div>
-
+            <hr />
             <div class="container">
                 <div class="row">
+                    <div class="col"></div>
                     <table id="table_prenotazioni"
                            data-toggle="table"
                            data-filter-control="true"
@@ -106,16 +107,18 @@
                            data-sorter="Data Inizio">
                         <thead>
                             <tr>
-
                                 <th data-field="description" data-sortable="true" data-filter-control="input">Descrizione</th>
-                                <th data-field="start_date" data-sortable="true" data-filter-control="input">Data</th>
-
+                                <th data-field="start_date" data-sortable="true" data-filter-control="input">Data Inizio</th>
+                                <th data-field="end_date" data-sortable="true" data-filter-control="input">Data Fine</th>
+                                <th data-field="room_name" data-sortable="true" data-filter-control="input">Data Fine</th>
                                 <th data-formatter="TablePrenotazioniActions" data-filter-control="input">Prenotazioni Actions</th>
                             </tr>
                         </thead>
                     </table>
+                    <div class="col"></div>
                 </div>
             </div>
+            <hr />
             <div class="container">
                 <div class=" row" id="titles">
                     <div class="col"></div>
@@ -125,6 +128,7 @@
                     <div class="col"></div>
                 </div>
                 <div class="row">
+                    <div class="col"></div>
                     <form>
                         <div class="form-group row">
                             <label for="input_prenota_evento" class="col-md-10 col-form-label">Nome evento</label>
@@ -144,23 +148,11 @@
                                 <select class="custom-select" id="input_prenota_stanza" name="selectBox"></select>
                             </div>
                         </div>
-                        <!--<div class="form-group row">
-                            <label for="input_prenota_data_inizio" class="col-md-10 col-form-label">Data di inizio</label>
-                            <div class="col-md-10">
-                                <input type="text" class="form-control" id="input_prenota_data_inizio" placeholder="Inserisci la data di inizio">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="input_prenota_data_fine" class="col-md-10 col-form-label">Data di fine</label>
-                            <div class="col-md-10">
-                                <input type="text" class="form-control" id="input_prenota_data_fine" placeholder="Inserisci la data di fine">
-                            </div>
-                        </div>-->
                         <div class="form-group row">
                             <label for="input_prenota_data" class="col-md-10 col-form-label">Data di prenotazione</label>
                             <div class="col-md-10">
                                 <div class="input-group date" id="input_prenota_data" data-provide="datepicker" data-date-format="dd-mm-yyyy">
-                                    <input type="text" id="input_prenota_data_value" class="form-control">
+                                    <input type="text" id="input_prenota_data_value" data-date-format="dd-mm-yyyy" class="form-control">
                                     <div class="input-group-addon">
                                         <span class="glyphicon glyphicon-th"></span>
                                     </div>
@@ -182,15 +174,24 @@
                             </div>
                         </div>
                     </form>
+                    <div class="col"></div>
                 </div>
-                <div class="form-group row">
-                    <div class="col-md-10">
-                        <button type="button" id="input_prenotazione_inserisci" class="btn btn-success">Inserisci</button>
+                <div class="row">
+                    <div class="col"></div>
+                    <div class="form-group row">
+                        <div class="col-md-10">
+                            <button type="button" id="input_prenotazione_inserisci" class="btn btn-success">Inserisci</button>
+                        </div>
                     </div>
+
+                    <div class="col"></div>
+
                 </div>
+
             </div>
         </div>
     </div>
+    <hr />
 
     <!-- Footer -->
     <div class="d-flex flex-column sticky-footer-wrapper">

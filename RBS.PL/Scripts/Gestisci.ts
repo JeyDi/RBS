@@ -100,8 +100,7 @@ function InsertRisorseTable() {
 }
 
 function DeleteRisorsaTable() {
-    console.log("risorse delete row")
-    console.log(risorse_delete_row)
+
     $.ajax({
         url: BaseUrl + "resources/Delete/" + risorse_delete_row.username,
         //url: BaseUrl + "resources/Delete",
@@ -220,7 +219,7 @@ function DropdownSaleInsert() {
                     .append($("<option></option>")
                         .attr("value", index)
                         .text(value.name));
-                console.log(value.name)
+
             });
 
             return building_list

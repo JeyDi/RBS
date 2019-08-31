@@ -209,28 +209,46 @@ function TablePrenotazioniActions(value, row) {
 
 function InsertPrenotazioniTable() {
     $('#input_prenotazione_inserisci').on('click', function (event) {
-        
-        $.ajax({
-            url: BaseUrl + 'reservations/Insert',
-            type: "POST",
-            contentType: 'application/json',
-            data: JSON.stringify({
-                event_name: $("#input_prenota_evento").val(),
-                description: $("#input_prenota_descrizione").val(),
-                username: $('#input_risorse').find("option:selected").text(),
-                room: $('#input_prenota_stanza').find("option:selected").text(),
-                start_date: $('#input_prenota_data_value').datepicker('getFormattedDate'),
-                end_date: $('#input_prenota_data_value').datepicker('getFormattedDate')
-            }),
-            error: function (err) {
-                alert("errore nella creazione della prenotazione, valori non inseriti correttamente");
-                console.log(err);
-            }
-        }).done(function (data){
-            
-            RefreshTable()
-            $("#Prenotazioni_Alert_Success").show();
-        });
+
+        //Create start and end date
+        var input_start_date = $('#input_prenota_data_value').datepicker('getFormattedDate') + " " + $("#input-time-start").val() + ":00"
+        var input_end_date = $('#input_prenota_data_value').datepicker('getFormattedDate') + " " + $("#input-time-end").val() + ":00"
+
+        //Check if in the input textbox there are values
+        var input_event_name = $("#input_prenota_evento").val()
+        var input_description = $("#input_prenota_descrizione").val()
+        var input_username = $('#input_risorse').find("option:selected").text()
+        var input_room = $('#input_prenota_stanza').find("option:selected").text()
+
+        if (input_event_name && input_description && input_username && input_room) {
+
+            $.ajax({
+                url: BaseUrl + 'reservations/Insert',
+                type: "POST",
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    event_name: input_event_name,
+                    description: input_description,
+                    username: input_username,
+                    room: input_room,
+                    start_date: input_start_date,
+                    end_date: input_end_date
+                }),
+                error: function (err) {
+                    alert("Prenotazione già esistente o non valida, inserisci dei valori corretti controllando la tabella");
+                    console.log(err);
+                }
+            }).done(function (data) {
+
+                RefreshTable()
+                $("#Prenotazioni_Alert_Success").show();
+            });
+        }
+        else {
+            alert("Inserisci i valori all'interno del form di compilazione correttamente!");
+        }
+
+      
     });
 
 

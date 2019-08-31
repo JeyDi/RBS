@@ -149,7 +149,15 @@ namespace RBS.WebAPI.Controllers
                 //}
 
                 var reservation = reservations.Insert(input.event_name, input.description, input.username, input.room, input.start_date, input.end_date);
-                return Ok(new ReservationsVM(reservation));
+                if (reservation is null)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    return Ok(new ReservationsVM(reservation));
+                }
+                
             }
 
             catch (Exception ex)

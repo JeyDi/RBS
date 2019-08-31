@@ -70,6 +70,7 @@
             <div class="col"></div>
         </div>
     </div>
+    <hr />
 
 
     <!--Managers-->
@@ -87,10 +88,10 @@
                 <div class="row">
                     <div class="col"></div>
                     <div class="col-5" id="titles">
-                                <button type="button" id="refresh_risorse_table" class="btn btn-success">Ricarica</button>
+                        <button type="button" id="refresh_risorse_table" class="btn btn-success">Ricarica</button>
                     </div>
                     <div class="col"></div>
-                    
+
                     <div class="container">
                         <div id="Risorse_Alert_UnSuccess" class="alert alert-warning text-center alert-dismissible" role="alert" style="display:none">
                             Risorsa eliminata correttamente
@@ -102,56 +103,70 @@
                         </div>
                     </div>
                 </div>
+                <hr />
                 <div class="row">
-                    <table id="table_risorse"
-                           data-toggle="table"
-                           data-filter-control="true"
-                           data-search="true"
-                           data-sortable="true"
-                           data-pagination="true"
-                           data-detail-view="true"
-                           data-detail-view-by-click="false"
-                           data-detail-formatter="TableRisorseDetails"
-                           data-detail-view-icon="true"
-                           data-sorter="Cognome">
-                        <thead>
-                            <tr>
-
-                                <th data-field="name" data-sortable="true" data-filter-control="input">Nome</th>
-                                <th data-field="surname" data-sortable="true" data-filter-control="input">Cognome</th>
-
-                                <th data-formatter="TableRisorseActions" data-filter-control="input">Risorse Actions</th>
-                            </tr>
-                        </thead>
-                    </table>
+                    <div class="col"></div>
+                    <div class="col-10">
+                        <table id="table_risorse"
+                               data-toggle="table"
+                               data-filter-control="true"
+                               data-search="true"
+                               data-sortable="true"
+                               data-pagination="true"
+                               data-detail-view="true"
+                               data-detail-view-by-click="false"
+                               data-detail-formatter="TableRisorseDetails"
+                               data-detail-view-icon="true"
+                               data-sorter="Cognome">
+                            <thead>
+                                <tr>
+                                    <th data-field="name" data-sortable="true" data-filter-control="input">Nome</th>
+                                    <th data-field="surname" data-sortable="true" data-filter-control="input">Cognome</th>
+                                    <th data-formatter="TableRisorseActions" data-filter-control="input">Risorse Actions</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                    <div class="col"></div>
+                </div>
+                <hr />
+                <div class=" row" id="titles">
+                    <div class="col"></div>
+                    <div class="col-5">
+                        <h4> Inserisci una nuova risorsa</h4>
+                    </div>
+                    <div class="col"></div>
                 </div>
                 <div class="row">
+                    <div class="col"></div>
                     <form>
                         <div class="form-group row">
-                            <label for="input_risorse_nome" class="col-sm-4 col-form-label">Nome</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="input_risorse_nome" placeholder="Nome utente">
-                            </div>
+                            <label for="input_risorse_nome" id="title" class="col col-form-label">Nome</label>
+                            <input type="text" class="form-control" id="input_risorse_nome" placeholder="Nome utente">
                         </div>
                         <div class="form-group row">
-                            <label for="input_risorse_cognome" class="col-sm-4 col-form-label">Cognome</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="input_risorse_cognome" placeholder="Cognome utente">
-                            </div>
+                            <label for="input_risorse_cognome" id="title" class="col-sm-4 col-form-label">Cognome</label>
+                            <input type="text" class="form-control" id="input_risorse_cognome" placeholder="Cognome utente">
+
                         </div>
                         <div class="form-group row">
-                            <div class="col-sm-10">
-                                <label class="form-check-label"><input type="checkbox" id="checkbox_risorse_admin">Admin</label>
+                            <div class="col"></div>
+                            <div class="col" id="title">
+                                <input type="checkbox" class="form-check-input" id="checkbox_risorse_admin">
+                                <label class="form-check-label" for="exampleCheck1">Admin</label>
                             </div>
+                            <div class="col"></div>
                         </div>
                         <div class="form-group row">
-                            <div class="col-sm-10">
-                                <button type="button" id="input_risorse_inserisci" class="btn btn-success">Inserisci</button>
-                            </div>
+                            <div class="col"></div>
+                            <button type="button" id="input_risorse_inserisci" class="btn btn-success">Inserisci</button>
+                            <div class="col"></div>
                         </div>
                     </form>
+                    <div class="col"></div>
                 </div>
             </div>
+            <hr />
         </div>
 
         <!--Manager delle sale-->
@@ -166,19 +181,20 @@
                             </div>
                             <div class="col"></div>
                         </div>
-                        <div class="form-group row">
-
-                            <label for="input_sale_edificio" class="col-sm-4 col-form-label">Seleziona un edificio</label>
-                            <div class="col-sm-10">
-
+                        <div class="row">
+                            <div class="col"></div>
+                            <div class="form-group row">
+                                <label for="input_sale_edificio" class="col col-form-label" id="titles">Seleziona un edificio</label>
                                 <select class="custom-select" id="input_sale_edificio" name="selectBox"></select>
-
                             </div>
+                            <div class="col"></div>
                         </div>
-                        <div class="form-group row">
-                            <div class="col-sm-10">
+                        <div class="row">
+                            <div class="col"></div>
+                            <div class="form-group row">
                                 <button type="button" id="refresh_sale_table" class="btn btn-success">Ricarica</button>
                             </div>
+                            <div class="col"></div>
                         </div>
                         <div class="container">
                             <div id="Sale_Alert_UnSuccess" class="alert alert-warning text-center alert-dismissible" role="alert" style="display:none">
@@ -192,8 +208,10 @@
                         </div>
                     </div>
                 </div>
+                <hr />
                 <div class="row">
-                    <div class="container">
+                    <div class="col"></div>
+                    <div class="col-10">
                         <table id="table_sale"
                                data-toggle="table"
                                data-filter-control="true"
@@ -214,112 +232,138 @@
                             </thead>
                         </table>
                     </div>
+                    <div class="col"></div>
+                </div>
+                <hr />
+                <div class=" row" id="titles">
+                    <div class="col"></div>
+                    <div class="col-5">
+                        <h4> Inserisci una nuova sala o aula</h4>
+                    </div>
+                    <div class="col"></div>
                 </div>
                 <div class="row">
+                    <div class="col"></div>
                     <form>
                         <div class="form-group row">
-                            <label for="input_sale_nome" class="col-sm-4 col-form-label">Nome Sala</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="input_sale_nome" placeholder="Nome della sala">
-                            </div>
+                            <label for="input_sale_nome" id="titles" class="col col-form-label">Nome Sala</label>
+                            <input type="text" class="form-control" id="input_sale_nome" placeholder="Nome della sala">
+
                         </div>
                         <div class="form-group row">
-                            <label for="input_sale_sittings" class="col-sm-4 col-form-label">Posti disponibili</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="input_sale_sittings" placeholder="Numero di posti disponibili">
-                            </div>
+                            <label for="input_sale_sittings" id="titles" class="col col-form-label">Posti disponibili</label>
+                            <input type="text" class="form-control" id="input_sale_sittings" placeholder="Numero di posti disponibili">
                         </div>
                     </form>
+                    <div class="col"></div>
                 </div>
                 <div class="form-group row">
-                    <div class="col-sm-10">
-                        <button type="button" id="input_sale_inserisci" class="btn btn-success">Inserisci</button>
-                    </div>
+                    <div class="col"></div>
+                    <button type="button" id="input_sale_inserisci" class="btn btn-success">Inserisci</button>
+                    <div class="col"></div>
                 </div>
 
             </div>
-
+            <hr />
         </div>
-    </div>
 
-    <!--Manager degli edifici-->
-    <div id="manager_edifici" style="display: none;">
-        <div class="container">
-            <div class="row">
-                <div class="container">
-                    <div class="row">
-                        <div class="col"></div>
-                        <div class="col-5" id="titles">
-                            <h3> Gestore degli edifici</h3>
-                        </div>
-                        <div class="col"></div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-sm-10">
-                            <button type="button" id="refresh_edifici_table" class="btn btn-success">Ricarica</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="container">
-                    <div id="Edifici_Alert_UnSuccess" class="alert alert-warning text-center alert-dismissible" role="alert" style="display:none">
-                        Edificio eliminato correttamente
-                        <button type="button" id="Edifici_Alert_UnSuccess_Button" class="close" onclick='$("#Edifici_Alert_UnSuccess").hide();' aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    </div>
-                    <div id="Edifici_Alert_Success" class="alert alert-success text-center alert-dismissible" role="alert" style="display:none">
-                        Nuovo edificio inserito
-                        <button type="button" id="Edifici_Alert_Success_Button" class="close" onclick='$("#Edifici_Alert_Success").hide();' aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    </div>
-                </div>
-            </div>
 
-            <div class="row">
-                <div class="container">
-                    <table id="table_edifici"
-                           data-toggle="table"
-                           data-filter-control="true"
-                           data-search="true"
-                           data-sortable="true"
-                           data-pagination="true"
-                           data-detail-view="true"
-                           data-detail-view-by-click="false"
-                           data-detail-formatter="TableEdificiDetails"
-                           data-detail-view-icon="true"
-                           data-sorter="Nome Edificio">
-                        <thead>
-                            <tr>
 
-                                <th data-field="name" data-sortable="true" data-filter-control="input">Nome Edificio</th>
-                                <th data-formatter="TableEdificiActions" data-filter-control="input">Edifici Actions</th>
-
-                            </tr>
-                        </thead>
-                    </table>
-                </div>
-            </div>
-            <div class="row">
-                <div class="container">
-                    <form>
-                        <div class="form-group row">
-                            <label for="input_edificio_nome" class="col-sm-4 col-form-label">Nome Edificio</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="input_edificio_nome" placeholder="Nome dell'edificio">
+        <!--Manager degli edifici-->
+        <div id="manager_edifici" style="display: none;">
+            <div class="container">
+                <div class="row">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col"></div>
+                            <div class="col-5" id="titles">
+                                <h3> Gestore degli edifici</h3>
                             </div>
+                            <div class="col"></div>
                         </div>
-                        <div class="form-group row">
-                            <label for="input_edificio_indirizzo" class="col-sm-4 col-form-label">Indirizzo</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="input_edificio_indirizzo" placeholder="Indirizzo dell'edificio">
+                        <div class="row">
+                            <div class="col"></div>
+                            <div class="form-group row">
+                                <button type="button" id="refresh_edifici_table" class="btn btn-success">Ricarica</button>
                             </div>
+                            <div class="col"></div>
                         </div>
-                    </form>
+                    </div>
+                    <div class="container">
+                        <div id="Edifici_Alert_UnSuccess" class="alert alert-warning text-center alert-dismissible" role="alert" style="display:none">
+                            Edificio eliminato correttamente
+                            <button type="button" id="Edifici_Alert_UnSuccess_Button" class="close" onclick='$("#Edifici_Alert_UnSuccess").hide();' aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        </div>
+                        <div id="Edifici_Alert_Success" class="alert alert-success text-center alert-dismissible" role="alert" style="display:none">
+                            Nuovo edificio inserito
+                            <button type="button" id="Edifici_Alert_Success_Button" class="close" onclick='$("#Edifici_Alert_Success").hide();' aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group row">
-                    <div class="col-sm-10">
-                        <button type="button" id="input_edificio_inserisci" class="btn btn-success">Inserisci</button>
+                <hr />
+                <div class="row">
+                    <div class="col"></div>
+                    <div class="col-10">
+                        <table id="table_edifici"
+                               data-toggle="table"
+                               data-filter-control="true"
+                               data-search="true"
+                               data-sortable="true"
+                               data-pagination="true"
+                               data-detail-view="true"
+                               data-detail-view-by-click="false"
+                               data-detail-formatter="TableEdificiDetails"
+                               data-detail-view-icon="true"
+                               data-sorter="Nome Edificio">
+                            <thead>
+                                <tr>
+
+                                    <th data-field="name" data-sortable="true" data-filter-control="input">Nome Edificio</th>
+                                    <th data-formatter="TableEdificiActions" data-filter-control="input">Edifici Actions</th>
+
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                    <div class="col"></div>
+                </div>
+                <hr />
+                <div class=" row" id="titles">
+                    <div class="col"></div>
+                    <div class="col-5">
+                        <h4> Inserisci un nuovo edificio</h4>
+                    </div>
+                    <div class="col"></div>
+                </div>
+                <div class="row">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col"></div>
+                            <form>
+                                <div class="form-group row">
+                                    <label for="input_edificio_nome" class="col col-form-label" id="title">Nome Edificio</label>
+                                    <input type="text" class="form-control" id="input_edificio_nome" placeholder="Nome dell'edificio">
+                                </div>
+                                <div class="form-group row">
+                                    <label for="input_edificio_indirizzo" class="col col-form-label" id="title">Indirizzo</label>
+                                    <input type="text" class="form-control" id="input_edificio_indirizzo" placeholder="Indirizzo dell'edificio">
+                                </div>
+                            </form>
+                            <div class="col"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col"></div>
+                            <div class="form-group row">
+                                <button type="button" id="input_edificio_inserisci" class="btn btn-success">Inserisci</button>
+                            </div>
+                            <div class="col"></div>
+                        </div>
                     </div>
                 </div>
             </div>
+            <hr />
         </div>
+
     </div>
 
     <!--Managers-->

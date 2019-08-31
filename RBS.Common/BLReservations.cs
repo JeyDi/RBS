@@ -108,7 +108,15 @@ namespace RBS.Common
                 EFSPRepository SPRepo = new EFSPRepository();
                 Reservations reservation = SPRepo.SP_Reservation_Create(event_name, description, username, room, start_date, end_date);
 
-                return reservation;
+                if(reservation is null)
+                {
+                    return null;
+                }
+                else
+                {
+                    return reservation;
+                }
+                
 
             }
             catch (Exception)
