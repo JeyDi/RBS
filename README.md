@@ -4,6 +4,8 @@
 Reti Booking System è un sistema di prenotazione web realizzato con .Net Framework 4.7, Typescript, e SQL Server.  
 E' un'applicazione full-stack realizzata con uno stack microsoft MVC a cui è stata applicata una logica di realizzazione tipica dei progetti enterprise per scopo di studio  
   
+L'applicazione è stata realizzata come progetto finale del percorso circolare sviluppo in Reti.
+  
 Il sistema consente di effettuare delle prenotazioni, cancellarle, creare nuove risorse (persone), creare delle sale riunioni oppure dei nuovi edifici sul modello aziendale Reti.  
   
 Per avviare il progetto è necessario scaricare la solution, creare il DB SQL Server con il relativo script (sia per Windows che per Linux), successivamente avviare la solution di Visual Studio (solo Windows) e fare la build del progetto.  
