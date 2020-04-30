@@ -12,7 +12,7 @@
     "bootstrap-datepicker": "^1.9.0",
     "bootstrap-table": "^1.15.4",
     "fontawesome": "^5.6.3",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "jquery-ui-dist": "^1.12.1",
     "popper.js": "^1.15.0",
     "typescript": "^3.4.5"
